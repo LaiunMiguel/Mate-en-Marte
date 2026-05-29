@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cunr1j1kfsw4f"]
+
+[ext_resource type="Script" uid="uid://c53pg2hblwnjg" path="res://Player.gd" id="1_xhfnw"]
+[ext_resource type="Texture2D" uid="uid://b2sll84iwwo55" path="res://Sprite-0001.png" id="2_kpjcp"]
+[ext_resource type="Script" uid="uid://dbqyvxla0s5v" path="res://Scenes/player/States/State_machine.gd" id="3_kne1u"]
+[ext_resource type="Script" uid="uid://4w4pveyni05g" path="res://Scenes/player/States/IdleState.gd" id="4_dtqjt"]
+[ext_resource type="Script" uid="uid://v27iu67w3vco" path="res://Scenes/player/States/AimStategd.gd" id="5_5ncpa"]
+[ext_resource type="Script" uid="uid://b3miqawxbxp3x" path="res://Scenes/player/States/LaunchState.gd" id="6_wi0c6"]
+[ext_resource type="Script" uid="uid://c26rtdlj7bld1" path="res://Scenes/player/States/CooldownState.gd" id="7_hp6x6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kne1u"]
+radius = 8.0
+
+[node name="Player" type="CharacterBody2D" unique_id=497995314]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_xhfnw")
+MAX_DRAGG_DISTANCE = null
+IMPULSE = null
+MAX_SPEED = null
+GRAVITY_MUL = null
+MOVE_COOLDOWN = null
+TIME_SLOW = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=408917067]
+scale = Vector2(2, 2)
+shape = SubResource("CapsuleShape2D_kne1u")
+debug_color = Color(0.947501, 0.18710378, 0.35114133, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2129227170]
+texture_filter = 1
+position = Vector2(1, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("2_kpjcp")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1851984509 node_paths=PackedStringArray("player", "start_state", "states_list")]
+script = ExtResource("3_kne1u")
+player = NodePath("")
+start_state = NodePath("IdleState")
+states_list = [NodePath("IdleState"), NodePath("AimState"), NodePath("LaunchState"), NodePath("CooldownState")]
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=1283856208]
+script = ExtResource("4_dtqjt")
+state_id = "idle"
+
+[node name="AimState" type="Node" parent="StateMachine" unique_id=575058303]
+script = ExtResource("5_5ncpa")
+state_id = "aim"
+
+[node name="LaunchState" type="Node" parent="StateMachine" unique_id=1104812418]
+script = ExtResource("6_wi0c6")
+state_id = "launch"
+
+[node name="CooldownState" type="Node" parent="StateMachine" unique_id=609056575]
+script = ExtResource("7_hp6x6")
+state_id = "cooldown"
+
+[node name="MoveCooldown" type="Timer" parent="StateMachine/CooldownState" unique_id=67008072]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1683588695]
+position = Vector2(3, -184)
+position_smoothing_enabled = true
+
+[connection signal="timeout" from="StateMachine/CooldownState/MoveCooldown" to="StateMachine/CooldownState" method="_on_move_cooldown_timeout"]

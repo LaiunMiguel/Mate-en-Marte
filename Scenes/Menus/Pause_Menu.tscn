@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://uiaahtf8j42k"]
+
+[ext_resource type="Script" uid="uid://conr6nyj5qqdw" path="res://Scenes/Menus/pause_menu.gd" id="1_fo4r2"]
+
+[node name="PauseMenu" type="Control" unique_id=743074635]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 243.0
+script = ExtResource("1_fo4r2")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=489857472]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5411765)
+
+[node name="ExitButton" type="Button" parent="." unique_id=1436613867]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 30.0
+offset_right = 50.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit Game"
+
+[node name="MenuButton" type="Button" parent="." unique_id=1637680755]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -10.0
+offset_right = 50.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main Menu"
+
+[node name="ResumeButton" type="Button" parent="." unique_id=1235461315]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]

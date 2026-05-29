@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://cm6hvrg5bxyb0"]
+
+[ext_resource type="Script" uid="uid://cwiynp4f55lpd" path="res://main.gd" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://cunr1j1kfsw4f" path="res://Scenes/player/Player.tscn" id="2_cm0pq"]
+[ext_resource type="Script" uid="uid://b17wpt351gla5" path="res://Scripts/Spawner.gd" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://bsdcg57acsaef" path="res://Scenes/Obstacles/Asteroid.tscn" id="4_cm0pq"]
+[ext_resource type="Script" uid="uid://dn6wtn4no457e" path="res://Scripts/CamaraController.gd" id="5_fos0i"]
+[ext_resource type="PackedScene" uid="uid://dlx6e6wkbssy2" path="res://Scenes/Buff/Life.tscn" id="5_lgr22"]
+[ext_resource type="Texture2D" uid="uid://dgi1nxxpkas3w" path="res://Assets/Imagenes/cielo.png" id="6_3dxm6"]
+
+[node name="Main" type="Node2D" unique_id=1840420445]
+script = ExtResource("1_uu6xs")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1583125275]
+
+[node name="Player" parent="." unique_id=1050372350 instance=ExtResource("2_cm0pq")]
+process_mode = 1
+position = Vector2(306, 304)
+
+[node name="Director" type="Node" parent="." unique_id=363336694]
+process_mode = 1
+script = ExtResource("3_r0du0")
+min_velocity_of_obstacles = 50.0
+max_velocity_of_obstacles = 100.0
+obstacle_scene = ExtResource("4_cm0pq")
+buff_list = Array[PackedScene]([ExtResource("5_lgr22")])
+
+[node name="Spawn_timer" type="Timer" parent="Director" unique_id=711883737]
+autostart = true
+
+[node name="Dificulty_lvl_up" type="Timer" parent="Director" unique_id=1071400798]
+wait_time = 100.0
+
+[node name="BuffSpawn" type="Timer" parent="Director" unique_id=1883891564]
+wait_time = 10.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=266534747]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1334145032]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1458681001]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -41.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Presiona \"Aqui\" para iniciar"
+
+[node name="Button_lose" type="Button" parent="CanvasLayer" unique_id=738301072]
+visible = false
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -27.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Perdiste! Presiona \"Aqui\" para reintentar"
+
+[node name="Distance" type="Label" parent="CanvasLayer" unique_id=216625902]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CamaraController" type="Node" parent="." unique_id=1364211572 node_paths=PackedStringArray("player_to_follow")]
+script = ExtResource("5_fos0i")
+player_to_follow = NodePath("../Player")
+
+[node name="Camera2D" type="Camera2D" parent="CamaraController" unique_id=162682330]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1965743974]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1397891712]
+motion_mirroring = Vector2(0, 800)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer" unique_id=2109849216]
+offset_right = 597.0
+offset_bottom = 800.0
+texture = ExtResource("6_3dxm6")
+
+[connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
+[connection signal="timeout" from="Director/Spawn_timer" to="Director" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Director/Dificulty_lvl_up" to="Director" method="_on_dificulty_lvl_up_timeout"]
+[connection signal="timeout" from="Director/BuffSpawn" to="Director" method="_on_buff_spawn_timeout"]
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button_lose" to="." method="_on_button_lose_pressed"]
