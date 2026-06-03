@@ -7,9 +7,7 @@
 [ext_resource type="Script" uid="uid://v27iu67w3vco" path="res://Scenes/player/States/AimStategd.gd" id="5_5ncpa"]
 [ext_resource type="Script" uid="uid://b3miqawxbxp3x" path="res://Scenes/player/States/LaunchState.gd" id="6_wi0c6"]
 [ext_resource type="Script" uid="uid://c26rtdlj7bld1" path="res://Scenes/player/States/CooldownState.gd" id="7_hp6x6"]
-
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_hg0hj"]
-points = PackedVector2Array(-16.25, 12.25, 16.75, 12.25, 0.25, -14.25)
+[ext_resource type="Script" uid="uid://dottawpiyk6d6" path="res://Scenes/player/States/BrakeState.gd" id="8_pe0xw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pe0xw"]
 atlas = ExtResource("2_hg0hj")
@@ -59,6 +57,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_hg0hj"]
+points = PackedVector2Array(-12.75, 11.75, 13.75, 11.75, 0.25, -10.75)
+
 [sub_resource type="Animation" id="Animation_hg0hj"]
 length = 0.001
 tracks/0/type = "value"
@@ -85,6 +86,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_pe0xw"]
 resource_name = "default"
@@ -99,6 +124,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_xb7k6"]
@@ -127,6 +164,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1.0148661, 5.6107433e-06, 1.6748487e-06, 1), Color(1, 1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_trp67"]
 resource_name = "star"
@@ -143,25 +192,47 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.4293702, 2.6751873, 0.8380277, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_v18lm"]
+resource_name = "win"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xb7k6"]
 _data = {
 &"RESET": SubResource("Animation_hg0hj"),
 &"default": SubResource("Animation_pe0xw"),
 &"hit": SubResource("Animation_xb7k6"),
-&"star": SubResource("Animation_trp67")
+&"star": SubResource("Animation_trp67"),
+&"win": SubResource("Animation_v18lm")
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=497995314 groups=["player"]]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_xhfnw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=408917067]
-position = Vector2(0.5, -4.5)
-scale = Vector2(2, 2)
-shape = SubResource("ConvexPolygonShape2D_hg0hj")
-debug_color = Color(0.947501, 0.18710378, 0.35114133, 0.41960785)
 
 [node name="animated_sprite" type="AnimatedSprite2D" parent="." unique_id=1804397377]
 modulate = Color(1.2742168, 1.0864638, 0.40462413, 1)
@@ -172,11 +243,17 @@ sprite_frames = SubResource("SpriteFrames_h8poa")
 autoplay = "default"
 frame_progress = 0.60109824
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=408917067]
+position = Vector2(0.5, -4.5)
+scale = Vector2(2, 2)
+shape = SubResource("ConvexPolygonShape2D_hg0hj")
+debug_color = Color(0.947501, 0.18710378, 0.35114133, 0.41960785)
+
 [node name="StateMachine" type="Node" parent="." unique_id=1851984509 node_paths=PackedStringArray("player", "start_state", "states_list")]
 script = ExtResource("3_kne1u")
 player = NodePath("..")
 start_state = NodePath("IdleState")
-states_list = [NodePath("IdleState"), NodePath("AimState"), NodePath("LaunchState"), NodePath("CooldownState")]
+states_list = [NodePath("IdleState"), NodePath("AimState"), NodePath("LaunchState"), NodePath("CooldownState"), NodePath("BrakeState")]
 
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=1283856208]
 script = ExtResource("4_dtqjt")
@@ -196,6 +273,13 @@ state_id = "cooldown"
 
 [node name="MoveCooldown" type="Timer" parent="StateMachine/CooldownState" unique_id=67008072]
 
+[node name="BrakeState" type="Node" parent="StateMachine" unique_id=2143321745]
+script = ExtResource("8_pe0xw")
+state_id = "brake"
+
+[node name="BrakeDuration" type="Timer" parent="StateMachine/BrakeState" unique_id=171027547]
+wait_time = 0.5
+
 [node name="CooldownBar" type="ProgressBar" parent="." unique_id=1798663987]
 visible = false
 offset_left = 22.0
@@ -210,3 +294,4 @@ libraries/ = SubResource("AnimationLibrary_xb7k6")
 autoplay = &"default"
 
 [connection signal="timeout" from="StateMachine/CooldownState/MoveCooldown" to="StateMachine/CooldownState" method="_on_move_cooldown_timeout"]
+[connection signal="timeout" from="StateMachine/BrakeState/BrakeDuration" to="StateMachine/BrakeState" method="_on_brake_duration_timeout"]

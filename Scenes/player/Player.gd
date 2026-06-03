@@ -6,6 +6,9 @@ class_name Player
 @onready var move_cooldown: Timer = $MoveCooldown
 @onready var animated_sprite: AnimatedSprite2D = $animated_sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
+@onready var state_machine: Node = $StateMachine
+
 
 # State variables
 var mouse_start   : Vector2
@@ -22,28 +25,39 @@ var mouse_end     : Vector2
 @export var MOVE_COOLDOWN:       float = 0.5
 @export var TIME_SLOW:           float = 0.4
 @export var GRAVITY:             float = 300
-
-#Player Stats flags
-var invulerable: bool = false
+@export var CURRENT_GRAVITY:     float = 300
 
 #Signals
-signal  player_change_life
+signal  player_hit
+signal  player_heal
 signal  player_lose
 
-#Score
+#Score deprecated
 @export var score : float = 0
 @export var score_mul : float = 1 
 @export var score_per_second : float = 1
+
+#Distance
+var distance_traveled : float = 0;
+
+
+func _ready() -> void:
+	_distancia_traveled()
+	
+func _process(delta: float) -> void:
+	_distancia_traveled()
 
 func _apply_movement(delta: float) -> void:
 	if velocity.length() > MAX_SPEED:
 		velocity = velocity.normalized() * MAX_SPEED
 		
-	velocity.y += GRAVITY * delta
+	velocity.y += CURRENT_GRAVITY * delta
 	move_and_slide()
 
-func _process(delta: float) -> void:
-	score += (score_per_second * score_mul) * delta
+func _distancia_traveled() -> void:
+	distance_traveled = - global_position.y / 100
+
+
 
 func slingshot():
 
@@ -61,24 +75,25 @@ func _rotate_sprite(vector: Vector2):
 	rotation = direction.angle() + deg_to_rad(90)
 	
 func get_hit(type_of_obstacle):
-	if !invulerable:
-		CURRENT_LIFE -= 1
-		emit_signal("player_change_life")
-		animation_player.play("hit")
-		if CURRENT_LIFE == 0:
-			emit_signal("player_lose")
+	CURRENT_LIFE -= 1
+	emit_signal("player_hit")
+	animation_player.play("hit")
+	if CURRENT_LIFE == 0:
+		emit_signal("player_lose")
 	
 func lose():
 	line_2d.queue_free()
-	queue_free()
+	hide()
+	process_mode = Node.PROCESS_MODE_DISABLED
 	
+
+
 func gain_life():
 	if CURRENT_LIFE < MAX_LIFE:
 		CURRENT_LIFE += 1
-		emit_signal("player_change_life")
+		emit_signal("player_heal")
 	
 func _set_invulnerable(boolean: bool):
-	invulerable = boolean
 	animation_player.stop()
 	if (boolean):
 		animation_player.play("star")
@@ -86,3 +101,11 @@ func _set_invulnerable(boolean: bool):
 		animation_player.play("default")
 	
 	
+func _on_brake_button_pressed():
+	var event := InputEventAction.new()
+	event.action = "brake"
+	event.pressed = true
+	state_machine._input(event)
+
+func play(animation : String):
+	animation_player.play(animation)

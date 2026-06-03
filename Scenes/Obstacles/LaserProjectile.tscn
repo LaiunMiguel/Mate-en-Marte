@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dyly75nwa1n3l"]
+
+[ext_resource type="Script" uid="uid://5qdwvtnf83fj" path="res://Scenes/Obstacles/laser_projectile.gd" id="1_10uqd"]
+[ext_resource type="Texture2D" uid="uid://bxbq4o7q0ec66" path="res://Assets/Imagenes/Confucion.png" id="1_tnxbk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_10uqd"]
+radius = 21.023796
+
+[node name="LaserProjectile" type="Area2D" unique_id=1955140416]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_10uqd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=486499138]
+shape = SubResource("CircleShape2D_10uqd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1643531475]
+texture = ExtResource("1_tnxbk")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1111423089]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

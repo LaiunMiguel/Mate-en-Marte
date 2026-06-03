@@ -4,16 +4,26 @@
 [ext_resource type="PackedScene" uid="uid://cunr1j1kfsw4f" path="res://Scenes/player/Player.tscn" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://b4dbiqhuwar75" path="res://OutOfArea.gd" id="3_03owx"]
 [ext_resource type="Script" uid="uid://b17wpt351gla5" path="res://Scripts/Spawner.gd" id="3_r0du0"]
-[ext_resource type="PackedScene" uid="uid://bsdcg57acsaef" path="res://Scenes/Obstacles/Asteroid.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://bsdcg57acsaef" path="res://Scenes/Obstacles/Plane.tscn" id="4_cm0pq"]
 [ext_resource type="Script" uid="uid://dn6wtn4no457e" path="res://Scripts/CamaraController.gd" id="5_fos0i"]
 [ext_resource type="PackedScene" uid="uid://dlx6e6wkbssy2" path="res://Scenes/Buff/Life.tscn" id="5_lgr22"]
 [ext_resource type="Texture2D" uid="uid://dgi1nxxpkas3w" path="res://Assets/Imagenes/cielo.png" id="6_3dxm6"]
 [ext_resource type="Texture2D" uid="uid://cve20ibssp8gd" path="res://Assets/Imagenes/burbuja-Sheet.png" id="6_trn2v"]
+[ext_resource type="PackedScene" uid="uid://drpwix1et7kvu" path="res://Scenes/Obstacles/Asteroid.tscn" id="6_ugqhr"]
 [ext_resource type="PackedScene" uid="uid://dc8445oaf6u7s" path="res://Scenes/Buff/Star.tscn" id="7_wkp8b"]
+[ext_resource type="PackedScene" uid="uid://bgc6sbrhca31" path="res://Scenes/Obstacles/Alien.tscn" id="7_xa1i3"]
 [ext_resource type="PackedScene" uid="uid://uiaahtf8j42k" path="res://Scenes/Menus/Pause_Menu.tscn" id="10_n5qs1"]
+[ext_resource type="Shader" uid="uid://bokpkow4w5nr3" path="res://Shaders/GameScene.gdshader" id="11_axnfw"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_trn2v"]
 b = Vector2(600, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ugqhr"]
+shader = ExtResource("11_axnfw")
+shader_parameter/ShakeStrength = 0.0
+shader_parameter/FactorA = Vector2(100, 100)
+shader_parameter/FactorB = Vector2(1, 1)
+shader_parameter/magnitude = Vector2(0.01, 0.01)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_03owx"]
 atlas = ExtResource("6_trn2v")
@@ -63,6 +73,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_axnfw"]
+font_size = 23
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xa1i3"]
+font_size = 28
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Main" type="Node2D" unique_id=1840420445]
 script = ExtResource("1_uu6xs")
 
@@ -71,7 +91,6 @@ points = PackedVector2Array(0, 2)
 
 [node name="Player" parent="." unique_id=1050372350 instance=ExtResource("2_cm0pq")]
 process_mode = 1
-position = Vector2(306, 0)
 
 [node name="OutOfArea" type="Area2D" parent="." unique_id=673634652]
 position = Vector2(1, 823)
@@ -84,27 +103,22 @@ shape = SubResource("SegmentShape2D_trn2v")
 [node name="Director" type="Node" parent="." unique_id=363336694]
 process_mode = 1
 script = ExtResource("3_r0du0")
-time_between_obstacles = null
-number_of_obstacles_per_spawn = null
-min_velocity_of_obstacles = 50.0
-max_velocity_of_obstacles = 100.0
-min_obstacle_size = null
-max_obstacle_size = null
-time_to_lvl_up = null
-obstacle_scene = ExtResource("4_cm0pq")
+max_velocity_of_obstacles = 150.0
+obstacles_scenes = Array[PackedScene]([ExtResource("4_cm0pq"), ExtResource("6_ugqhr"), ExtResource("7_xa1i3")])
 buff_list = Array[PackedScene]([ExtResource("5_lgr22"), ExtResource("7_wkp8b")])
 
 [node name="Spawn_timer" type="Timer" parent="Director" unique_id=711883737]
+one_shot = true
 autostart = true
-
-[node name="Dificulty_lvl_up" type="Timer" parent="Director" unique_id=1071400798]
-wait_time = 100.0
 
 [node name="BuffSpawn" type="Timer" parent="Director" unique_id=1883891564]
 wait_time = 5.0
 autostart = true
 
+[node name="ObstaclesContainer" type="Node" parent="." unique_id=1892285031]
+
 [node name="CamaraController" type="Node" parent="." unique_id=1364211572 node_paths=PackedStringArray("player_to_follow")]
+unique_name_in_owner = true
 script = ExtResource("5_fos0i")
 player_to_follow = NodePath("../Player")
 
@@ -113,6 +127,14 @@ unique_name_in_owner = true
 position = Vector2(304, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=266534747]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1398224433]
+material = SubResource("ShaderMaterial_ugqhr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Life" type="AnimatedSprite2D" parent="CanvasLayer" unique_id=1513044872]
 position = Vector2(50, 51)
@@ -131,6 +153,16 @@ position = Vector2(170, 51)
 sprite_frames = SubResource("SpriteFrames_c2ibq")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="NextZoneBar" type="ProgressBar" parent="CanvasLayer" unique_id=848428411]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -282.0
+offset_right = 36.0
+offset_bottom = 352.0
+grow_vertical = 2
+fill_mode = 3
 
 [node name="Button_lose" type="Button" parent="CanvasLayer" unique_id=738301072]
 visible = false
@@ -181,6 +213,53 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 
+[node name="TutorialLabel" type="Label" parent="CanvasLayer" unique_id=257093017]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -104.75
+offset_top = -39.25
+offset_right = 104.75
+offset_bottom = 39.25
+grow_horizontal = 2
+grow_vertical = 2
+text = "Arrastra en direccion contraria a donde quieres lanzar"
+label_settings = SubResource("LabelSettings_axnfw")
+autowrap_mode = 3
+
+[node name="BrakeButton" type="Button" parent="CanvasLayer" unique_id=1841726730]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -69.0
+offset_right = -15.0
+offset_bottom = -11.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Brake"
+
+[node name="PlayerWonLabel" type="Label" parent="CanvasLayer" unique_id=1093772574]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -85.0
+offset_right = 101.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "FELICIDADES HAZ LLEGADO A MARTE DISFRUTA DE ESE MATE TE LO MERECES"
+label_settings = SubResource("LabelSettings_xa1i3")
+autowrap_mode = 3
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1965743974]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1397891712]
@@ -193,11 +272,14 @@ offset_bottom = 1086.0
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("6_3dxm6")
 
-[connection signal="player_change_life" from="Player" to="." method="_on_player_chage_life"]
+[connection signal="player_heal" from="Player" to="." method="_on_player_player_heal"]
+[connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
 [connection signal="player_lose" from="Player" to="." method="_on_player_player_lose"]
 [connection signal="body_entered" from="OutOfArea" to="." method="_on_out_of_area_body_entered"]
+[connection signal="player_win" from="Director" to="." method="_on_director_player_win"]
 [connection signal="timeout" from="Director/Spawn_timer" to="Director" method="_on_spawn_timer_timeout"]
-[connection signal="timeout" from="Director/Dificulty_lvl_up" to="Director" method="_on_dificulty_lvl_up_timeout"]
 [connection signal="timeout" from="Director/BuffSpawn" to="Director" method="_on_buff_spawn_timeout"]
 [connection signal="pressed" from="CanvasLayer/Button_lose" to="." method="_on_button_lose_pressed"]
 [connection signal="pressed" from="CanvasLayer/PausaMenu" to="." method="_on_pausa_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/BrakeButton" to="." method="_on_brake_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BrakeButton" to="Player" method="_on_brake_button_pressed"]

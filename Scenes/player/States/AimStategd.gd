@@ -4,7 +4,6 @@ var drag_vector
 
 func enter() -> void:
 	player.mouse_start = get_viewport().get_mouse_position()
-	Engine.time_scale = move_toward(Engine.time_scale,player.TIME_SLOW,4.0)
 
 
 
@@ -20,6 +19,8 @@ func handle_input(event: InputEvent) -> void:
 			finished.emit("launch")
 		else:
 			finished.emit("idle")
+	elif event.is_action_pressed("brake"):
+		finished.emit("brake")
 			
 
 func update(delta: float) -> void:
@@ -32,7 +33,9 @@ func update(delta: float) -> void:
 	
 	player.line_2d.add_point(player.global_position)
 	player.line_2d.add_point(player.global_position + drag_vector)
-	player._rotate_sprite(drag_vector)
+	if drag_vector.length() > player.MIN_DRAG_DISTANCE:
+		Engine.time_scale = move_toward(Engine.time_scale,player.TIME_SLOW,4.0)
+		player._rotate_sprite(drag_vector)
 	player._apply_movement(delta)
 
 

@@ -16,7 +16,8 @@ func exit() -> void:
 
 
 func handle_input(event: InputEvent) -> void:
-	pass
+	if event.is_action_pressed("brake"):
+		finished.emit("brake")
 
 
 func update(delta: float) -> void:

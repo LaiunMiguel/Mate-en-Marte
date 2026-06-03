@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bgc6sbrhca31"]
+
+[ext_resource type="Script" uid="uid://cvi524e3j5hh0" path="res://Scenes/Obstacles/Alien.gd" id="1_g4shy"]
+[ext_resource type="Texture2D" uid="uid://tmn0pvcovflx" path="res://Assets/Imagenes/nube.png" id="2_dsvxs"]
+
+[node name="Alien" type="Node2D" unique_id=188158237]
+script = ExtResource("1_g4shy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1523546565]
+scale = Vector2(3, 3)
+texture = ExtResource("2_dsvxs")
+
+[node name="TimeAlive" type="Timer" parent="." unique_id=1565207307]
+wait_time = 5.0
+one_shot = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1745184735]
+position = Vector2(0, -6)
+
+[node name="ShootingTime" type="Timer" parent="." unique_id=731291899]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="TimeAlive" to="." method="_on_time_alive_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="ShootingTime" to="." method="_on_shooting_time_timeout"]
