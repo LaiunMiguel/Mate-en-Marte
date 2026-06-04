@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://drpwix1et7kvu"]
 
 [ext_resource type="Script" uid="uid://d0i1qfcpfnq0y" path="res://Scenes/Obstacles/Asteroid.gd" id="1_4heqm"]
+[ext_resource type="Texture2D" uid="uid://dy2vjrtg8e6d" path="res://Assets/Imagenes/burbuja_escudo.png" id="2_4heqm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rwuic"]
 radius = 47.095646
@@ -10,9 +11,14 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_4heqm")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=134739076]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_4heqm")
+
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1548153358]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1460600404]
+position = Vector2(2, -5)
 shape = SubResource("CircleShape2D_rwuic")
 debug_color = Color(0.41409773, 0.28121758, 0.06349028, 0.41960785)
 
