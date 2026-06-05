@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bgc6sbrhca31" path="res://Scenes/Obstacles/Alien.tscn" id="7_xa1i3"]
 [ext_resource type="PackedScene" uid="uid://uiaahtf8j42k" path="res://Scenes/Menus/Pause_Menu.tscn" id="10_n5qs1"]
 [ext_resource type="Shader" uid="uid://bokpkow4w5nr3" path="res://Shaders/GameScene.gdshader" id="11_axnfw"]
+[ext_resource type="AudioStream" uid="uid://suc74o5nvu6v" path="res://Assets/Sound/Orbital Coin Run.mp3" id="15_xbt34"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_trn2v"]
 b = Vector2(600, 1)
@@ -91,6 +92,10 @@ points = PackedVector2Array(0, 2)
 
 [node name="Player" parent="." unique_id=1050372350 instance=ExtResource("2_cm0pq")]
 process_mode = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player" unique_id=346804109]
+stream = ExtResource("15_xbt34")
+autoplay = true
 
 [node name="OutOfArea" type="Area2D" parent="." unique_id=673634652]
 position = Vector2(1, 823)

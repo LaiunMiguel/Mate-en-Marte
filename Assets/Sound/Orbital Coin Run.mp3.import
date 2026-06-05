@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://suc74o5nvu6v"
+path="res://.godot/imported/Orbital Coin Run.mp3-9b86c0ddc30e185930f138f680b3da98.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Orbital Coin Run.mp3"
+dest_files=["res://.godot/imported/Orbital Coin Run.mp3-9b86c0ddc30e185930f138f680b3da98.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

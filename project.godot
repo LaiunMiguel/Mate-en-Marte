@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Prototype"
+config/name="Mate en Marte"
 run/main_scene="uid://b2hihdtpyy3ml"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"

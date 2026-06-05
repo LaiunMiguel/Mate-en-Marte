@@ -40,6 +40,13 @@ signal  player_lose
 #Distance
 var distance_traveled : float = 0;
 
+#Audio
+@onready var audio_stream_handler: AudioStreamPlayer2D = $AudioStreamHandler
+# AudioPreload
+const HIT_HURT := preload("res://Assets/Sound/hitHurt.wav")
+const JUMP := preload("res://Assets/Sound/jump.wav")
+const POWER_UP := preload("res://Assets/Sound/powerUp.wav")
+
 
 func _ready() -> void:
 	_distancia_traveled()
@@ -69,6 +76,8 @@ func slingshot():
 	var power = drag_vector.length() / MAX_DRAGG_DISTANCE
 	var speed = power * MAX_SPEED
 	velocity = direction * speed
+	audio_stream_handler.stream = JUMP
+	audio_stream_handler.play()
 		
 func _rotate_sprite(vector: Vector2):
 	var direction = -vector.normalized()
@@ -78,6 +87,8 @@ func get_hit(type_of_obstacle):
 	CURRENT_LIFE -= 1
 	emit_signal("player_hit")
 	animation_player.play("hit")
+	audio_stream_handler.stream = HIT_HURT
+	audio_stream_handler.play()
 	if CURRENT_LIFE == 0:
 		emit_signal("player_lose")
 	
@@ -91,12 +102,20 @@ func lose():
 func gain_life():
 	if CURRENT_LIFE < MAX_LIFE:
 		CURRENT_LIFE += 1
+		audio_stream_handler.stop()
+		audio_stream_handler.stream = POWER_UP
+		audio_stream_handler.play()
 		emit_signal("player_heal")
 	
 func _set_invulnerable(boolean: bool):
 	animation_player.stop()
 	if (boolean):
 		animation_player.play("star")
+		audio_stream_handler.stop()
+		audio_stream_handler.stream = POWER_UP
+		audio_stream_handler.play()
+		
+		
 	else:
 		animation_player.play("default")
 	
@@ -109,3 +128,4 @@ func _on_brake_button_pressed():
 
 func play(animation : String):
 	animation_player.play(animation)
+	
