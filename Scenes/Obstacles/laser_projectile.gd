@@ -9,6 +9,9 @@ func initialize(spawn_point: Vector2, player: Player, projectile_speed: float):
 	player_to_follow = player
 	direction = (player.global_position - spawn_point).normalized()
 	speed = projectile_speed
+	
+	rotation = direction.angle()
+
 
 func _process(delta):
 	direction = direction.lerp(
@@ -16,6 +19,7 @@ func _process(delta):
 		2.0 * delta
 	).normalized()
 
+	rotation = direction.angle()
 	position += direction * speed * delta
 
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:

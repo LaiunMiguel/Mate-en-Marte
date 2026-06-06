@@ -8,6 +8,10 @@ func initialize(position:Vector2, size:float , speed: float):
 	global_position = position
 	scale = Vector2.ONE * size
 	obstacle_speed = speed
+	rotation = randf_range(0, 360)
+
+func _process(delta: float) -> void:
+	rotate(0.1 * delta)
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

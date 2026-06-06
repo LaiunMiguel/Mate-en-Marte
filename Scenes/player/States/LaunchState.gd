@@ -6,7 +6,7 @@ func enter() -> void:
 
 func _launch_player() -> void:
 	player.slingshot()
-	finished.emit("cooldown")
+	finished.emit("idle")
 
 
 func exit() -> void:

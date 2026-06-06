@@ -12,12 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://drpwix1et7kvu" path="res://Scenes/Obstacles/Asteroid.tscn" id="6_ugqhr"]
 [ext_resource type="PackedScene" uid="uid://dc8445oaf6u7s" path="res://Scenes/Buff/Star.tscn" id="7_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://bgc6sbrhca31" path="res://Scenes/Obstacles/Alien.tscn" id="7_xa1i3"]
+[ext_resource type="PackedScene" uid="uid://dectt81r62e5w" path="res://Scenes/Obstacles/MiniAsteroid.tscn" id="8_eq5i7"]
 [ext_resource type="PackedScene" uid="uid://uiaahtf8j42k" path="res://Scenes/Menus/Pause_Menu.tscn" id="10_n5qs1"]
 [ext_resource type="Shader" uid="uid://bokpkow4w5nr3" path="res://Shaders/GameScene.gdshader" id="11_axnfw"]
 [ext_resource type="AudioStream" uid="uid://suc74o5nvu6v" path="res://Assets/Sound/Orbital Coin Run.mp3" id="15_xbt34"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_trn2v"]
-b = Vector2(600, 1)
+b = Vector2(864, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ugqhr"]
 shader = ExtResource("11_axnfw")
@@ -87,6 +88,8 @@ outline_color = Color(0, 0, 0, 1)
 [node name="Main" type="Node2D" unique_id=1840420445]
 script = ExtResource("1_uu6xs")
 
+[node name="ObstaclesContainer" type="Node" parent="." unique_id=1892285031]
+
 [node name="Line2D" type="Line2D" parent="." unique_id=1583125275]
 points = PackedVector2Array(0, 2)
 
@@ -103,13 +106,16 @@ collision_mask = 2
 script = ExtResource("3_03owx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfArea" unique_id=1943068426]
+position = Vector2(-157, 0)
 shape = SubResource("SegmentShape2D_trn2v")
 
 [node name="Director" type="Node" parent="." unique_id=363336694]
 process_mode = 1
 script = ExtResource("3_r0du0")
 max_velocity_of_obstacles = 150.0
-obstacles_scenes = Array[PackedScene]([ExtResource("4_cm0pq"), ExtResource("6_ugqhr"), ExtResource("7_xa1i3")])
+distance_to_level_up = 150.0
+next_distance_to_level_up = 150
+obstacles_scenes = Array[PackedScene]([ExtResource("4_cm0pq"), ExtResource("6_ugqhr"), ExtResource("8_eq5i7"), ExtResource("7_xa1i3")])
 buff_list = Array[PackedScene]([ExtResource("5_lgr22"), ExtResource("7_wkp8b")])
 
 [node name="Spawn_timer" type="Timer" parent="Director" unique_id=711883737]
@@ -119,8 +125,6 @@ autostart = true
 [node name="BuffSpawn" type="Timer" parent="Director" unique_id=1883891564]
 wait_time = 5.0
 autostart = true
-
-[node name="ObstaclesContainer" type="Node" parent="." unique_id=1892285031]
 
 [node name="CamaraController" type="Node" parent="." unique_id=1364211572 node_paths=PackedStringArray("player_to_follow")]
 unique_name_in_owner = true
@@ -236,20 +240,6 @@ label_settings = SubResource("LabelSettings_axnfw")
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="BrakeButton" type="Button" parent="CanvasLayer" unique_id=1841726730]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -92.0
-offset_top = -69.0
-offset_right = -15.0
-offset_bottom = -11.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Brake"
-
 [node name="PlayerWonLabel" type="Label" parent="CanvasLayer" unique_id=1093772574]
 visible = false
 anchors_preset = 8
@@ -270,9 +260,8 @@ autowrap_mode = 3
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1965743974]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1397891712]
-position = Vector2(0, -195)
 motion_offset = Vector2(10, 10)
-motion_mirroring = Vector2(0, 859)
+motion_mirroring = Vector2(0, 850)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer" unique_id=2109849216]
 offset_right = 1448.0
@@ -289,5 +278,3 @@ texture = ExtResource("6_3dxm6")
 [connection signal="timeout" from="Director/BuffSpawn" to="Director" method="_on_buff_spawn_timeout"]
 [connection signal="pressed" from="CanvasLayer/Button_lose" to="." method="_on_button_lose_pressed"]
 [connection signal="pressed" from="CanvasLayer/PausaMenu" to="." method="_on_pausa_menu_pressed"]
-[connection signal="pressed" from="CanvasLayer/BrakeButton" to="." method="_on_brake_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/BrakeButton" to="Player" method="_on_brake_button_pressed"]

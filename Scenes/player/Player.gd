@@ -18,10 +18,10 @@ var mouse_end     : Vector2
 # Player stats
 @export var MAX_LIFE:            int   = 3
 @export var CURRENT_LIFE:        int   = 3
-@export var MAX_DRAGG_DISTANCE:  float = 100.0
+@export var MAX_DRAGG_DISTANCE:  float = 150.0
 @export var MIN_DRAG_DISTANCE:   float = 20.0
 @export var IMPULSE:             float = 8.0
-@export var MAX_SPEED:           float = 750.0
+@export var MAX_SPEED:           float = 950.0
 @export var MOVE_COOLDOWN:       float = 0.5
 @export var TIME_SLOW:           float = 0.4
 @export var GRAVITY:             float = 300

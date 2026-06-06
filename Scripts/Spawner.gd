@@ -48,7 +48,7 @@ func _on_spawn_timer_timeout() -> void:
 		0: 
 			_spawn_basic_obstacles()
 		1:
-			_spawn_basic_obstacles()
+			_spawn_medium_obstacles()
 		2:
 			_spawn_advanced_obstacles()
 		3:
@@ -61,7 +61,7 @@ func _on_spawn_timer_timeout() -> void:
 func _spawn_basic_obstacles():
 	for i in range(number_of_obstacles_per_spawn):
 			if (obstacles_container.get_child_count() <= max_obstacles_per_screen):
-				var obstacle = obstacles_scenes[threat_lvl].instantiate()
+				var obstacle = obstacles_scenes[0].instantiate()
 				obstacles_container.add_child(obstacle)
 				var offscreen = camara_controller.get_vertical_offscreen()
 				var position : Vector2 = Vector2(
@@ -72,10 +72,25 @@ func _spawn_basic_obstacles():
 				var size : float = randf_range(min_obstacle_size,max_obstacle_size)
 				obstacle.initialize(position,size,obstacle_speed)
 
+func _spawn_medium_obstacles():
+	for i in range(number_of_obstacles_per_spawn + 2):
+			if (obstacles_container.get_child_count() <= max_obstacles_per_screen + 1):
+				var obstacle = obstacles_scenes[randi_range(1,2)].instantiate()
+				obstacles_container.add_child(obstacle)
+				var offscreen = camara_controller.get_vertical_offscreen()
+				var position : Vector2 = Vector2(
+					randf_range(0,view_port),
+					randf_range(offscreen,offscreen - 200)
+					)
+				var obstacle_speed : float = randf_range(min_velocity_of_obstacles,max_velocity_of_obstacles)
+				var size : float = randf_range(min_obstacle_size,max_obstacle_size)
+				obstacle.initialize(position,size,obstacle_speed)
+	
+
 func _spawn_advanced_obstacles():
 	for i in range(number_of_obstacles_per_spawn):
 			if (obstacles_container.get_child_count() <= max_obstacles_per_screen):
-				var obstacle = obstacles_scenes[threat_lvl].instantiate()
+				var obstacle = obstacles_scenes[3].instantiate()
 				obstacles_container.add_child(obstacle)
 				var offscreen = camara_controller.get_vertical_offscreen()
 				var position : Vector2 = Vector2(

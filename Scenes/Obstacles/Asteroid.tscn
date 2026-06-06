@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://drpwix1et7kvu"]
 
 [ext_resource type="Script" uid="uid://d0i1qfcpfnq0y" path="res://Scenes/Obstacles/Asteroid.gd" id="1_4heqm"]
-[ext_resource type="Texture2D" uid="uid://dy2vjrtg8e6d" path="res://Assets/Imagenes/burbuja_escudo.png" id="2_4heqm"]
+[ext_resource type="Texture2D" uid="uid://ds018qloo35js" path="res://Assets/Imagenes/asteroide.png" id="2_4heqm"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rwuic"]
-radius = 47.095646
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xodst"]
+radius = 46.0
+height = 146.0
 
 [node name="Asteroid" type="Area2D" unique_id=2001614328]
 collision_layer = 4
@@ -12,14 +13,16 @@ collision_mask = 2
 script = ExtResource("1_4heqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=134739076]
-scale = Vector2(2.5, 2.5)
+position = Vector2(18.999998, -9.999999)
+scale = Vector2(5, 5)
 texture = ExtResource("2_4heqm")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1548153358]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1460600404]
-position = Vector2(2, -5)
-shape = SubResource("CircleShape2D_rwuic")
+position = Vector2(21, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_xodst")
 debug_color = Color(0.41409773, 0.28121758, 0.06349028, 0.41960785)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

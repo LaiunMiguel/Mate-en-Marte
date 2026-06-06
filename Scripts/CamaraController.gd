@@ -5,7 +5,7 @@ class_name CamaraController
 @export var player_to_follow : Player
 
 #Camara Config
-@export var offset : float = 200.0
+@export var offset : float = 350.0
 @export var smoothing : float = 5.0
 
 #Margenes de spawn 

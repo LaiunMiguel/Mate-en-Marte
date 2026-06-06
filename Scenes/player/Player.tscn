@@ -254,7 +254,7 @@ debug_color = Color(0.947501, 0.18710378, 0.35114133, 0.41960785)
 script = ExtResource("3_kne1u")
 player = NodePath("..")
 start_state = NodePath("IdleState")
-states_list = [NodePath("IdleState"), NodePath("AimState"), NodePath("LaunchState"), NodePath("CooldownState"), NodePath("BrakeState")]
+states_list = [NodePath("IdleState"), NodePath("AimState"), NodePath("LaunchState")]
 
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=1283856208]
 script = ExtResource("4_dtqjt")
