@@ -2,6 +2,7 @@ extends AbstractPlayerState
 
 
 func enter() -> void:
+	
 	_launch_player()
 
 func _launch_player() -> void:
@@ -18,8 +19,4 @@ func handle_input(event: InputEvent) -> void:
 
 
 func update(delta: float) -> void:
-	pass
-
-
-func handle_event(event: StringName, value = null) -> void:
 	pass

@@ -16,7 +16,3 @@ func handle_input(event: InputEvent) -> void:
 
 func update(delta: float) -> void:
 	player._apply_movement(delta)
-
-
-func handle_event(event: StringName, value = null) -> void:
-	pass

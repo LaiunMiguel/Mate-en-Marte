@@ -1,69 +1,51 @@
 [gd_scene format=3 uid="uid://uiaahtf8j42k"]
 
 [ext_resource type="Script" uid="uid://conr6nyj5qqdw" path="res://Scenes/Menus/pause_menu.gd" id="1_fo4r2"]
+[ext_resource type="PackedScene" uid="uid://8fwitx8t7kw2" path="res://Scenes/Menus/OptionMenu.tscn" id="2_sr1dw"]
 
 [node name="PauseMenu" type="Control" unique_id=743074635]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 0
-offset_right = 150.0
-offset_bottom = 243.0
 script = ExtResource("1_fo4r2")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=489857472]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 138.0
 color = Color(0, 0, 0, 0.5411765)
 
-[node name="ExitButton" type="Button" parent="." unique_id=1436613867]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = 30.0
-offset_right = 50.0
-offset_bottom = 61.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Exit Game"
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=1576528019]
+layout_mode = 0
+offset_right = 179.0
+offset_bottom = 136.0
 
-[node name="MenuButton" type="Button" parent="." unique_id=1637680755]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -10.0
-offset_right = 50.0
-offset_bottom = 21.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Main Menu"
-
-[node name="ResumeButton" type="Button" parent="." unique_id=1235461315]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = -19.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ResumeButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1235461315]
+layout_mode = 2
 text = "Resume"
 
-[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
-[connection signal="pressed" from="ResumeButton" to="." method="_on_resume_button_pressed"]
+[node name="OptionButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=296398007]
+layout_mode = 2
+text = "Options"
+
+[node name="MenuButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1637680755]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="ExitButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1436613867]
+layout_mode = 2
+text = "Exit Game"
+
+[node name="OptionMenu" parent="." unique_id=1022705813 instance=ExtResource("2_sr1dw")]
+visible = false
+layout_mode = 1
+offset_left = -41.0
+offset_top = -43.0
+offset_right = -41.0
+offset_bottom = -42.60002
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="save_option" from="OptionMenu" to="." method="_on_option_menu_save_option"]

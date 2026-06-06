@@ -7,6 +7,8 @@
 radius = 26.305893
 
 [node name="MiniAsteroid" type="Area2D" unique_id=1482899434]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_qm4hp")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=616898763]
@@ -21,4 +23,5 @@ position = Vector2(11, -6)
 shape = SubResource("CircleShape2D_qm4hp")
 debug_color = Color(0.41409773, 0.28121758, 0.06349028, 0.41960785)
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

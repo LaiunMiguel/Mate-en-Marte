@@ -7,8 +7,8 @@
 script = ExtResource("1_mwl8v")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=311782174]
-position = Vector2(302, 401.5)
-scale = Vector2(0.6004016, 0.79003906)
+position = Vector2(271.00003, 477)
+scale = Vector2(0.53815264, 0.9375)
 texture = ExtResource("1_xy1un")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=695213856]

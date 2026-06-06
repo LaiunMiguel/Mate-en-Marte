@@ -12,6 +12,7 @@ extends Node2D
 @onready var pause_menu: Control = $CanvasLayer/PauseMenu
 @onready var next_zone_bar: ProgressBar = $CanvasLayer/NextZoneBar
 @onready var player_won_label: Label = $CanvasLayer/PlayerWonLabel
+@onready var speed_label: Label = $CanvasLayer/SpeedLabel
 
 #UI TUTORIAL
 @onready var tutorial_label: Label = $CanvasLayer/TutorialLabel
@@ -29,7 +30,7 @@ extends Node2D
 @onready var spawner: Node = $Spawner
 
 #Screan Shake
-@onready var color_rect: ColorRect = $CanvasLayer/ColorRect
+@onready var color_rect: ColorRect = $CanvasLayer/ScreenShakeShader
 @export var hit_shake_strength = 1;
 @export var dead_shake_strength = 2;
 
@@ -40,6 +41,7 @@ var ended: bool = false
 var curStrength = 0;
 
 func _ready() -> void:
+	AudioManager.play_music(AudioPreload.MUSIC_TRACK_1)
 	player.CURRENT_GRAVITY = 0
 	player.global_position.x = get_viewport_rect().size.x / 2
 	director.process_mode = Node.PROCESS_MODE_DISABLED
@@ -78,7 +80,12 @@ func _process(delta: float) -> void:
 			next_zone_bar.min_value = next_zone_bar.max_value
 			next_zone_bar.max_value = director.next_distance_to_level_up
 		var distance_text = "DISTANCIA RECORRIDA: %.1f METROS"  % distance_travel
+		var velocity = player.velocity
 		distance.text = distance_text
+		speed_label.text = "VEL: %d | MAX: %d" % [
+			int(velocity.length()),
+			int(player.CURRENT_MAX_SPEED)
+		]
 			
 	
 
@@ -108,7 +115,7 @@ func _change_health() -> void:
 			vidas[i].play("idle")
 
 
-func _on_out_of_area_body_entered(body: Node2D) -> void:
+func _on_out_of_area_body_entered(_body: Node2D) -> void:
 	_end_level()
 
 

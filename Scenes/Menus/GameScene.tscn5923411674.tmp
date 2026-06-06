@@ -94,6 +94,19 @@ points = PackedVector2Array(0, 2)
 
 [node name="Player" parent="." unique_id=1050372350 instance=ExtResource("2_cm0pq")]
 process_mode = 1
+MAX_LIFE = null
+CURRENT_LIFE = null
+MAX_DRAGG_DISTANCE = null
+MIN_DRAG_DISTANCE = null
+IMPULSE = null
+MAX_SPEED = null
+MOVE_COOLDOWN = null
+TIME_SLOW = null
+GRAVITY = null
+CURRENT_GRAVITY = null
+score = null
+score_mul = null
+score_per_second = null
 
 [node name="OutOfArea" type="Area2D" parent="." unique_id=673634652]
 position = Vector2(1, 823)
@@ -189,7 +202,6 @@ offset_right = 17.0
 offset_bottom = 23.0
 grow_horizontal = 2
 size_flags_vertical = 0
-text = "Distance"
 metadata/_edit_use_anchors_ = true
 
 [node name="TutorialLabel" type="Label" parent="CanvasLayer" unique_id=257093017]
@@ -252,17 +264,6 @@ grow_vertical = 2
 text = "FELICIDADES HAZ LLEGADO A MARTE DISFRUTA DE ESE MATE TE LO MERECES"
 label_settings = SubResource("LabelSettings_xa1i3")
 autowrap_mode = 3
-
-[node name="SpeedLabel" type="Label" parent="CanvasLayer" unique_id=1412632714]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -38.0
-offset_top = 27.0
-offset_right = 38.0
-offset_bottom = 50.0
-grow_horizontal = 2
-text = "Velocidad"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1965743974]
 

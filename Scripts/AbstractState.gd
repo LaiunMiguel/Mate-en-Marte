@@ -36,13 +36,3 @@ func handle_input(event: InputEvent) -> void
 # Callback derivado de _physics_process
 @abstract
 func update(delta: float) -> void
-
-
-# Callback cuando finaliza una animación en tiempo del estado actual
-@abstract
-func _on_animation_finished(anim_name: StringName) -> void
-
-
-# Callback genérico para eventos manejados como strings.
-@abstract
-func handle_event(event: StringName, value = null) -> void

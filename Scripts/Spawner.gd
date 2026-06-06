@@ -38,7 +38,7 @@ signal player_win
 func _ready() -> void:
 	view_port = get_parent().get_viewport_rect().size.x
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player && player.distance_traveled >= next_distance_to_level_up:
 		_dificulty_lvl_up()
 
