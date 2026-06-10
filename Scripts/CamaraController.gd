@@ -14,6 +14,9 @@ class_name CamaraController
 func _ready() -> void:
 	camera.limit_left = 0
 	camera.limit_right = get_parent().get_viewport_rect().size.x 
+	if player_to_follow :
+		camera.global_position = player_to_follow.position
+		camera.global_position.y -= offset
 
 func _process(delta: float) -> void:
 	if player_to_follow == null:

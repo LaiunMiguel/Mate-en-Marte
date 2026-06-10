@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://c6if20qt5krtg"]
+
+[ext_resource type="Texture2D" uid="uid://dgi1nxxpkas3w" path="res://Assets/Imagenes/cielo.png" id="1_h3uq7"]
+[ext_resource type="Texture2D" uid="uid://dxj0jt7ceehcx" path="res://Assets/Imagenes/montana.png" id="2_6x1hm"]
+[ext_resource type="Texture2D" uid="uid://tmn0pvcovflx" path="res://Assets/Imagenes/nube.png" id="3_ct4h2"]
+
+[node name="Nivel1" type="Node" unique_id=72708418]
+
+[node name="Cielo" type="Parallax2D" parent="." unique_id=1345486876]
+repeat_size = Vector2(0, 100)
+autoscroll = Vector2(1, 1)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Cielo" unique_id=787290947]
+z_index = -1
+position = Vector2(272, 420)
+texture = ExtResource("1_h3uq7")
+
+[node name="Montana" type="Parallax2D" parent="." unique_id=292502300]
+z_index = -1
+scroll_scale = Vector2(0.5, 0.05)
+
+[node name="Sprite2D" type="Sprite2D" parent="Montana" unique_id=1191368289]
+position = Vector2(262, 612.00006)
+scale = Vector2(5.6487503, 8.359376)
+texture = ExtResource("2_6x1hm")
+
+[node name="Nube" type="Parallax2D" parent="." unique_id=422566421]
+
+[node name="Sprite2D" type="Sprite2D" parent="Nube" unique_id=466652080]
+z_index = -1
+position = Vector2(119, 97)
+scale = Vector2(6.625, 5.46875)
+texture = ExtResource("3_ct4h2")
+
+[node name="Nube2" type="Parallax2D" parent="." unique_id=647560407]
+scale = Vector2(1e-05, 1e-05)
+scroll_offset = Vector2(321, 100)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Nube2" unique_id=1661079160]
+z_index = -1
+position = Vector2(10000000, 13000001)
+scale = Vector2(581249.75, 621874.7)
+texture = ExtResource("3_ct4h2")
