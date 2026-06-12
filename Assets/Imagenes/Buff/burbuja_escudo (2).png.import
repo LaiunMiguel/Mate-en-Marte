@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biocrwn63au1h"
-path="res://.godot/imported/montana.png-95bfce562ed67d99374a1a26868d9861.ctex"
+uid="uid://dy2vjrtg8e6d"
+path="res://.godot/imported/burbuja_escudo (2).png-8198245705be3af2d3ab21aafe858703.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Imagenes/montana.png"
-dest_files=["res://.godot/imported/montana.png-95bfce562ed67d99374a1a26868d9861.ctex"]
+source_file="res://Assets/Imagenes/Buff/burbuja_escudo (2).png"
+dest_files=["res://.godot/imported/burbuja_escudo (2).png-8198245705be3af2d3ab21aafe858703.ctex"]
 
 [params]
 

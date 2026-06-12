@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgi1nxxpkas3w"
-path="res://.godot/imported/cielo.png-ea280f3c071758589c321dcae25deb07.ctex"
+uid="uid://bac1g5qnv8byu"
+path="res://.godot/imported/alien-Sheet.png-613bb77f92b6421799c040bf4dec4e9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Imagenes/cielo.png"
-dest_files=["res://.godot/imported/cielo.png-ea280f3c071758589c321dcae25deb07.ctex"]
+source_file="res://Assets/Imagenes/Obstacles/alien-Sheet.png"
+dest_files=["res://.godot/imported/alien-Sheet.png-613bb77f92b6421799c040bf4dec4e9d.ctex"]
 
 [params]
 

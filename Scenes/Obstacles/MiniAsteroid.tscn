@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dectt81r62e5w"]
 
-[ext_resource type="Texture2D" uid="uid://cedm7ot4gkimq" path="res://Assets/Imagenes/asteroide2.png" id="1_1rm88"]
+[ext_resource type="Texture2D" uid="uid://cedm7ot4gkimq" path="res://Assets/Imagenes/Obstacles/asteroide2.png" id="1_1rm88"]
 [ext_resource type="Script" uid="uid://d0i1qfcpfnq0y" path="res://Scenes/Obstacles/Asteroid.gd" id="1_qm4hp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qm4hp"]

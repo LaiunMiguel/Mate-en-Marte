@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy2vjrtg8e6d"
-path="res://.godot/imported/burbuja_escudo.png-4bfa648a22047eaa4457ac039e2ae721.ctex"
+uid="uid://boj8jfm6qnaq"
+path="res://.godot/imported/satelite.png-b9a49e6eb527be10da9d5f931f6802ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Imagenes/burbuja_escudo.png"
-dest_files=["res://.godot/imported/burbuja_escudo.png-4bfa648a22047eaa4457ac039e2ae721.ctex"]
+source_file="res://Assets/Imagenes/Obstacles/satelite.png"
+dest_files=["res://.godot/imported/satelite.png-b9a49e6eb527be10da9d5f931f6802ec.ctex"]
 
 [params]
 

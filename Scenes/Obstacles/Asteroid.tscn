@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://drpwix1et7kvu"]
 
 [ext_resource type="Script" uid="uid://d0i1qfcpfnq0y" path="res://Scenes/Obstacles/Asteroid.gd" id="1_4heqm"]
-[ext_resource type="Texture2D" uid="uid://ds018qloo35js" path="res://Assets/Imagenes/asteroide.png" id="2_4heqm"]
+[ext_resource type="Texture2D" uid="uid://ds018qloo35js" path="res://Assets/Imagenes/Obstacles/asteroide.png" id="2_4heqm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xodst"]
 radius = 46.0

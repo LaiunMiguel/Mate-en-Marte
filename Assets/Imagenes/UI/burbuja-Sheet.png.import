@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cve20ibssp8gd"
-path="res://.godot/imported/burbuja-Sheet.png-fc83036f4770888cf06b0d0455f8c139.ctex"
+path="res://.godot/imported/burbuja-Sheet.png-ff4b86e1dc44b6598a07f7ed4a550431.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Imagenes/burbuja-Sheet.png"
-dest_files=["res://.godot/imported/burbuja-Sheet.png-fc83036f4770888cf06b0d0455f8c139.ctex"]
+source_file="res://Assets/Imagenes/UI/burbuja-Sheet.png"
+dest_files=["res://.godot/imported/burbuja-Sheet.png-ff4b86e1dc44b6598a07f7ed4a550431.ctex"]
 
 [params]
 

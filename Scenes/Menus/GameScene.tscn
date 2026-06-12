@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bsdcg57acsaef" path="res://Scenes/Obstacles/Plane.tscn" id="4_cm0pq"]
 [ext_resource type="Script" uid="uid://dn6wtn4no457e" path="res://Scripts/CamaraController.gd" id="5_fos0i"]
 [ext_resource type="PackedScene" uid="uid://dlx6e6wkbssy2" path="res://Scenes/Buff/Life.tscn" id="5_lgr22"]
-[ext_resource type="Texture2D" uid="uid://cve20ibssp8gd" path="res://Assets/Imagenes/burbuja-Sheet.png" id="6_trn2v"]
+[ext_resource type="PackedScene" uid="uid://b350f0jde241t" path="res://Scenes/Obstacles/Satelite.tscn" id="6_eq5i7"]
+[ext_resource type="Texture2D" uid="uid://cve20ibssp8gd" path="res://Assets/Imagenes/UI/burbuja-Sheet.png" id="6_trn2v"]
 [ext_resource type="PackedScene" uid="uid://drpwix1et7kvu" path="res://Scenes/Obstacles/Asteroid.tscn" id="6_ugqhr"]
 [ext_resource type="PackedScene" uid="uid://dc8445oaf6u7s" path="res://Scenes/Buff/Star.tscn" id="7_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://bgc6sbrhca31" path="res://Scenes/Obstacles/Alien.tscn" id="7_xa1i3"]
@@ -110,7 +111,7 @@ script = ExtResource("3_r0du0")
 max_velocity_of_obstacles = 150.0
 distance_to_level_up = 150.0
 next_distance_to_level_up = 150
-obstacles_scenes = Array[PackedScene]([ExtResource("4_cm0pq"), ExtResource("6_ugqhr"), ExtResource("8_eq5i7"), ExtResource("7_xa1i3")])
+obstacles_scenes = Array[PackedScene]([ExtResource("4_cm0pq"), ExtResource("6_eq5i7"), ExtResource("6_ugqhr"), ExtResource("8_eq5i7"), ExtResource("7_xa1i3")])
 buff_list = Array[PackedScene]([ExtResource("5_lgr22"), ExtResource("7_wkp8b")])
 
 [node name="Spawn_timer" type="Timer" parent="Director" unique_id=711883737]
@@ -159,6 +160,7 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="NextZoneBar" type="ProgressBar" parent="CanvasLayer" unique_id=848428411]
+visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -168,6 +170,7 @@ offset_right = 28.0
 offset_bottom = 352.0
 grow_vertical = 2
 fill_mode = 3
+show_percentage = false
 
 [node name="Button_lose" type="Button" parent="CanvasLayer" unique_id=738301072]
 visible = false
@@ -265,7 +268,9 @@ offset_bottom = 50.0
 grow_horizontal = 2
 text = "Velocidad"
 
-[node name="Background" parent="." unique_id=72708418 instance=ExtResource("15_eq5i7")]
+[node name="ParallexBackground" parent="." unique_id=72708418 node_paths=PackedStringArray("player_to_follow", "director") instance=ExtResource("15_eq5i7")]
+player_to_follow = NodePath("../Player")
+director = NodePath("../Director")
 
 [connection signal="player_heal" from="Player" to="." method="_on_player_player_heal"]
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
@@ -277,4 +282,4 @@ text = "Velocidad"
 [connection signal="pressed" from="CanvasLayer/Button_lose" to="." method="_on_button_lose_pressed"]
 [connection signal="pressed" from="CanvasLayer/PausaMenu" to="." method="_on_pausa_menu_pressed"]
 
-[editable path="Background"]
+[editable path="ParallexBackground"]

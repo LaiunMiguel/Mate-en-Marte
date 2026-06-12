@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyej7afphk1nw"
-path="res://.godot/imported/burbuja.png-9b54b322f15ff0f979e2eaa99f0eb20c.ctex"
+uid="uid://cl3saiackxbgp"
+path="res://.godot/imported/burbuja_star.png-b811d46d4c01675d345ff2d59b443704.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Imagenes/burbuja.png"
-dest_files=["res://.godot/imported/burbuja.png-9b54b322f15ff0f979e2eaa99f0eb20c.ctex"]
+source_file="res://Assets/Imagenes/Buff/burbuja_star.png"
+dest_files=["res://.godot/imported/burbuja_star.png-b811d46d4c01675d345ff2d59b443704.ctex"]
 
 [params]
 

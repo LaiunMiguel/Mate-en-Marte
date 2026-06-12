@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1ni42fy8m0tv"
-path="res://.godot/imported/disparo.png-2fd224459f7cec9106f328ebed48dd7c.ctex"
+uid="uid://7fxff3cuyl04"
+path="res://.godot/imported/burbuja_escudo.png-438fa5952386c450b31556bfe6328704.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Imagenes/disparo.png"
-dest_files=["res://.godot/imported/disparo.png-2fd224459f7cec9106f328ebed48dd7c.ctex"]
+source_file="res://Assets/Imagenes/Buff/burbuja_escudo.png"
+dest_files=["res://.godot/imported/burbuja_escudo.png-438fa5952386c450b31556bfe6328704.ctex"]
 
 [params]
 

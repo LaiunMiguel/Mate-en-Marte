@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dyly75nwa1n3l"]
 
 [ext_resource type="Script" uid="uid://5qdwvtnf83fj" path="res://Scenes/Obstacles/laser_projectile.gd" id="1_10uqd"]
-[ext_resource type="Texture2D" uid="uid://b1ni42fy8m0tv" path="res://Assets/Imagenes/disparo.png" id="2_10uqd"]
+[ext_resource type="Texture2D" uid="uid://b1ni42fy8m0tv" path="res://Assets/Imagenes/Obstacles/disparo.png" id="2_10uqd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e42ta"]
 size = Vector2(22, 12)

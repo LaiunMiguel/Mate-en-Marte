@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dabg7rao488ca"
-path="res://.godot/imported/cielo2.png-fe0eab4967221fa9afcc497996f3a040.ctex"
+uid="uid://cyej7afphk1nw"
+path="res://.godot/imported/burbuja.png-4f794c07a85c2cd3a1774d5d09492cca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Imagenes/cielo2.png"
-dest_files=["res://.godot/imported/cielo2.png-fe0eab4967221fa9afcc497996f3a040.ctex"]
+source_file="res://Assets/Imagenes/Buff/burbuja.png"
+dest_files=["res://.godot/imported/burbuja.png-4f794c07a85c2cd3a1774d5d09492cca.ctex"]
 
 [params]
 

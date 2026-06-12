@@ -29,13 +29,6 @@ extends Node2D
 @onready var killbox: Area2D = $Killbox
 @onready var spawner: Node = $Spawner
 
-#Background
-@onready var background: Node = $Background
-@onready var cielo: Parallax2D = $Background/Cielo
-@onready var sprite_2d: Sprite2D = $Background/Cielo/Sprite2D
-const START_HEIGHT := 0
-const END_HEIGHT := 200
-
 #Screan Shake
 @onready var color_rect: ColorRect = $CanvasLayer/ScreenShakeShader
 @export var hit_shake_strength = 1;
@@ -93,27 +86,6 @@ func _process(delta: float) -> void:
 			int(velocity.length()),
 			int(player.CURRENT_MAX_SPEED)
 		]
-		var t = clamp(
-		(distance_travel - START_HEIGHT) / (END_HEIGHT - START_HEIGHT),
-		0.0,
-		1.0
-	)
-		var color := Color.WHITE
-		if t < 0.5:
-			color = Color(0.5, 0.7, 1.0).lerp(
-				Color(0.1, 0.2, 0.5),
-				t * 2.0
-			)
-		else:
-			color = Color(0.1, 0.2, 0.5).lerp(
-				Color(0.0, 0.0, 0.0),
-				(t - 0.5) * 2.0
-			)
-		sprite_2d.modulate = color
-	
-	 
-	
-
 
 func _end_level():
 	button_lose.visible = true

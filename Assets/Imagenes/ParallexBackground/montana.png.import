@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8t7akp7bf1ec"
-path="res://.godot/imported/fondo_Temp.png-5548949aa396465d22bdfe6273c1e31e.ctex"
+uid="uid://biocrwn63au1h"
+path="res://.godot/imported/montana.png-6a457f4af47350c22535b409c3543e7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Imagenes/fondo_Temp.png"
-dest_files=["res://.godot/imported/fondo_Temp.png-5548949aa396465d22bdfe6273c1e31e.ctex"]
+source_file="res://Assets/Imagenes/ParallexBackground/montana.png"
+dest_files=["res://.godot/imported/montana.png-6a457f4af47350c22535b409c3543e7c.ctex"]
 
 [params]
 

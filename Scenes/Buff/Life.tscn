@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dlx6e6wkbssy2"]
 
 [ext_resource type="Script" uid="uid://bxpxx3k8k0bgs" path="res://Scenes/Buff/life.gd" id="1_472th"]
-[ext_resource type="Texture2D" uid="uid://cyej7afphk1nw" path="res://Assets/Imagenes/burbuja.png" id="2_1788x"]
+[ext_resource type="Texture2D" uid="uid://b7o2fhaeasnou" path="res://Assets/Imagenes/Buff/burbuja_mate_2.png" id="2_472th"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_quuij"]
-radius = 29.017237
+radius = 39.012817
 
 [node name="Life" type="Node2D" unique_id=1803483819 groups=["Buff"]]
 script = ExtResource("1_472th")
@@ -12,13 +12,14 @@ script = ExtResource("1_472th")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=300976723]
 position = Vector2(-1, 3)
 scale = Vector2(1.43, 1.34)
-texture = ExtResource("2_1788x")
+texture = ExtResource("2_472th")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=712712195]
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2044319049]
+position = Vector2(-3, 2)
 shape = SubResource("CircleShape2D_quuij")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
