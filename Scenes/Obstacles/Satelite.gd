@@ -1,7 +1,7 @@
 extends Node2D
 
-func initialize(position,size):
-	global_position = position
+func initialize(initial_position,_size):
+	global_position = initial_position
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):

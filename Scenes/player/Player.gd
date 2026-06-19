@@ -44,6 +44,9 @@ var distance_traveled : float = 0;
 #TEMP
 @onready var max_velocity_timer: Timer = $MaxVelocityTimer
 
+#Flags
+@export var is_invulnerable: bool = false
+
 func _ready() -> void:
 	_distancia_traveled()
 	
@@ -89,15 +92,15 @@ func _rotate_sprite(vector: Vector2):
 	rotation = direction.angle() + deg_to_rad(90)
 	
 func get_hit():
-
-	CURRENT_LIFE -= 1
-	CURRENT_MAX_SPEED = BASE_MAX_SPEED
-	velocity = velocity.normalized() * CURRENT_MAX_SPEED
-	emit_signal("player_hit")
-	animation_player.play("hit")
-	_play_sound(AudioPreload.HIT_HURT)
-	if CURRENT_LIFE == 0:
-		emit_signal("player_lose")
+	if !is_invulnerable:
+		CURRENT_LIFE -= 1
+		CURRENT_MAX_SPEED = BASE_MAX_SPEED
+		velocity = velocity.normalized() * CURRENT_MAX_SPEED
+		emit_signal("player_hit")
+		animation_player.play("hit")
+		_play_sound(AudioPreload.HIT_HURT)
+		if CURRENT_LIFE == 0:
+			emit_signal("player_lose")
 	
 func lose():
 	line_2d.queue_free()

@@ -6,17 +6,19 @@ extends Node2D
 
 var obstacle_speed : float = 200
 var player_to_follow : Player 
-var distance_to_player : float = 300;
+var distance_to_player : float = 500;
 var is_time_to_go : bool = false
 var direction : int = 1
 var projectile_velocity : float = 300
-var vertical_speed: float = 400
+var vertical_speed: float = 1000
+var formation_offset : Vector2
 
-func initialize(position:Vector2, player: Player):
-	global_position = position
+func initialize(initial_position:Vector2, player: Player, offset:Vector2):
+	global_position = initial_position
 	player_to_follow = player
-	distance_to_player = randf_range(320,370)
+	distance_to_player = randf_range(450,500)
 	time_alive.start(5)
+	formation_offset = offset
 	direction = [-1,1].pick_random()
 	 
 
@@ -26,16 +28,19 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func _process(delta: float) -> void:
 	if player_to_follow:
-		var target_y = player_to_follow.global_position.y - distance_to_player
-		global_position.y = move_toward(
-			global_position.y,
-			target_y,
+		var target_position = Vector2(
+			player_to_follow.global_position.x + formation_offset.x,
+			player_to_follow.global_position.y - 450 + formation_offset.y
+		)
+
+		global_position = global_position.move_toward(
+			target_position,
 			vertical_speed * delta
 		)
 		if is_time_to_go : 
-			global_position.x += 5 * direction
+			global_position.x += 200 * direction * delta
 	else: 
-		global_position.x += 15 * direction 
+		global_position.x += 200 * direction * delta
 	
 
 	
@@ -47,7 +52,7 @@ func _on_shooting_time_timeout() -> void:
 	if player_to_follow:
 		var projectile = projectile_scene.instantiate()
 		projectile.initialize(global_position, player_to_follow ,projectile_velocity)
-		get_parent().add_child(projectile)
+		get_parent().get_parent().add_child(projectile)
 	
 	
 	

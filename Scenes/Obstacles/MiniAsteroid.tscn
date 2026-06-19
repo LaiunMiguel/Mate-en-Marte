@@ -24,4 +24,5 @@ shape = SubResource("CircleShape2D_qm4hp")
 debug_color = Color(0.41409773, 0.28121758, 0.06349028, 0.41960785)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

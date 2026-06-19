@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://dectt81r62e5w" path="res://Scenes/Obstacles/MiniAsteroid.tscn" id="8_eq5i7"]
 [ext_resource type="PackedScene" uid="uid://uiaahtf8j42k" path="res://Scenes/Menus/Pause_Menu.tscn" id="10_n5qs1"]
 [ext_resource type="Shader" uid="uid://bokpkow4w5nr3" path="res://Shaders/GameScene.gdshader" id="11_axnfw"]
-[ext_resource type="PackedScene" uid="uid://dmepk24ji4wgx" path="res://Scenes/StarScenary.tscn" id="12_82a24"]
 [ext_resource type="PackedScene" uid="uid://ckfkqngiximir" path="res://Scenes/Background.tscn" id="15_eq5i7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_trn2v"]
@@ -89,8 +88,6 @@ outline_color = Color(0, 0, 0, 1)
 [node name="Main" type="Node2D" unique_id=1840420445]
 script = ExtResource("1_uu6xs")
 
-[node name="ScenaryContainer" type="Node" parent="." unique_id=1124202540]
-
 [node name="ObstaclesContainer" type="Node" parent="." unique_id=1892285031]
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1583125275]
@@ -101,8 +98,7 @@ process_mode = 1
 
 [node name="OutOfArea" type="Area2D" parent="." unique_id=673634652]
 position = Vector2(-73, 641)
-collision_layer = 0
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("3_03owx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfArea" unique_id=1943068426]
@@ -112,14 +108,13 @@ shape = SubResource("SegmentShape2D_trn2v")
 [node name="Director" type="Node" parent="." unique_id=363336694]
 process_mode = 1
 script = ExtResource("3_r0du0")
+max_velocity_of_obstacles = 150.0
 distance_to_level_up = 150.0
 next_distance_to_level_up = 150
 obstacles_scenes = Array[PackedScene]([ExtResource("4_cm0pq"), ExtResource("6_eq5i7"), ExtResource("6_ugqhr"), ExtResource("8_eq5i7"), ExtResource("7_xa1i3")])
 buff_list = Array[PackedScene]([ExtResource("5_lgr22"), ExtResource("7_wkp8b")])
-scenary_scenes = Array[PackedScene]([ExtResource("12_82a24")])
 
 [node name="Spawn_timer" type="Timer" parent="Director" unique_id=711883737]
-wait_time = 1.5
 one_shot = true
 autostart = true
 

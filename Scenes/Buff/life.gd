@@ -1,7 +1,7 @@
 extends BuffAbstract
 
-func initialize(position):
-	global_position = position
+func initialize(initial_position):
+	global_position = initial_position
 
 func handle_event(event):
 	if (event.is_in_group("player")):

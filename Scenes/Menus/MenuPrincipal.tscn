@@ -1,15 +1,10 @@
 [gd_scene format=3 uid="uid://b2hihdtpyy3ml"]
 
 [ext_resource type="Script" uid="uid://ctk8g73nn6mrx" path="res://Scenes/Menus/menu_principal.gd" id="1_mwl8v"]
-[ext_resource type="Texture2D" uid="uid://8t7akp7bf1ec" path="res://Assets/Imagenes/UI/fondo_Temp.png" id="1_xy1un"]
+[ext_resource type="Texture2D" uid="uid://dvsrmhqgrapeq" path="res://Assets/Imagenes/UI/astronauta_v2.png" id="2_mwl8v"]
 
 [node name="MenuPrincipal" type="Node2D" unique_id=101206024]
 script = ExtResource("1_mwl8v")
-
-[node name="Background" type="Sprite2D" parent="." unique_id=311782174]
-position = Vector2(271.00003, 477)
-scale = Vector2(0.53815264, 0.9375)
-texture = ExtResource("1_xy1un")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=695213856]
 
@@ -19,10 +14,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = 45.5
-offset_right = -71.0
-offset_bottom = 170.5
+offset_left = -512.0
+offset_top = -193.0
+offset_right = -333.0
+offset_bottom = -68.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "Play"
@@ -33,13 +28,18 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = 203.5
-offset_right = -73.0
-offset_bottom = 322.5
+offset_left = -514.0
+offset_top = -44.0
+offset_right = -337.0
+offset_bottom = 75.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "Exit"
+
+[node name="AstronautaV2" type="Sprite2D" parent="." unique_id=1204321216]
+position = Vector2(266.125, 478.00003)
+scale = Vector2(5.3375, 9.61)
+texture = ExtResource("2_mwl8v")
 
 [connection signal="pressed" from="CanvasLayer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ExitButton" to="." method="_on_exit_button_pressed"]

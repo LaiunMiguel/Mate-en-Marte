@@ -1,8 +1,8 @@
 @abstract class_name BuffAbstract
 extends Node2D
 
-func initialize(position):
+func initialize(_initial_position):
 	pass
 
-func handle_event(event):
+func handle_event(_event):
 	pass

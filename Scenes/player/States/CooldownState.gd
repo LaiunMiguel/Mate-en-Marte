@@ -26,7 +26,7 @@ func update(delta: float) -> void:
 
 
 
-func handle_event(_event: StringName, value = null) -> void:
+func handle_event(_event: StringName, _value = null) -> void:
 	pass
 
 

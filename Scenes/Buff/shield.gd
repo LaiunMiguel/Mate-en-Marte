@@ -13,3 +13,7 @@ func handle_event(event):
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	print("body enter")
 	handle_event(body)
+
+
+func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
+	queue_free()

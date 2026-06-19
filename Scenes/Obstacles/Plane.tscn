@@ -42,6 +42,7 @@ collision_mask = 2
 script = ExtResource("1_l7pm1")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1510719049]
+position = Vector2(29, -6)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2087419094]
 scale = Vector2(2, 2)

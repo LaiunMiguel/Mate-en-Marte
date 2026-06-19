@@ -25,10 +25,6 @@ extends Node2D
 	$CanvasLayer/Life3
 ]
 
-#Scenary
-@onready var killbox: Area2D = $Killbox
-@onready var spawner: Node = $Spawner
-
 #Screan Shake
 @onready var color_rect: ColorRect = $CanvasLayer/ScreenShakeShader
 @export var hit_shake_strength = 1;

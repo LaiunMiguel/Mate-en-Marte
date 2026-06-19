@@ -12,7 +12,7 @@ const START_HEIGHT := 0
 const END_HEIGHT := 200
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	nubes_container.position.x += 0.2
 
 	var level_start := director.next_distance_to_level_up - director.distance_to_level_up

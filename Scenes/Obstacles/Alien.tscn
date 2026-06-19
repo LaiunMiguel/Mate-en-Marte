@@ -81,6 +81,7 @@ one_shot = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1745184735]
 position = Vector2(0, -12)
+rect = Rect2(-26, -69, 49, 73)
 
 [node name="ShootingTime" type="Timer" parent="." unique_id=731291899]
 wait_time = 2.0

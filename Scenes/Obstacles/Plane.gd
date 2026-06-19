@@ -6,11 +6,15 @@ var obstacle_speed : float = 200
 var direction : int = 1
 var in_screen : int = 0
 
-func initialize(position:Vector2, size:float , speed: float):
-	global_position = position
-	scale = Vector2.ONE * size
+func initialize(initial_position:Vector2, speed: float):
+	global_position = initial_position
 	obstacle_speed = speed
-	direction = [-1, 1].pick_random()
+	if position.x < 150:
+		direction = 1
+	elif position.x > 450:
+		direction = -1
+	else:
+		direction = [-1, 1].pick_random()
 	animated_sprite_2d.flip_h = direction > 0
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:

@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dmepk24ji4wgx"]
+
+[ext_resource type="Texture2D" uid="uid://p3feuunfuptr" path="res://Assets/Imagenes/ParallexBackground/star.png" id="1_6un7c"]
+[ext_resource type="Script" uid="uid://b7fxy2dj77iqw" path="res://Scenes/star_scenary.gd" id="2_ylclv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tq4q"]
+atlas = ExtResource("1_6un7c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4trr"]
+atlas = ExtResource("1_6un7c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic4nb"]
+atlas = ExtResource("1_6un7c")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c274o"]
+atlas = ExtResource("1_6un7c")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fly1"]
+atlas = ExtResource("1_6un7c")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfj8m"]
+atlas = ExtResource("1_6un7c")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0ovd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tq4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4trr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic4nb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c274o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fly1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfj8m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="StarScenary" type="AnimatedSprite2D" unique_id=784626785]
+sprite_frames = SubResource("SpriteFrames_e0ovd")
+autoplay = "default"
+frame_progress = 0.07686998
+script = ExtResource("2_ylclv")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=681575735]
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
