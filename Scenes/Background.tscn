@@ -78,13 +78,13 @@ scroll_offset = Vector2(321, 100)
 repeat_times = 2
 
 [node name="MountainMars" type="Parallax2D" parent="." unique_id=156643830]
+visible = false
 z_index = -1
 scale = Vector2(-1, -1)
 scroll_scale = Vector2(0, 0)
 scroll_offset = Vector2(538, 648)
 
 [node name="Sprite2D" type="Sprite2D" parent="MountainMars" unique_id=1415146574]
-visible = false
 modulate = Color(0.85490197, 0.49803922, 0.7019608, 1)
 position = Vector2(266, 820.00006)
 scale = Vector2(5.6487503, 9.601562)

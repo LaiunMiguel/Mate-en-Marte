@@ -109,8 +109,6 @@ func _on_spawn_timer_timeout() -> void:
 		3:
 			_spawn_four_lvl()
 		4: 
-			time_between_obstacles = 5000
-			next_distance_to_level_up = player.distance_traveled + 50
 			buff_spawn.stop()
 		5:
 			emit_signal("player_win")

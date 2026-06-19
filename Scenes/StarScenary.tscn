@@ -23,10 +23,6 @@ region = Rect2(32, 32, 32, 32)
 atlas = ExtResource("1_6un7c")
 region = Rect2(0, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rfj8m"]
-atlas = ExtResource("1_6un7c")
-region = Rect2(32, 64, 32, 32)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_e0ovd"]
 animations = [{
 "frames": [{
@@ -46,17 +42,20 @@ animations = [{
 "texture": SubResource("AtlasTexture_7fly1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rfj8m")
+"texture": SubResource("AtlasTexture_c274o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic4nb")
 }],
 "loop": true,
 "name": &"default",
-"speed": 3.0
+"speed": 5.0
 }]
 
 [node name="StarScenary" type="AnimatedSprite2D" unique_id=784626785]
 sprite_frames = SubResource("SpriteFrames_e0ovd")
 autoplay = "default"
-frame_progress = 0.07686998
+frame_progress = 0.57219183
 script = ExtResource("2_ylclv")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=681575735]

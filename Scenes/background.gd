@@ -54,11 +54,16 @@ func _process(_delta: float) -> void:
 			)
 
 		4:
-			# Victoria
 			color = Color(0.315, 0.083, 0.021, 1.0)
+		
+		5:
+			color =Color(0.315, 0.083, 0.021, 1.0).lerp(
+				Color(0.532, 0.164, 0.06, 1.0),
+				t
+			)
 
-	if director.threat_lvl == 3 && !mars_parallax.visible:
+	if director.threat_lvl == 4 && !mars_parallax.visible:
 		mars_parallax.visible = true
 	if mars_parallax.visible :
-		$MountainMars/Sprite2D.position.y -= 0.1
+		$MountainMars/Sprite2D.position.y -= 2
 	cielo.modulate = color

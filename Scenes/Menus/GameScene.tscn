@@ -98,6 +98,7 @@ points = PackedVector2Array(0, 2)
 
 [node name="Player" parent="." unique_id=1050372350 instance=ExtResource("2_cm0pq")]
 process_mode = 1
+collision_layer = 0
 
 [node name="OutOfArea" type="Area2D" parent="." unique_id=673634652]
 position = Vector2(-73, 641)
