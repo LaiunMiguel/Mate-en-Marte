@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://dmepk24ji4wgx" path="res://Scenes/StarScenary.tscn" id="12_82a24"]
 [ext_resource type="PackedScene" uid="uid://ckfkqngiximir" path="res://Scenes/Background.tscn" id="15_eq5i7"]
 [ext_resource type="Texture2D" uid="uid://cliej30jqu54q" path="res://Assets/Imagenes/UI/ui.png" id="17_ggpbi"]
-[ext_resource type="Texture2D" uid="uid://djeljp0o055ve" path="res://Assets/Imagenes/UI/pause.png" id="18_uumtb"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_trn2v"]
 b = Vector2(864, 0)
@@ -88,17 +87,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_uumtb"]
-font_size = 52
-outline_size = 5
-
-[sub_resource type="LabelSettings" id="LabelSettings_q441p"]
-font_size = 59
-outline_size = 8
-
-[sub_resource type="LabelSettings" id="LabelSettings_4f0m1"]
-font_size = 90
-
 [node name="Main" type="Node2D" unique_id=1840420445]
 script = ExtResource("1_uu6xs")
 
@@ -159,6 +147,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Button_lose" type="Button" parent="CanvasLayer" unique_id=738301072]
+visible = false
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -27.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Perdiste! Presiona \"Aqui\" para reintentar"
+
+[node name="Distance" type="Label" parent="CanvasLayer" unique_id=216625902]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -17.0
+offset_right = 17.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_vertical = 0
+text = "Distance"
+metadata/_edit_use_anchors_ = true
+
 [node name="TutorialLabel" type="Label" parent="CanvasLayer" unique_id=257093017]
 anchors_preset = 8
 anchor_left = 0.5
@@ -208,7 +220,18 @@ text = "FELICIDADES HAZ LLEGADO A MARTE DISFRUTA DE ESE MATE TE LO MERECES"
 label_settings = SubResource("LabelSettings_xa1i3")
 autowrap_mode = 3
 
-[node name="UI" type="Node" parent="CanvasLayer" unique_id=319581126]
+[node name="SpeedLabel" type="Label" parent="CanvasLayer" unique_id=1412632714]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -38.0
+offset_top = 27.0
+offset_right = 38.0
+offset_bottom = 50.0
+grow_horizontal = 2
+text = "Velocidad"
+
+[node name="UI" type="Node" parent="CanvasLayer" unique_id=418082084]
 
 [node name="Life" type="Node" parent="CanvasLayer/UI" unique_id=927294290]
 
@@ -240,124 +263,34 @@ autoplay = "idle"
 
 [node name="Stats" type="Node" parent="CanvasLayer/UI" unique_id=1889652096]
 
-[node name="Stats" type="Sprite2D" parent="CanvasLayer/UI/Stats" unique_id=99825508]
-position = Vector2(335, 48.999992)
-scale = Vector2(0.56749994, 0.45249996)
+[node name="Stats" type="Sprite2D" parent="CanvasLayer/UI/Stats" unique_id=1330410721]
+position = Vector2(308, 37.999996)
+scale = Vector2(0.49333334, 0.31999987)
 texture = ExtResource("17_ggpbi")
 
-[node name="PausaMenu" type="TextureButton" parent="CanvasLayer/UI/Stats/Stats" unique_id=1151107647]
-anchors_preset = -1
-anchor_left = 0.38300002
-anchor_top = 0.07467468
-anchor_right = 0.623
-anchor_bottom = 0.919
-offset_left = -300.28455
-offset_top = -94.492935
-offset_right = -299.79117
-offset_bottom = -113.08176
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("18_uumtb")
-stretch_mode = 0
-metadata/_edit_use_anchors_ = true
+[node name="Pause" type="Node" parent="CanvasLayer/UI" unique_id=31413460]
 
-[node name="Distance" type="Sprite2D" parent="CanvasLayer/UI/Stats/Stats" unique_id=604992490]
-position = Vector2(-179.00002, 3.8295984e-06)
-scale = Vector2(0.35583335, 0.9075001)
+[node name="PauseBanner" type="Sprite2D" parent="CanvasLayer/UI/Pause" unique_id=873871887]
+position = Vector2(498.00003, 39.000015)
+scale = Vector2(0.10666649, 0.31000012)
 texture = ExtResource("17_ggpbi")
 
-[node name="DistanceNumberLabel" type="Label" parent="CanvasLayer/UI/Stats/Stats/Distance" unique_id=2083986474]
-anchors_preset = -1
-anchor_left = 0.07600001
-anchor_top = 0.11000001
-anchor_right = 1.0789627
-anchor_bottom = 0.22671203
-offset_left = -324.98392
-offset_top = -36.611183
-offset_right = -362.2246
-offset_bottom = 22.04641
-size_flags_vertical = 0
-text = "XXXXX"
-label_settings = SubResource("LabelSettings_uumtb")
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="DistanceLabel" type="Label" parent="CanvasLayer/UI/Stats/Stats/Distance" unique_id=216625902]
-anchors_preset = -1
-anchor_left = 0.026479239
-anchor_top = 0.11
-anchor_right = 0.97666675
-anchor_bottom = 0.22671203
-offset_left = -300.22354
-offset_top = -116.97282
-offset_right = -303.6236
-offset_bottom = -58.315224
-size_flags_vertical = 0
-text = "DISTANCIA RESTANTE"
-label_settings = SubResource("LabelSettings_uumtb")
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Timer" type="Sprite2D" parent="CanvasLayer/UI/Stats/Stats" unique_id=1092387245]
-position = Vector2(180.99997, 3.8295984e-06)
-scale = Vector2(0.35583335, 0.9075001)
-texture = ExtResource("17_ggpbi")
-
-[node name="TimerLabel" type="Label" parent="CanvasLayer/UI/Stats/Stats/Timer" unique_id=1412632714]
-anchors_preset = -1
-anchor_left = 0.194622
-anchor_right = 0.7970237
-offset_left = -402.59448
-offset_top = -104.713615
-offset_right = -189.59447
-offset_bottom = -22.713615
-grow_horizontal = 2
-text = "TIEMPO"
-label_settings = SubResource("LabelSettings_q441p")
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="TimerNumberLabel" type="Label" parent="CanvasLayer/UI/Stats/Stats/Timer" unique_id=1282022498]
-offset_left = -285.8215
-offset_top = -31.657593
-offset_right = 283.6675
-offset_bottom = 92.34241
-text = "00:00"
-label_settings = SubResource("LabelSettings_4f0m1")
-horizontal_alignment = 1
-
-[node name="TiempoTranscurrido" type="Timer" parent="CanvasLayer/UI/Stats/Stats/Timer" unique_id=1304029341]
-
-[node name="Lose" type="Node" parent="CanvasLayer/UI" unique_id=1239218941]
-
-[node name="LabelLose" type="Label" parent="CanvasLayer/UI/Lose" unique_id=518319457]
-visible = false
-offset_left = 2.0
-offset_top = 431.0
-offset_right = 540.0
-offset_bottom = 454.0
-text = "UHHHH NO LOGRASTE LLEGAR A MARTE TE FALTARON XXXX KM"
-horizontal_alignment = 1
-
-[node name="Button_lose" type="Button" parent="CanvasLayer/UI/Lose/LabelLose" unique_id=738301072]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+[node name="PausaMenu" type="Button" parent="CanvasLayer/UI/Pause/PauseBanner" unique_id=2051304890]
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -2.0
-offset_top = 10.5
-offset_bottom = 82.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -100.0
+offset_right = -300.0
+offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Presiona \"Aqui\" para reintentar"
+text = "I I"
+metadata/_edit_use_anchors_ = true
 
 [node name="ParallexBackground" parent="." unique_id=72708418 node_paths=PackedStringArray("player_to_follow", "director") instance=ExtResource("15_eq5i7")]
 player_to_follow = NodePath("../Player")
 director = NodePath("../Director")
-
-[node name="TextureRect" parent="ParallexBackground/Cielo" parent_id_path=PackedInt32Array(72708418, 1345486876) index="0" unique_id=1251872463]
-metadata/_edit_lock_ = true
 
 [connection signal="player_heal" from="Player" to="." method="_on_player_player_heal"]
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
@@ -366,8 +299,7 @@ metadata/_edit_lock_ = true
 [connection signal="player_win" from="Director" to="." method="_on_director_player_win"]
 [connection signal="timeout" from="Director/Spawn_timer" to="Director" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Director/BuffSpawn" to="Director" method="_on_buff_spawn_timeout"]
-[connection signal="pressed" from="CanvasLayer/UI/Stats/Stats/PausaMenu" to="." method="_on_pausa_menu_pressed"]
-[connection signal="timeout" from="CanvasLayer/UI/Stats/Stats/Timer/TiempoTranscurrido" to="." method="_on_tiempo_transcurrido_timeout"]
-[connection signal="pressed" from="CanvasLayer/UI/Lose/LabelLose/Button_lose" to="." method="_on_button_lose_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button_lose" to="." method="_on_button_lose_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Pause/PauseBanner/PausaMenu" to="." method="_on_pausa_menu_pressed"]
 
 [editable path="ParallexBackground"]

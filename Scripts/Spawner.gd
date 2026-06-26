@@ -205,4 +205,6 @@ func _on_buff_spawn_timeout() -> void:
 	var position : Vector2 = Vector2(randf_range(0,view_port),camara_controller.get_vertical_offscreen())
 	buff.initialize(position)
 
-	
+func totaldistance() -> float:
+	var total = distance_to_level_up + (next_distance_to_level_up * 4)
+	return total

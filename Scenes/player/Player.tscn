@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://c53pg2hblwnjg" path="res://Scenes/player/Player.gd" id="1_xhfnw"]
 [ext_resource type="Texture2D" uid="uid://cwaxyg134abw5" path="res://Assets/Imagenes/Player/nave Copy-Sheet.png" id="2_hg0hj"]
 [ext_resource type="Script" uid="uid://dbqyvxla0s5v" path="res://Scenes/player/States/State_machine.gd" id="3_kne1u"]
+[ext_resource type="Texture2D" uid="uid://iwpuyi2dmsup" path="res://Assets/Imagenes/Player/Aura.png" id="3_trp67"]
 [ext_resource type="Script" uid="uid://4w4pveyni05g" path="res://Scenes/player/States/IdleState.gd" id="4_dtqjt"]
 [ext_resource type="Script" uid="uid://v27iu67w3vco" path="res://Scenes/player/States/AimStategd.gd" id="5_5ncpa"]
 [ext_resource type="Script" uid="uid://b3miqawxbxp3x" path="res://Scenes/player/States/LaunchState.gd" id="6_wi0c6"]
 [ext_resource type="Script" uid="uid://c26rtdlj7bld1" path="res://Scenes/player/States/CooldownState.gd" id="7_hp6x6"]
 [ext_resource type="Script" uid="uid://dottawpiyk6d6" path="res://Scenes/player/States/BrakeState.gd" id="8_pe0xw"]
+[ext_resource type="Texture2D" uid="uid://cqfjrhduyxema" path="res://Assets/Imagenes/Player/flare.png" id="10_xb7k6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pe0xw"]
 atlas = ExtResource("2_hg0hj")
@@ -57,6 +59,35 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8poa"]
+atlas = ExtResource("3_trp67")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hdke"]
+atlas = ExtResource("3_trp67")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tjkw"]
+atlas = ExtResource("3_trp67")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kk05o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8poa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hdke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tjkw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_hg0hj"]
 points = PackedVector2Array(-12.75, 11.75, 13.75, 11.75, 0.25, -10.75)
 
@@ -72,7 +103,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1.2742168, 1.0864638, 0.40462413, 1)]
+"values": [Color(1.2738329, 1.2738329, 1.2738329, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -105,6 +136,18 @@ tracks/3/path = NodePath(".:is_invulnerable")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Aura:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -149,6 +192,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Aura:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_xb7k6"]
 resource_name = "hit"
@@ -179,7 +234,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_trp67"]
 resource_name = "star"
-length = 5.0
+length = 5.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -190,7 +245,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0.06666667, 0.53333336, 1.0333333, 1.5333333, 1.9666667, 2.3666666, 2.8, 3.1666667, 3.4333334, 3.7, 3.9, 4.0666666, 4.233333, 4.4, 4.5666666, 4.733333, 4.8999996, 5.0666666),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.4293702, 2.6751873, 0.8380277, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1)]
+"values": [Color(1.2742168, 1.0864638, 0.40462413, 1), Color(1.0357041, 0.17578931, 0.6952819, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(1.036, 0.176, 0.695, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(1.036, 0.176, 0.695, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(1.036, 0.176, 0.695, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(1.036, 0.176, 0.695, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(1.036, 0.176, 0.695, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(1.036, 0.176, 0.695, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(1.036, 0.176, 0.695, 1), Color(1.2742168, 1.0864638, 0.40462413, 1), Color(2.2817864, 2.4233654, 0.8297639, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -199,6 +254,18 @@ tracks/1/path = NodePath(".:is_invulnerable")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Aura:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 4.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -229,18 +296,41 @@ _data = {
 &"win": SubResource("Animation_v18lm")
 }
 
+[sub_resource type="Gradient" id="Gradient_xb7k6"]
+colors = PackedColorArray(0.7862192, 0.7756371, 0.04224337, 1, 1, 1, 1, 0.5058824)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v18lm"]
+gradient = SubResource("Gradient_xb7k6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v18lm"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 20.0
+gravity = Vector3(0, 98, 0)
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_v18lm")
+
 [node name="Player" type="CharacterBody2D" unique_id=497995314 groups=["player"]]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_xhfnw")
 
 [node name="animated_sprite" type="AnimatedSprite2D" parent="." unique_id=1804397377]
-modulate = Color(1.2742168, 1.0864638, 0.40462413, 1)
+modulate = Color(1.2738329, 1.2738329, 1.2738329, 1)
 texture_filter = 1
 position = Vector2(1, 0)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_h8poa")
 autoplay = "default"
+
+[node name="Aura" type="AnimatedSprite2D" parent="." unique_id=1853643548]
+visible = false
+position = Vector2(2, -2.000001)
+scale = Vector2(2.75, 2.7734375)
+sprite_frames = SubResource("SpriteFrames_kk05o")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.46208477
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=408917067]
 position = Vector2(0.5, -4.5)
@@ -295,6 +385,32 @@ autoplay = &"default"
 [node name="MaxVelocityTimer" type="Timer" parent="." unique_id=470831526]
 wait_time = 1.5
 
+[node name="InvulnerableTimer" type="Timer" parent="." unique_id=1221947309]
+wait_time = 5.0
+one_shot = true
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="." unique_id=138530327]
+position = Vector2(2, 27)
+amount = 20
+texture = ExtResource("10_xb7k6")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_v18lm")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=508223877]
+position = Vector2(22, 27)
+amount = 20
+texture = ExtResource("10_xb7k6")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_v18lm")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1207194368]
+position = Vector2(-19, 27)
+amount = 20
+texture = ExtResource("10_xb7k6")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_v18lm")
+
 [connection signal="timeout" from="StateMachine/CooldownState/MoveCooldown" to="StateMachine/CooldownState" method="_on_move_cooldown_timeout"]
 [connection signal="timeout" from="StateMachine/BrakeState/BrakeDuration" to="StateMachine/BrakeState" method="_on_brake_duration_timeout"]
 [connection signal="timeout" from="MaxVelocityTimer" to="." method="_on_max_velocity_timer_timeout"]
+[connection signal="timeout" from="InvulnerableTimer" to="." method="_on_invulnerable_timer_timeout"]

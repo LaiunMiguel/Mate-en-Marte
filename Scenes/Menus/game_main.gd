@@ -6,24 +6,34 @@ extends Node2D
 @onready var director: Node = $Director
 
 #UI
-@onready var button: Button = $CanvasLayer/Button
-@onready var button_lose: Button = $CanvasLayer/Button_lose
-@onready var distance: Label = $CanvasLayer/Distance
+@onready var label_lose: Label = $CanvasLayer/UI/Lose/LabelLose
+@onready var button_lose: Button = $CanvasLayer/UI/Lose/LabelLose/Button_lose
 @onready var pause_menu: Control = $CanvasLayer/PauseMenu
-@onready var next_zone_bar: ProgressBar = $CanvasLayer/NextZoneBar
 @onready var player_won_label: Label = $CanvasLayer/PlayerWonLabel
-@onready var speed_label: Label = $CanvasLayer/SpeedLabel
+@onready var distance_label: Label = $CanvasLayer/UI/Stats/Stats/Distance/DistanceLabel
+@onready var distance_number_label: Label = $CanvasLayer/UI/Stats/Stats/Distance/DistanceNumberLabel
+@onready var timer_label: Label = $CanvasLayer/UI/Stats/Stats/Timer/TimerLabel
+@onready var timer_number_label: Label = $CanvasLayer/UI/Stats/Stats/Timer/TimerNumberLabel
+@onready var tiempo_transcurrido: Timer = $CanvasLayer/UI/Stats/Stats/Timer/TiempoTranscurrido
+
 
 #UI TUTORIAL
+
 @onready var tutorial_label: Label = $CanvasLayer/TutorialLabel
 
 
-#UI Temp
+#UI Stats
 @onready var vidas = [
-	$CanvasLayer/Life,
-	$CanvasLayer/Life2,
-	$CanvasLayer/Life3
+	$CanvasLayer/UI/Life/Ui/Life,
+	$CanvasLayer/UI/Life/Ui/Life2,
+	$CanvasLayer/UI/Life/Ui/Life3
 ]
+@onready var stats: Sprite2D = $CanvasLayer/UI/Stats/Stats
+@onready var ui: Sprite2D = $CanvasLayer/UI/Life/Ui
+
+
+
+var segundos_transcurridos : int = 0
 
 #Screan Shake
 @onready var color_rect: ColorRect = $CanvasLayer/ScreenShakeShader
@@ -34,6 +44,9 @@ extends Node2D
 var is_first_launch :bool = true
 var ended: bool = false
 
+#vars 
+var distance_to_win: float = 0
+
 var curStrength = 0;
 
 func _ready() -> void:
@@ -41,10 +54,7 @@ func _ready() -> void:
 	player.CURRENT_GRAVITY = 0
 	player.global_position.x = get_viewport_rect().size.x / 2
 	director.process_mode = Node.PROCESS_MODE_DISABLED
-	next_zone_bar.min_value = 0
-	next_zone_bar.max_value = director.next_distance_to_level_up
-	next_zone_bar.value = player.distance_traveled
-	
+	distance_to_win = director.totaldistance()
 
 func _process(delta: float) -> void: 
 	
@@ -54,6 +64,8 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_released("aim"):
 			player.CURRENT_GRAVITY = player.GRAVITY
 			director.process_mode = Node.PROCESS_MODE_INHERIT
+			tiempo_transcurrido.start()
+			_on_tiempo_transcurrido_timeout()
 			tutorial_label.queue_free()
 			is_first_launch = false
 			
@@ -71,22 +83,20 @@ func _process(delta: float) -> void:
 		elif player.global_position.x + 50 < 0:
 			player.global_position.x = view_port.x
 		var distance_travel = player.distance_traveled
-		next_zone_bar.value = distance_travel
-		if distance_travel > next_zone_bar.max_value:
-			next_zone_bar.min_value = next_zone_bar.max_value
-			next_zone_bar.max_value = director.next_distance_to_level_up
-		var distance_text = "DISTANCIA RECORRIDA: %.1f METROS"  % distance_travel
-		var velocity = player.velocity
-		distance.text = distance_text
-		speed_label.text = "VEL: %d | MAX: %d" % [
-			int(velocity.length()),
-			int(player.CURRENT_MAX_SPEED)
-		]
+		var distance_left = distance_to_win - distance_travel
+		var distance_text = "%.1f KM"  % distance_left
+		
+		distance_number_label.text = distance_text
+
 
 func _end_level():
-	button_lose.visible = true
-	distance.text = "TU DISTANCIA FINAL ES DE : %.1f METROS" % player.distance_traveled
-	distance.position.y = (get_viewport_rect().size.y / 2 ) - 50
+	ui.visible = false
+	stats.visible = false
+	var distance_travel = player.distance_traveled
+	var distance_left = distance_to_win - distance_travel
+	label_lose.visible = true
+	label_lose.text = "UHHHH NO LOGRASTE LLEGAR A MARTE TE FALTARON %.1f KM" % distance_left
+	
 	ended = true
 	player.lose()
 	camara_controller.player_lose()
@@ -134,3 +144,9 @@ func _on_director_player_win() -> void:
 	ended = true
 	player.play("win")
 	player.process_mode = Node.PROCESS_MODE_DISABLED
+
+func _on_tiempo_transcurrido_timeout() -> void:
+	segundos_transcurridos += 1
+	var minutos := segundos_transcurridos / 60
+	var segundos := segundos_transcurridos % 60
+	timer_number_label.text = "%02d:%02d" % [minutos, segundos]

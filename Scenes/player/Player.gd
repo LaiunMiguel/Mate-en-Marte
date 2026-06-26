@@ -3,10 +3,8 @@ class_name Player
 
 
 @onready var line_2d: Line2D = $"../Line2D"
-@onready var move_cooldown: Timer = $MoveCooldown
 @onready var animated_sprite: AnimatedSprite2D = $animated_sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
 @onready var state_machine: Node = $StateMachine
 
 
@@ -27,6 +25,10 @@ var mouse_end     : Vector2
 @export var TIME_SLOW:           float = 0.4
 @export var GRAVITY:             float = 300
 @export var CURRENT_GRAVITY:     float = 300
+@export var inv_duration:        float = 5.0
+
+#Timers
+@onready var invulnerable_timer: Timer = $InvulnerableTimer
 
 #Signals
 signal  player_hit
@@ -46,6 +48,12 @@ var distance_traveled : float = 0;
 
 #Flags
 @export var is_invulnerable: bool = false
+
+#Particulas
+@onready var gpu_particles_2d_3: GPUParticles2D = $GPUParticles2D3
+@onready var gpu_particles_2d_2: GPUParticles2D = $GPUParticles2D2
+@onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
+
 
 func _ready() -> void:
 	_distancia_traveled()
@@ -82,9 +90,26 @@ func slingshot():
 	var power = drag_vector.length() / MAX_DRAGG_DISTANCE
 	var speed = power * CURRENT_MAX_SPEED
 	velocity = direction * speed
+	
+	_activate_thrusters(power)
 	_play_sound(AudioPreload.JUMP)
 	
 	
+func _activate_thrusters(power: float):
+	gpu_particles_2d.emitting = true
+	gpu_particles_2d_2.emitting = true
+	gpu_particles_2d_3.emitting = true
+
+	# Más potencia = llamas más grandes
+	gpu_particles_2d.amount_ratio = power
+	gpu_particles_2d_2.amount_ratio = power
+	gpu_particles_2d_3.amount_ratio = power
+
+	await get_tree().create_timer(0.3).timeout
+
+	gpu_particles_2d.emitting = false
+	gpu_particles_2d_2.emitting = false
+	gpu_particles_2d_3.emitting = false
 
 		
 func _rotate_sprite(vector: Vector2):
@@ -115,6 +140,12 @@ func gain_life():
 		_play_sound(AudioPreload.POWER_UP)
 		emit_signal("player_heal")
 	
+	
+func activate_invulnerable():
+	_set_invulnerable(true)
+	invulnerable_timer.start(inv_duration)
+	
+	
 func _set_invulnerable(boolean: bool):
 	animation_player.stop()
 	if (boolean):
@@ -140,3 +171,7 @@ func _play_sound(sound):
 
 func _on_max_velocity_timer_timeout() -> void:
 	CURRENT_MAX_SPEED = max(BASE_MAX_SPEED , CURRENT_MAX_SPEED - 150)
+
+
+func _on_invulnerable_timer_timeout() -> void:
+	_set_invulnerable(false)

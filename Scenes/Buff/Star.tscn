@@ -22,10 +22,7 @@ collision_mask = 2
 position = Vector2(-3, 3)
 shape = SubResource("CircleShape2D_evf0b")
 
-[node name="invulnerable_time" type="Timer" parent="." unique_id=770483699]
-
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=78957931]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="timeout" from="invulnerable_time" to="." method="_on_invulnerable_time_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

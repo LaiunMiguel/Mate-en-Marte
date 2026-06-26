@@ -326,7 +326,7 @@ text = "00:00"
 label_settings = SubResource("LabelSettings_4f0m1")
 horizontal_alignment = 1
 
-[node name="TiempoTranscurrido" type="Timer" parent="CanvasLayer/UI/Stats/Stats/Timer" unique_id=1304029341]
+[node name="Timer" type="Timer" parent="CanvasLayer/UI/Stats/Stats/Timer" unique_id=1325634784]
 
 [node name="Lose" type="Node" parent="CanvasLayer/UI" unique_id=1239218941]
 
@@ -367,7 +367,7 @@ metadata/_edit_lock_ = true
 [connection signal="timeout" from="Director/Spawn_timer" to="Director" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Director/BuffSpawn" to="Director" method="_on_buff_spawn_timeout"]
 [connection signal="pressed" from="CanvasLayer/UI/Stats/Stats/PausaMenu" to="." method="_on_pausa_menu_pressed"]
-[connection signal="timeout" from="CanvasLayer/UI/Stats/Stats/Timer/TiempoTranscurrido" to="." method="_on_tiempo_transcurrido_timeout"]
+[connection signal="timeout" from="CanvasLayer/UI/Stats/Stats/Timer/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/UI/Lose/LabelLose/Button_lose" to="." method="_on_button_lose_pressed"]
 
 [editable path="ParallexBackground"]
