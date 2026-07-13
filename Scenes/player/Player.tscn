@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dbqyvxla0s5v" path="res://Scenes/player/States/State_machine.gd" id="3_kne1u"]
 [ext_resource type="Texture2D" uid="uid://iwpuyi2dmsup" path="res://Assets/Imagenes/Player/Aura.png" id="3_trp67"]
 [ext_resource type="Script" uid="uid://4w4pveyni05g" path="res://Scenes/player/States/IdleState.gd" id="4_dtqjt"]
+[ext_resource type="Texture2D" uid="uid://6go161o4wq8w" path="res://Assets/Imagenes/Player/Propulsion.png" id="4_v18lm"]
 [ext_resource type="Script" uid="uid://v27iu67w3vco" path="res://Scenes/player/States/AimStategd.gd" id="5_5ncpa"]
 [ext_resource type="Script" uid="uid://b3miqawxbxp3x" path="res://Scenes/player/States/LaunchState.gd" id="6_wi0c6"]
 [ext_resource type="Script" uid="uid://c26rtdlj7bld1" path="res://Scenes/player/States/CooldownState.gd" id="7_hp6x6"]
@@ -88,8 +89,37 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk05o"]
+atlas = ExtResource("4_v18lm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irnrt"]
+atlas = ExtResource("4_v18lm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5m3b"]
+atlas = ExtResource("4_v18lm")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0otme"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk05o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irnrt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5m3b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_hg0hj"]
-points = PackedVector2Array(-12.75, 11.75, 13.75, 11.75, 0.25, -10.75)
+points = PackedVector2Array(-9.75, 10.75, 10.75, 10.75, 0.25, -9.25)
 
 [sub_resource type="Animation" id="Animation_hg0hj"]
 length = 0.001
@@ -152,6 +182,30 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:process_mode")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_pe0xw"]
@@ -272,28 +326,12 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_v18lm"]
-resource_name = "win"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xb7k6"]
 _data = {
 &"RESET": SubResource("Animation_hg0hj"),
 &"default": SubResource("Animation_pe0xw"),
 &"hit": SubResource("Animation_xb7k6"),
-&"star": SubResource("Animation_trp67"),
-&"win": SubResource("Animation_v18lm")
+&"star": SubResource("Animation_trp67")
 }
 
 [sub_resource type="Gradient" id="Gradient_xb7k6"]
@@ -331,6 +369,11 @@ sprite_frames = SubResource("SpriteFrames_kk05o")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.46208477
+
+[node name="Propulsion" type="AnimatedSprite2D" parent="." unique_id=1408968985]
+position = Vector2(1, 34)
+sprite_frames = SubResource("SpriteFrames_0otme")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=408917067]
 position = Vector2(0.5, -4.5)

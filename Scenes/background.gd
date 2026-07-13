@@ -15,8 +15,8 @@ const END_HEIGHT := 200
 func _process(_delta: float) -> void:
 	nubes_container.position.x += 0.2
 
-	var level_start := director.next_distance_to_level_up - director.distance_to_level_up
-	var level_end := director.next_distance_to_level_up
+	var level_start := director.get_next_distance_to_level_up() - director.get_distance_to_level_up()
+	var level_end := director.get_next_distance_to_level_up()
 
 	var t := inverse_lerp(
 		level_start,
@@ -62,8 +62,11 @@ func _process(_delta: float) -> void:
 				t
 			)
 
-	if director.threat_lvl == 4 && !mars_parallax.visible:
-		mars_parallax.visible = true
 	if mars_parallax.visible :
 		$MountainMars/Sprite2D.position.y -= 2
 	cielo.modulate = color
+
+func show_mars_mountain():
+	mars_parallax.visible = true
+
+	

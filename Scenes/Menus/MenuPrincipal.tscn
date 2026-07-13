@@ -1,45 +1,66 @@
 [gd_scene format=3 uid="uid://b2hihdtpyy3ml"]
 
 [ext_resource type="Script" uid="uid://ctk8g73nn6mrx" path="res://Scenes/Menus/menu_principal.gd" id="1_mwl8v"]
-[ext_resource type="Texture2D" uid="uid://dvsrmhqgrapeq" path="res://Assets/Imagenes/UI/astronauta_v2.png" id="2_mwl8v"]
+[ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="2_2dvkh"]
+[ext_resource type="Texture2D" uid="uid://3r75anuijja4" path="res://Assets/Imagenes/ParallexBackground/Menu.png" id="3_2dvkh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yl6lt"]
+font_size = 98
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
 
 [node name="MenuPrincipal" type="Node2D" unique_id=101206024]
 script = ExtResource("1_mwl8v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=695213856]
 
-[node name="PlayButton" type="Button" parent="CanvasLayer" unique_id=1221628492]
-anchors_preset = 6
-anchor_left = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=869209834]
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -512.0
-offset_top = -193.0
-offset_right = -333.0
-offset_bottom = -68.0
-grow_horizontal = 0
+offset_left = -187.0
+offset_top = -248.0
+offset_right = 125.0
+offset_bottom = 66.0
+grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_2dvkh")
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1221628492]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 65
 text = "Play"
 
-[node name="ExitButton" type="Button" parent="CanvasLayer" unique_id=27114660]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -514.0
-offset_top = -44.0
-offset_right = -337.0
-offset_bottom = 75.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="OptionsButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1940481385]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 55
+text = "Options
+"
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=27114660]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 65
 text = "Exit"
 
-[node name="AstronautaV2" type="Sprite2D" parent="." unique_id=1204321216]
-position = Vector2(266.125, 478.00003)
-scale = Vector2(5.3375, 9.61)
-texture = ExtResource("2_mwl8v")
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=106955240]
+offset_left = 33.0
+offset_top = 23.0
+offset_right = 502.0
+offset_bottom = 224.0
+theme = ExtResource("2_2dvkh")
+text = "MATE EN 
+MARTE"
+label_settings = SubResource("LabelSettings_yl6lt")
 
-[connection signal="pressed" from="CanvasLayer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="Menu" type="Sprite2D" parent="." unique_id=1204321216]
+position = Vector2(271.125, 478.00003)
+scale = Vector2(2, 2)
+texture = ExtResource("3_2dvkh")
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

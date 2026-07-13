@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://drh48s25h40fu"]
+
+[ext_resource type="Script" uid="uid://c1hqyeag2280d" path="res://Scenes/Menus/end_game.gd" id="1_7kdgw"]
+[ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="1_40745"]
+[ext_resource type="Texture2D" uid="uid://bccxi6rpj2hqr" path="res://Assets/Imagenes/UI/astronauta_v4.png" id="3_7kdgw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mc2ya"]
+font_size = 53
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7kdgw"]
+font_size = 41
+outline_size = 1
+outline_color = Color(0.2875611, 0.107447915, 0.10886528, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kl2mc"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_te4ay"]
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_in6xa"]
+font_size = 50
+
+[node name="EndGame" type="Node2D" unique_id=1948098982]
+script = ExtResource("1_7kdgw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=45579051]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=50413037]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Background" type="Node2D" parent="CanvasLayer" unique_id=1158386553]
+unique_name_in_owner = true
+visibility_layer = 513
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1667920710]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_40745")
+
+[node name="PlayerWonLabel" type="Label" parent="CanvasLayer/Control" unique_id=1846320263]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = 52.0
+offset_right = 211.0
+offset_bottom = 334.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "FELICIDADES HAZ LLEGADO A MARTE DISFRUTA DE ESE MATE TE LO MERECES"
+label_settings = SubResource("LabelSettings_mc2ya")
+autowrap_mode = 3
+
+[node name="WinPhoto" type="Sprite2D" parent="CanvasLayer/Control" unique_id=1166045804]
+position = Vector2(271, 267)
+scale = Vector2(4.5, 4.687)
+texture = ExtResource("3_7kdgw")
+
+[node name="CreditosButton" type="Button" parent="CanvasLayer/Control" unique_id=1741486469]
+visible = false
+layout_mode = 0
+offset_left = 364.0
+offset_top = 891.0
+offset_right = 524.0
+offset_bottom = 946.0
+text = "Creditos"
+
+[node name="Credits" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=2055382879]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_40745")
+
+[node name="Credits" type="Label" parent="CanvasLayer/Control/Credits" unique_id=439179512]
+layout_mode = 2
+text = "CREDITOS
+
+"
+horizontal_alignment = 1
+
+[node name="Credits2" type="Label" parent="CanvasLayer/Control/Credits" unique_id=508113659]
+layout_mode = 2
+text = "
+Game Design & Programming
+"
+label_settings = SubResource("LabelSettings_7kdgw")
+
+[node name="Credits3" type="Label" parent="CanvasLayer/Control/Credits" unique_id=319891557]
+layout_mode = 2
+text = "Miguel Laiun
+Agustín Romero"
+horizontal_alignment = 1
+
+[node name="Credits4" type="Label" parent="CanvasLayer/Control/Credits" unique_id=1801686169]
+layout_mode = 2
+text = "
+Art & UI
+"
+label_settings = SubResource("LabelSettings_kl2mc")
+horizontal_alignment = 1
+
+[node name="Credits5" type="Label" parent="CanvasLayer/Control/Credits" unique_id=701060294]
+layout_mode = 2
+text = "Agustín Romero
+Miguel Laiun"
+horizontal_alignment = 1
+
+[node name="Credits6" type="Label" parent="CanvasLayer/Control/Credits" unique_id=210831121]
+layout_mode = 2
+text = "
+Font
+"
+label_settings = SubResource("LabelSettings_te4ay")
+horizontal_alignment = 1
+
+[node name="Credits7" type="Label" parent="CanvasLayer/Control/Credits" unique_id=1187699744]
+layout_mode = 2
+text = "Game Paused 
+Created by Dharmas Foundry"
+horizontal_alignment = 1
+
+[node name="Credits8" type="Label" parent="CanvasLayer/Control/Credits" unique_id=118605457]
+layout_mode = 2
+text = "
+Sound Effects
+"
+label_settings = SubResource("LabelSettings_in6xa")
+horizontal_alignment = 1
+
+[node name="Credits9" type="Label" parent="CanvasLayer/Control/Credits" unique_id=2086982664]
+layout_mode = 2
+text = "Generated using SFXR "
+horizontal_alignment = 1
+
+[node name="Credits10" type="Label" parent="CanvasLayer/Control/Credits" unique_id=1243381871]
+layout_mode = 2
+text = "https://sfxr.me/"
+horizontal_alignment = 1
+
+[node name="Credits11" type="Label" parent="CanvasLayer/Control/Credits" unique_id=772962864]
+layout_mode = 2
+text = "
+Y En especial 
+Gracias a Vos!
+"
+horizontal_alignment = 1
+
+[node name="Credits12" type="Label" parent="CanvasLayer/Control/Credits" unique_id=1854527819]
+layout_mode = 2
+text = "Esperamos que hayas 
+disfrutados el juego!
+
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/Control/CreditosButton" to="." method="_on_creditos_button_pressed"]

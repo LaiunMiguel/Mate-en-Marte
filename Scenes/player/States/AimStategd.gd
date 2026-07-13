@@ -51,4 +51,5 @@ func update(delta: float) -> void:
 			randf_range(-1,1)
 		)	
 	
+	player.charge_truster(drag_vector)
 	player._apply_movement(delta)

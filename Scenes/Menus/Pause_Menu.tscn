@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://uiaahtf8j42k"]
 
 [ext_resource type="Script" uid="uid://conr6nyj5qqdw" path="res://Scenes/Menus/pause_menu.gd" id="1_fo4r2"]
+[ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="1_sjlmi"]
 [ext_resource type="PackedScene" uid="uid://8fwitx8t7kw2" path="res://Scenes/Menus/OptionMenu.tscn" id="2_sr1dw"]
 
 [node name="PauseMenu" type="Control" unique_id=743074635]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("1_sjlmi")
 script = ExtResource("1_fo4r2")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=489857472]
@@ -22,18 +24,22 @@ offset_bottom = 136.0
 
 [node name="ResumeButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1235461315]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Resume"
 
 [node name="OptionButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=296398007]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Options"
 
 [node name="MenuButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1637680755]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Main Menu"
 
 [node name="ExitButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1436613867]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Exit Game"
 
 [node name="OptionMenu" parent="." unique_id=1022705813 instance=ExtResource("2_sr1dw")]

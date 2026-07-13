@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://djjgvk57twubi"]
+
+[ext_resource type="FontFile" uid="uid://7s37rnkdcwo2" path="res://Assets/Fonts/Game Paused DEMO.otf" id="1_u64qk"]
+
+[resource]
+default_font = ExtResource("1_u64qk")
+default_font_size = 39

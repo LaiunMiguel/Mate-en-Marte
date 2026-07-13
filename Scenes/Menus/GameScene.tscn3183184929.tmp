@@ -33,7 +33,12 @@ shader_parameter/FactorB = Vector2(1, 1)
 shader_parameter/magnitude = Vector2(0.01, 0.01)
 
 [sub_resource type="LabelSettings" id="LabelSettings_axnfw"]
-font_size = 40
+font_size = 23
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xa1i3"]
+font_size = 28
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
@@ -163,6 +168,8 @@ shape = SubResource("SegmentShape2D_trn2v")
 [node name="Director" type="Node" parent="." unique_id=363336694]
 process_mode = 1
 script = ExtResource("3_r0du0")
+distance_to_level_up = 2.0
+next_distance_to_level_up = 2
 obstacles_scenes = Array[PackedScene]([ExtResource("4_cm0pq"), ExtResource("6_eq5i7"), ExtResource("6_ugqhr"), ExtResource("8_eq5i7"), ExtResource("7_xa1i3")])
 buff_list = Array[PackedScene]([ExtResource("5_lgr22"), ExtResource("7_wkp8b")])
 scenary_scenes = Array[PackedScene]([ExtResource("12_82a24")])
@@ -196,11 +203,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TutorialLabel" type="Label" parent="CanvasLayer" unique_id=257093017]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.38958332
-anchor_right = 0.61157405
-anchor_bottom = 0.61041665
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -104.75
 offset_top = -68.5
 offset_right = 104.75
@@ -208,7 +215,7 @@ offset_bottom = 68.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("15_q441p")
-text = "Manten precionado la pantalla y arrastra en direccion contraria "
+text = "Arrastra en direccion contraria a donde quieres lanzar"
 label_settings = SubResource("LabelSettings_axnfw")
 autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
@@ -227,6 +234,23 @@ offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
+
+[node name="PlayerWonLabel" type="Label" parent="CanvasLayer" unique_id=1093772574]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -124.5
+offset_right = 101.0
+offset_bottom = 124.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "FELICIDADES HAZ LLEGADO A MARTE DISFRUTA DE ESE MATE TE LO MERECES"
+label_settings = SubResource("LabelSettings_xa1i3")
+autowrap_mode = 3
 
 [node name="UI" type="Node" parent="CanvasLayer" unique_id=319581126]
 
@@ -261,12 +285,11 @@ autoplay = "idle"
 [node name="Stats" type="Node" parent="CanvasLayer/UI" unique_id=1889652096]
 
 [node name="Stats" type="Sprite2D" parent="CanvasLayer/UI/Stats" unique_id=99825508]
-position = Vector2(347, 70)
-scale = Vector2(0.62041664, 0.67125005)
+position = Vector2(335, 48.999992)
+scale = Vector2(0.56749994, 0.45249996)
 texture = ExtResource("17_ggpbi")
 
 [node name="PausaMenu" type="TextureButton" parent="CanvasLayer/UI/Stats/Stats" unique_id=1151107647]
-self_modulate = Color(0.21950102, 0.21950102, 0.21950102, 1)
 anchors_preset = -1
 anchor_left = 0.38300002
 anchor_top = 0.07467468

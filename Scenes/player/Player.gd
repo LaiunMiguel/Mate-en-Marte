@@ -53,10 +53,16 @@ var distance_traveled : float = 0;
 @onready var gpu_particles_2d_3: GPUParticles2D = $GPUParticles2D3
 @onready var gpu_particles_2d_2: GPUParticles2D = $GPUParticles2D2
 @onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
+@onready var propulsion: AnimatedSprite2D = $Propulsion
+var propulsion_initial: Vector2 
 
 
 func _ready() -> void:
 	_distancia_traveled()
+	gpu_particles_2d.emitting = false
+	gpu_particles_2d_2.emitting = false
+	gpu_particles_2d_3.emitting = false
+	propulsion_initial = propulsion.position
 	
 func _process(_delta: float) -> void:
 	_distancia_traveled()
@@ -74,6 +80,7 @@ func _distancia_traveled() -> void:
 
 
 func slingshot():
+	propulsion.visible = false
 	scale = Vector2(1.3, 0.8)
 
 	var tween = create_tween()
@@ -100,7 +107,6 @@ func _activate_thrusters(power: float):
 	gpu_particles_2d_2.emitting = true
 	gpu_particles_2d_3.emitting = true
 
-	# Más potencia = llamas más grandes
 	gpu_particles_2d.amount_ratio = power
 	gpu_particles_2d_2.amount_ratio = power
 	gpu_particles_2d_3.amount_ratio = power
@@ -111,7 +117,18 @@ func _activate_thrusters(power: float):
 	gpu_particles_2d_2.emitting = false
 	gpu_particles_2d_3.emitting = false
 
-		
+func charge_truster(drag):
+	var power = (drag.length() / MAX_DRAGG_DISTANCE) * 4 
+	propulsion.visible = true
+
+	propulsion.scale = Vector2(power,power)
+	
+	var offset = (power / 4.0) * 20.0
+	propulsion.position.y = propulsion_initial.y + offset
+	
+
+
+
 func _rotate_sprite(vector: Vector2):
 	var direction = -vector.normalized()
 	rotation = direction.angle() + deg_to_rad(90)
@@ -167,8 +184,6 @@ func play(animation : String):
 func _play_sound(sound):
 	AudioManager.play_sfx(sound)
 	
-
-
 func _on_max_velocity_timer_timeout() -> void:
 	CURRENT_MAX_SPEED = max(BASE_MAX_SPEED , CURRENT_MAX_SPEED - 150)
 

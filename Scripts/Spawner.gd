@@ -16,12 +16,20 @@ signal player_win
 @export var time_between_obstacles : float = 1
 @export var number_of_obstacles_per_spawn : int = 1 
 @export var max_obstacles_per_screen: int = 4
-@export var distance_to_level_up: float = 100
 @export var threat_lvl: int = 0 
+
+#Distances 
+@export var distance_first_level:  int  = 150
+@export var distance_second_level: int  = 150
+@export var distance_third_level:  int  = 150
+@export var distance_fourd_level:  int  = 150
+@export var distance_epiloge:      int  = 50
+
+var distancesperlevel = []
 
 #Player 
 @onready var player: Player = $"../Player"
-@export var next_distance_to_level_up : = 100
+var next_distance_to_level_up : int
 
 #Escenes
 @export var obstacles_scenes: Array[PackedScene]
@@ -92,6 +100,13 @@ var alien_formation = [
 
 func _ready() -> void:
 	view_port = get_parent().get_viewport_rect().size.x
+	distancesperlevel.append(distance_first_level)
+	distancesperlevel.append(distance_second_level)
+	distancesperlevel.append(distance_third_level)
+	distancesperlevel.append(distance_fourd_level)
+	distancesperlevel.append(distance_epiloge)
+	
+	next_distance_to_level_up = distancesperlevel[threat_lvl]
 	
 func _process(_delta: float) -> void:
 	if player && player.distance_traveled >= next_distance_to_level_up:
@@ -130,17 +145,32 @@ func _spawn_first_lvl():
 				obstacle.initialize(position,obstacle_speed)
 				
 func _spawn_second_lvl():
-	for i in range(number_of_obstacles_per_spawn ):
-			if (obstacles_container.get_child_count() <= max_obstacles_per_screen):
-				var obstacle = obstacles_scenes[1].instantiate()
-				obstacles_container.add_child(obstacle)
-				var offscreen = camara_controller.get_vertical_offscreen()
-				var position : Vector2 = Vector2(
-					randf_range(0,view_port),
-					randf_range(offscreen,offscreen - 200)
-					)
-				var size : float = randf_range(1,2)
-				obstacle.initialize(position,size)
+	var spawned_positions: Array[Vector2] = []
+
+	for i in range(2 ):
+			if (obstacles_container.get_child_count() >= 5):
+				break
+			var offscreen = camara_controller.get_vertical_offscreen()
+			var position: Vector2
+			var valid := false
+				
+			while !valid:
+				position = Vector2(
+					randf_range(0, view_port),
+					randf_range(offscreen, offscreen - 200)
+				)
+				valid = true
+			for p in spawned_positions:
+				if position.distance_to(p) < 100: # Distancia mínima
+					valid = false
+					break
+
+			var obstacle = obstacles_scenes[1].instantiate()
+			obstacles_container.add_child(obstacle)
+			
+			var variant : int = randi_range(1,3)
+			var rotations = [0, 45, 90, 135, 180, 225, 270, 315]
+			obstacle.initialize(position,variant,rotations.pick_random())
 
 func _spawn_third_lvl():
 
@@ -195,8 +225,9 @@ func _spawn_scenery():
 func _dificulty_lvl_up() -> void:
 	time_between_obstacles = max(0.2,time_between_obstacles - 0.5)
 	number_of_obstacles_per_spawn += 1
-	next_distance_to_level_up += distance_to_level_up
 	threat_lvl = min(threat_lvl+1,5)
+	next_distance_to_level_up +=  distancesperlevel[min(threat_lvl,4)]
+
 
 
 func _on_buff_spawn_timeout() -> void:
@@ -206,5 +237,14 @@ func _on_buff_spawn_timeout() -> void:
 	buff.initialize(position)
 
 func totaldistance() -> float:
-	var total = distance_to_level_up + (next_distance_to_level_up * 4)
+	var total: int
+	for dis in distancesperlevel:
+		total += dis
+	
 	return total
+	
+func get_next_distance_to_level_up() -> float:
+	return next_distance_to_level_up
+
+func get_distance_to_level_up() -> float:
+	return distancesperlevel[min(threat_lvl,4)]

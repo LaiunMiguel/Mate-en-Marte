@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5n2nxbwbqv26" path="res://Scenes/Menus/option_menu.gd" id="1_c6kko"]
 [ext_resource type="PackedScene" uid="uid://c5ykivjiolnj6" path="res://Scenes/Menus/BusControl.tscn" id="1_fpbte"]
+[ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="1_vfyb1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vfyb1"]
 font_size = 23
@@ -11,6 +12,7 @@ layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("1_vfyb1")
 script = ExtResource("1_c6kko")
 
 [node name="TextureRect" type="ColorRect" parent="." unique_id=995948738]

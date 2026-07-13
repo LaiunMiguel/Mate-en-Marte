@@ -29,12 +29,15 @@ func _process(delta: float) -> void:
 			new_pos,
 			smoothing * delta
 		)
-	
+
+func center():
+	return camera.get_screen_center_position()
+
 func get_vertical_offscreen() -> float:
 	var viewport_height = camera.get_viewport_rect().size.y
 	var top_visible = camera.global_position.y - viewport_height / 2
 
 	return top_visible - top_margin
 
-func player_lose():
+func end_chase():
 	set_process(false)

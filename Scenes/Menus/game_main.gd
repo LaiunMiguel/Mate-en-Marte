@@ -49,6 +49,11 @@ var distance_to_win: float = 0
 
 var curStrength = 0;
 
+#Win Animation
+@onready var victory_player: AnimatedSprite2D = $VictoryPlayer
+@onready var fade_out: ColorRect = $CanvasLayer/FadeOut
+
+
 func _ready() -> void:
 	AudioManager.play_music(AudioPreload.MUSIC_TRACK_1)
 	player.CURRENT_GRAVITY = 0
@@ -83,7 +88,7 @@ func _process(delta: float) -> void:
 		elif player.global_position.x + 50 < 0:
 			player.global_position.x = view_port.x
 		var distance_travel = player.distance_traveled
-		var distance_left = distance_to_win - distance_travel
+		var distance_left = max((distance_to_win - distance_travel),0)
 		var distance_text = "%.1f KM"  % distance_left
 		
 		distance_number_label.text = distance_text
@@ -99,7 +104,7 @@ func _end_level():
 	
 	ended = true
 	player.lose()
-	camara_controller.player_lose()
+	camara_controller.end_chase()
 
 func _on_button_lose_pressed() -> void:
 	get_tree().reload_current_scene()
@@ -140,10 +145,36 @@ func _on_player_player_heal() -> void:
 
 
 func _on_director_player_win() -> void:
-	player_won_label.show()
+	var parallex_background: Node = $ParallexBackground
+	parallex_background.show_mars_mountain()
 	ended = true
-	player.play("win")
-	player.process_mode = Node.PROCESS_MODE_DISABLED
+	player.process_mode = PROCESS_MODE_DISABLED
+	player.set_process(false)
+	player.set_physics_process(false)
+	
+	camara_controller.end_chase()
+	
+	player.visible = false
+	victory_player.global_position = player.global_position
+	victory_player.visible = true
+	
+	var tween = create_tween() 
+	tween.set_parallel(true) 
+	tween.tween_property(victory_player, "global_position:x", 270, 0.5) 
+	tween.tween_property(victory_player, "rotation_degrees", 180, 0.5) 
+	await tween.finished
+	tween.kill()
+	tween = create_tween() 
+	tween.tween_property(victory_player, "global_position:y", victory_player.global_position.y - 200, 1.5)
+	await tween.finished
+	await fade_out_animation()
+	get_tree().change_scene_to_file("res://Scenes/Menus/EndGame.tscn")
+
+
+func fade_out_animation():
+	var tween = create_tween()
+	tween.tween_property(fade_out, "modulate:a", 1.0, 0.5)
+	await tween.finished
 
 func _on_tiempo_transcurrido_timeout() -> void:
 	segundos_transcurridos += 1
