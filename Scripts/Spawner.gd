@@ -94,7 +94,7 @@ var alien_formation = [
 	]	
 ]
 
-
+var distancia_agragada_en_el_tutorial
 
 
 
@@ -107,6 +107,11 @@ func _ready() -> void:
 	distancesperlevel.append(distance_epiloge)
 	
 	next_distance_to_level_up = distancesperlevel[threat_lvl]
+
+func game_beggin():
+	distancia_agragada_en_el_tutorial = player.distance_traveled
+	next_distance_to_level_up += distancia_agragada_en_el_tutorial
+	threat_lvl = 0 
 	
 func _process(_delta: float) -> void:
 	if player && player.distance_traveled >= next_distance_to_level_up:
@@ -240,7 +245,8 @@ func totaldistance() -> float:
 	var total: int
 	for dis in distancesperlevel:
 		total += dis
-	
+	total += distancia_agragada_en_el_tutorial
+
 	return total
 	
 func get_next_distance_to_level_up() -> float:

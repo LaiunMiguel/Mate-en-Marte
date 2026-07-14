@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://dl5ddfmbmttsp"]
+
+[ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="1_43vwq"]
+[ext_resource type="Texture2D" uid="uid://cliej30jqu54q" path="res://Assets/Imagenes/UI/ui.png" id="2_y7ns2"]
+[ext_resource type="Script" uid="uid://bfll0k07cy5xa" path="res://Scenes/Menus/dead_menu.gd" id="3_150hs"]
+[ext_resource type="Theme" uid="uid://rm178ayv8b74" path="res://ButtonTheme.tres" id="3_y7ns2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_150hs"]
+font_size = 37
+
+[sub_resource type="LabelSettings" id="LabelSettings_8f6mv"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_llu52"]
+font_size = 22
+
+[node name="DeadMenu" type="NinePatchRect" unique_id=2068532239]
+offset_right = 400.0
+offset_bottom = 350.0
+theme = ExtResource("1_43vwq")
+texture = ExtResource("2_y7ns2")
+script = ExtResource("3_150hs")
+
+[node name="LoseLabel" type="Label" parent="." unique_id=1958801740]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 22.0
+offset_bottom = 67.0
+grow_horizontal = 2
+text = "Perdiste"
+label_settings = SubResource("LabelSettings_150hs")
+horizontal_alignment = 1
+
+[node name="Main" type="VBoxContainer" parent="." unique_id=391440884]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = 82.0
+offset_right = 152.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main" unique_id=923197576]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="TimeLabel" type="Label" parent="Main/VBoxContainer" unique_id=1898939438]
+layout_mode = 2
+text = "Tu vuelo duro : 00:00"
+label_settings = SubResource("LabelSettings_8f6mv")
+
+[node name="DistanciaLabel" type="Label" parent="Main/VBoxContainer" unique_id=1901844123]
+layout_mode = 2
+text = "Estuviste a XXXX de llegar"
+label_settings = SubResource("LabelSettings_llu52")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Main" unique_id=32276301]
+custom_minimum_size = Vector2(34, 100)
+layout_mode = 2
+theme = ExtResource("3_y7ns2")
+theme_override_constants/separation = 8
+
+[node name="RestartButton" type="Button" parent="Main/VBoxContainer2" unique_id=1540681728]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
+[node name="MenuButton" type="Button" parent="Main/VBoxContainer2" unique_id=1811550895]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Volver Al Menu"
+
+[connection signal="pressed" from="Main/VBoxContainer2/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer2/MenuButton" to="." method="_on_menu_button_pressed"]

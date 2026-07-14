@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://conr6nyj5qqdw" path="res://Scenes/Menus/pause_menu.gd" id="1_fo4r2"]
 [ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="1_sjlmi"]
 [ext_resource type="PackedScene" uid="uid://8fwitx8t7kw2" path="res://Scenes/Menus/OptionMenu.tscn" id="2_sr1dw"]
+[ext_resource type="Theme" uid="uid://rm178ayv8b74" path="res://ButtonTheme.tres" id="3_twtl6"]
+[ext_resource type="Texture2D" uid="uid://cliej30jqu54q" path="res://Assets/Imagenes/UI/ui.png" id="4_l3unk"]
 
 [node name="PauseMenu" type="Control" unique_id=743074635]
 process_mode = 2
@@ -11,16 +13,26 @@ anchors_preset = 0
 theme = ExtResource("1_sjlmi")
 script = ExtResource("1_fo4r2")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=489857472]
+[node name="ColorRect" type="NinePatchRect" parent="." unique_id=896324631]
 layout_mode = 0
-offset_right = 180.0
-offset_bottom = 138.0
-color = Color(0, 0, 0, 0.5411765)
+offset_top = -7.0
+offset_right = 212.0
+offset_bottom = 242.0
+theme = ExtResource("3_twtl6")
+texture = ExtResource("4_l3unk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=1576528019]
-layout_mode = 0
-offset_right = 179.0
-offset_bottom = 136.0
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = 18.0
+offset_right = 95.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ResumeButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1235461315]
 layout_mode = 2
@@ -45,10 +57,10 @@ text = "Exit Game"
 [node name="OptionMenu" parent="." unique_id=1022705813 instance=ExtResource("2_sr1dw")]
 visible = false
 layout_mode = 1
-offset_left = -41.0
-offset_top = -43.0
-offset_right = -41.0
-offset_bottom = -42.60002
+offset_left = -18.0
+offset_top = -22.0
+offset_right = -18.0
+offset_bottom = -21.600021
 
 [connection signal="pressed" from="ColorRect/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]

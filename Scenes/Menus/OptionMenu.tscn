@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://b5n2nxbwbqv26" path="res://Scenes/Menus/option_menu.gd" id="1_c6kko"]
 [ext_resource type="PackedScene" uid="uid://c5ykivjiolnj6" path="res://Scenes/Menus/BusControl.tscn" id="1_fpbte"]
 [ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="1_vfyb1"]
+[ext_resource type="Texture2D" uid="uid://cliej30jqu54q" path="res://Assets/Imagenes/UI/ui.png" id="3_520ba"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vfyb1"]
-font_size = 23
+font_size = 21
 
 [node name="OptionMenu" type="Control" unique_id=1022705813]
 layout_mode = 3
@@ -15,11 +16,12 @@ size_flags_vertical = 4
 theme = ExtResource("1_vfyb1")
 script = ExtResource("1_c6kko")
 
-[node name="TextureRect" type="ColorRect" parent="." unique_id=995948738]
+[node name="TextureRect" type="NinePatchRect" parent="." unique_id=1843121644]
 layout_mode = 0
+offset_top = -6.0
 offset_right = 242.0
-offset_bottom = 265.0
-color = Color(0.12156863, 0.12156863, 0.12156863, 0.827451)
+offset_bottom = 273.0
+texture = ExtResource("3_520ba")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=2138092912]
 layout_mode = 1
@@ -29,9 +31,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -108.0
-offset_top = -90.5
+offset_top = -92.5
 offset_right = 108.0
-offset_bottom = 119.5
+offset_bottom = 117.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 13
@@ -53,15 +55,14 @@ text = "Save"
 
 [node name="Label" type="Label" parent="TextureRect" unique_id=996027331]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -92.0
-offset_top = 3.0
-offset_right = 149.0
-offset_bottom = 48.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 14.0
+offset_bottom = 55.0
 grow_horizontal = 2
 text = "SOUND OPTIONS"
 label_settings = SubResource("LabelSettings_vfyb1")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="TextureRect/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]

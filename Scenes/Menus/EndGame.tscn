@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://bccxi6rpj2hqr" path="res://Assets/Imagenes/UI/astronauta_v4.png" id="3_7kdgw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_mc2ya"]
-font_size = 53
+font_size = 45
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7kdgw"]
-font_size = 41
+font_size = 32
 outline_size = 1
 outline_color = Color(0.2875611, 0.107447915, 0.10886528, 1)
 
@@ -22,6 +22,12 @@ font_size = 60
 
 [sub_resource type="LabelSettings" id="LabelSettings_in6xa"]
 font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_almbg"]
+font_size = 47
+
+[sub_resource type="LabelSettings" id="LabelSettings_ng4j1"]
+font_size = 41
 
 [node name="EndGame" type="Node2D" unique_id=1948098982]
 script = ExtResource("1_7kdgw")
@@ -58,9 +64,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -205.0
-offset_top = 52.0
+offset_top = 48.5
 offset_right = 211.0
-offset_bottom = 334.0
+offset_bottom = 393.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "FELICIDADES HAZ LLEGADO A MARTE DISFRUTA DE ESE MATE TE LO MERECES"
@@ -68,6 +74,7 @@ label_settings = SubResource("LabelSettings_mc2ya")
 autowrap_mode = 3
 
 [node name="WinPhoto" type="Sprite2D" parent="CanvasLayer/Control" unique_id=1166045804]
+visible = false
 position = Vector2(271, 267)
 scale = Vector2(4.5, 4.687)
 texture = ExtResource("3_7kdgw")
@@ -132,8 +139,9 @@ horizontal_alignment = 1
 
 [node name="Credits7" type="Label" parent="CanvasLayer/Control/Credits" unique_id=1187699744]
 layout_mode = 2
-text = "Game Paused 
-Created by Dharmas Foundry"
+text = "Quadrillion
+Created by Raymond Larabie
+https://www.1001fonts.com/quadrillion-font.html"
 horizontal_alignment = 1
 
 [node name="Credits8" type="Label" parent="CanvasLayer/Control/Credits" unique_id=118605457]
@@ -160,6 +168,7 @@ text = "
 Y En especial 
 Gracias a Vos!
 "
+label_settings = SubResource("LabelSettings_almbg")
 horizontal_alignment = 1
 
 [node name="Credits12" type="Label" parent="CanvasLayer/Control/Credits" unique_id=1854527819]
@@ -168,6 +177,7 @@ text = "Esperamos que hayas
 disfrutados el juego!
 
 "
+label_settings = SubResource("LabelSettings_ng4j1")
 horizontal_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/Control/CreditosButton" to="." method="_on_creditos_button_pressed"]

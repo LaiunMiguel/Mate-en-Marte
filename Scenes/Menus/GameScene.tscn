@@ -16,8 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://uiaahtf8j42k" path="res://Scenes/Menus/Pause_Menu.tscn" id="10_n5qs1"]
 [ext_resource type="Shader" uid="uid://bokpkow4w5nr3" path="res://Shaders/GameScene.gdshader" id="11_axnfw"]
 [ext_resource type="PackedScene" uid="uid://dmepk24ji4wgx" path="res://Scenes/StarScenary.tscn" id="12_82a24"]
+[ext_resource type="PackedScene" uid="uid://dbg8hwo05j3c5" path="res://Scenes/Menus/TutorialScene.tscn" id="14_4aajq"]
 [ext_resource type="PackedScene" uid="uid://ckfkqngiximir" path="res://Scenes/Background.tscn" id="15_eq5i7"]
 [ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="15_q441p"]
+[ext_resource type="PackedScene" uid="uid://dl5ddfmbmttsp" path="res://Scenes/Menus/DeadMenu.tscn" id="17_cfolp"]
 [ext_resource type="Texture2D" uid="uid://cliej30jqu54q" path="res://Assets/Imagenes/UI/ui.png" id="17_ggpbi"]
 [ext_resource type="Texture2D" uid="uid://djeljp0o055ve" path="res://Assets/Imagenes/UI/pause.png" id="18_uumtb"]
 [ext_resource type="Texture2D" uid="uid://cwaxyg134abw5" path="res://Assets/Imagenes/Player/nave Copy-Sheet.png" id="21_4f0m1"]
@@ -31,11 +33,6 @@ shader_parameter/ShakeStrength = 0.0
 shader_parameter/FactorA = Vector2(100, 100)
 shader_parameter/FactorB = Vector2(1, 1)
 shader_parameter/magnitude = Vector2(0.01, 0.01)
-
-[sub_resource type="LabelSettings" id="LabelSettings_axnfw"]
-font_size = 40
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_03owx"]
 atlas = ExtResource("6_trn2v")
@@ -86,10 +83,10 @@ animations = [{
 }]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uumtb"]
-font_size = 60
+font_size = 72
 
 [sub_resource type="LabelSettings" id="LabelSettings_q441p"]
-font_size = 82
+font_size = 80
 
 [sub_resource type="LabelSettings" id="LabelSettings_4f0m1"]
 font_size = 90
@@ -195,24 +192,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TutorialLabel" type="Label" parent="CanvasLayer" unique_id=257093017]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.38958332
-anchor_right = 0.61157405
-anchor_bottom = 0.61041665
-offset_left = -104.75
-offset_top = -68.5
-offset_right = 104.75
-offset_bottom = 68.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("15_q441p")
-text = "Manten precionado la pantalla y arrastra en direccion contraria "
-label_settings = SubResource("LabelSettings_axnfw")
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
-
 [node name="PauseMenu" parent="CanvasLayer" unique_id=246397568 instance=ExtResource("10_n5qs1")]
 visible = false
 anchors_preset = 8
@@ -220,15 +199,35 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -150.0
-offset_right = -160.0
-offset_bottom = -150.0
+offset_left = -211.0
+offset_top = -237.0
+offset_right = -211.0
+offset_bottom = -237.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 
 [node name="UI" type="Node" parent="CanvasLayer" unique_id=319581126]
+
+[node name="Tutorial" parent="CanvasLayer/UI" unique_id=450069715 instance=ExtResource("14_4aajq")]
+offset_left = -180.0
+offset_top = -65.0
+offset_right = 180.0
+offset_bottom = 65.0
+
+[node name="DeadMenu" parent="CanvasLayer/UI" unique_id=2068532239 instance=ExtResource("17_cfolp")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -175.0
+offset_right = 175.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Life" type="Node" parent="CanvasLayer/UI" unique_id=927294290]
 
@@ -311,12 +310,12 @@ anchor_top = 0.11
 anchor_right = 0.97666675
 anchor_bottom = 0.22671203
 offset_left = -300.2236
-offset_top = -95.056
+offset_top = -96.6976
 offset_right = -303.62366
-offset_bottom = -36.398407
+offset_bottom = -38.04001
 size_flags_vertical = 0
 theme = ExtResource("15_q441p")
-text = "DISTANCIA RESTANTE"
+text = "DISTANCIA "
 label_settings = SubResource("LabelSettings_uumtb")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
@@ -342,10 +341,10 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="TimerNumberLabel" type="Label" parent="CanvasLayer/UI/Stats/Stats/Timer" unique_id=1282022498]
-offset_left = -285.8215
-offset_top = -31.657593
-offset_right = 283.6675
-offset_bottom = 92.34241
+offset_left = -285.82153
+offset_top = -7.0335007
+offset_right = 283.66748
+offset_bottom = 116.9665
 theme = ExtResource("15_q441p")
 text = "00:00"
 label_settings = SubResource("LabelSettings_4f0m1")
@@ -353,31 +352,8 @@ horizontal_alignment = 1
 
 [node name="TiempoTranscurrido" type="Timer" parent="CanvasLayer/UI/Stats/Stats/Timer" unique_id=1304029341]
 
-[node name="Lose" type="Node" parent="CanvasLayer/UI" unique_id=1239218941]
-
-[node name="LabelLose" type="Label" parent="CanvasLayer/UI/Lose" unique_id=518319457]
-visible = false
-offset_left = 2.0
-offset_top = 431.0
-offset_right = 540.0
-offset_bottom = 454.0
-text = "UHHHH NO LOGRASTE LLEGAR A MARTE TE FALTARON XXXX KM"
-horizontal_alignment = 1
-
-[node name="Button_lose" type="Button" parent="CanvasLayer/UI/Lose/LabelLose" unique_id=738301072]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -2.0
-offset_top = 10.5
-offset_bottom = 82.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Presiona \"Aqui\" para reintentar"
-
 [node name="FadeOut" type="ColorRect" parent="CanvasLayer" unique_id=1876103488]
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -407,8 +383,8 @@ autoplay = "default"
 [connection signal="player_win" from="Director" to="." method="_on_director_player_win"]
 [connection signal="timeout" from="Director/Spawn_timer" to="Director" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Director/BuffSpawn" to="Director" method="_on_buff_spawn_timeout"]
+[connection signal="tutorial_finish" from="CanvasLayer/UI/Tutorial" to="." method="_on_tutorial_tutorial_finish"]
 [connection signal="pressed" from="CanvasLayer/UI/Stats/Stats/PausaMenu" to="." method="_on_pausa_menu_pressed"]
 [connection signal="timeout" from="CanvasLayer/UI/Stats/Stats/Timer/TiempoTranscurrido" to="." method="_on_tiempo_transcurrido_timeout"]
-[connection signal="pressed" from="CanvasLayer/UI/Lose/LabelLose/Button_lose" to="." method="_on_button_lose_pressed"]
 
 [editable path="ParallexBackground"]

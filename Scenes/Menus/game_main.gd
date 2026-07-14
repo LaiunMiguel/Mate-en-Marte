@@ -6,20 +6,18 @@ extends Node2D
 @onready var director: Node = $Director
 
 #UI
-@onready var label_lose: Label = $CanvasLayer/UI/Lose/LabelLose
-@onready var button_lose: Button = $CanvasLayer/UI/Lose/LabelLose/Button_lose
 @onready var pause_menu: Control = $CanvasLayer/PauseMenu
-@onready var player_won_label: Label = $CanvasLayer/PlayerWonLabel
 @onready var distance_label: Label = $CanvasLayer/UI/Stats/Stats/Distance/DistanceLabel
 @onready var distance_number_label: Label = $CanvasLayer/UI/Stats/Stats/Distance/DistanceNumberLabel
 @onready var timer_label: Label = $CanvasLayer/UI/Stats/Stats/Timer/TimerLabel
 @onready var timer_number_label: Label = $CanvasLayer/UI/Stats/Stats/Timer/TimerNumberLabel
 @onready var tiempo_transcurrido: Timer = $CanvasLayer/UI/Stats/Stats/Timer/TiempoTranscurrido
 
+#UI END MENU
+@onready var dead_menu: NinePatchRect = $CanvasLayer/UI/DeadMenu
 
 #UI TUTORIAL
-
-@onready var tutorial_label: Label = $CanvasLayer/TutorialLabel
+@onready var tutorial: NinePatchRect = $CanvasLayer/UI/Tutorial
 
 
 #UI Stats
@@ -55,23 +53,23 @@ var curStrength = 0;
 
 
 func _ready() -> void:
+	fade_out.hide()
+	ui.hide()
+	stats.hide()
 	AudioManager.play_music(AudioPreload.MUSIC_TRACK_1)
 	player.CURRENT_GRAVITY = 0
 	player.global_position.x = get_viewport_rect().size.x / 2
 	director.process_mode = Node.PROCESS_MODE_DISABLED
-	distance_to_win = director.totaldistance()
+	director.threat_lvl = -1
 
 func _process(delta: float) -> void: 
 	
 	if is_first_launch:
-		if Input.is_action_just_pressed("aim"):
-			tutorial_label.text = "Dependiendo de la distancia que arrastres es la fuerza con la que se lanzara"
 		if Input.is_action_just_released("aim"):
 			player.CURRENT_GRAVITY = player.GRAVITY
 			director.process_mode = Node.PROCESS_MODE_INHERIT
 			tiempo_transcurrido.start()
 			_on_tiempo_transcurrido_timeout()
-			tutorial_label.queue_free()
 			is_first_launch = false
 			
 	if Input.is_action_pressed("reset"):
@@ -95,13 +93,14 @@ func _process(delta: float) -> void:
 
 
 func _end_level():
-	ui.visible = false
-	stats.visible = false
+	ui.hide()
+	stats.hide()
+	if tutorial:
+		tutorial.hide()
 	var distance_travel = player.distance_traveled
 	var distance_left = distance_to_win - distance_travel
-	label_lose.visible = true
-	label_lose.text = "UHHHH NO LOGRASTE LLEGAR A MARTE TE FALTARON %.1f KM" % distance_left
-	
+	dead_menu.endStats(timer_number_label.text, distance_left)
+	dead_menu.show()
 	ended = true
 	player.lose()
 	camara_controller.end_chase()
@@ -172,12 +171,23 @@ func _on_director_player_win() -> void:
 
 
 func fade_out_animation():
+	fade_out.show()
 	var tween = create_tween()
 	tween.tween_property(fade_out, "modulate:a", 1.0, 0.5)
 	await tween.finished
+	fade_out.hide()
 
 func _on_tiempo_transcurrido_timeout() -> void:
 	segundos_transcurridos += 1
 	var minutos := segundos_transcurridos / 60
 	var segundos := segundos_transcurridos % 60
 	timer_number_label.text = "%02d:%02d" % [minutos, segundos]
+
+
+func _on_tutorial_tutorial_finish() -> void:
+	if !ended:
+		director.game_beggin()
+		distance_to_win = director.totaldistance()
+		ui.show()
+		stats.show()
+		

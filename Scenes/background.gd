@@ -29,6 +29,9 @@ func _process(_delta: float) -> void:
 	var color: Color
 
 	match director.threat_lvl:
+		-1: 
+			color = Color(0.153, 0.608, 1.0, 1.0)
+		
 		0:
 			color = Color(0.153, 0.608, 1.0, 1.0).lerp(
 				Color(0.07, 0.15, 0.393, 1.0),

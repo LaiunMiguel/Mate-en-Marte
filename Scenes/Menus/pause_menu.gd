@@ -1,7 +1,7 @@
 extends Control
 
 @onready var option_menu: Control = $OptionMenu
-@onready var color_rect: ColorRect = $ColorRect
+@onready var color_rect: NinePatchRect = $ColorRect
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
