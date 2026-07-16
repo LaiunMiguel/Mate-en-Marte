@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/Orbital Coin Run.mp3-9b86c0ddc30e185930f138f6
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

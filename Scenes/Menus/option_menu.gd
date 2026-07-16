@@ -10,3 +10,15 @@ signal save_option
 func _on_save_button_pressed() -> void:
 	emit_signal("save_option")
 	
+
+
+func _on_check_button_toggled(toggled_on: bool) -> void:
+	Settings.drag_line_enabled = toggled_on
+
+
+func _on_check_button_2_toggled(toggled_on: bool) -> void:
+	Settings.show_tutorial = toggled_on
+
+
+func _on_check_button_3_toggled(toggled_on: bool) -> void:
+	Settings.arg_mode = toggled_on

@@ -14,8 +14,12 @@ signal player_win
 
 ##Dificulty control
 @export var time_between_obstacles : float = 1
-@export var number_of_obstacles_per_spawn : int = 1 
-@export var max_obstacles_per_screen: int = 4
+@export var max_planes_per_screen : int = 4
+@export var max_satelites_per_screen : int = 5
+@export var max_asteroids_per_screen : int = 5
+
+@export var number_of_planes_per_spawn : = 1
+@export var number_of_saelites_per_spawn : = 1
 @export var threat_lvl: int = 0 
 
 #Distances 
@@ -99,6 +103,7 @@ var distancia_agragada_en_el_tutorial
 
 
 func _ready() -> void:
+	_load_difficulty()
 	view_port = get_parent().get_viewport_rect().size.x
 	distancesperlevel.append(distance_first_level)
 	distancesperlevel.append(distance_second_level)
@@ -137,8 +142,8 @@ func _on_spawn_timer_timeout() -> void:
 	spawn_timer.start(time_between_obstacles)
 	
 func _spawn_first_lvl():
-	for i in range(number_of_obstacles_per_spawn):
-			if (obstacles_container.get_child_count() <= max_obstacles_per_screen):
+	for i in range(number_of_planes_per_spawn):
+			if (obstacles_container.get_child_count() <= max_planes_per_screen):
 				var obstacle = obstacles_scenes[0].instantiate()
 				obstacles_container.add_child(obstacle)
 				var offscreen = camara_controller.get_vertical_offscreen()
@@ -152,8 +157,8 @@ func _spawn_first_lvl():
 func _spawn_second_lvl():
 	var spawned_positions: Array[Vector2] = []
 
-	for i in range(2 ):
-			if (obstacles_container.get_child_count() >= 5):
+	for i in range(number_of_saelites_per_spawn):
+			if (obstacles_container.get_child_count() >= max_satelites_per_screen):
 				break
 			var offscreen = camara_controller.get_vertical_offscreen()
 			var position: Vector2
@@ -180,26 +185,27 @@ func _spawn_second_lvl():
 func _spawn_third_lvl():
 
 	var amount = randi_range(1, 2)
-
-	for i in amount:
-		var pattern = patterns.pick_random()
-		var offscreen = camara_controller.get_vertical_offscreen()
-		var center_x = randf_range(200, view_port - 200)
-		for offset in pattern:
-			if obstacles_container.get_child_count() < max_obstacles_per_screen + 3:
-				var obstacle = obstacles_scenes[randi_range(2, 3)].instantiate()
-				obstacles_container.add_child(obstacle)
-				var position = Vector2(
-					center_x + offset.x,
-					offscreen + offset.y
-				)
-				obstacle.initialize(
-					position
-				)
-			
+	
 	for i in range(randi_range(2, 6)):
 		if scenary_container.get_child_count() < 50:
 			_spawn_scenery()
+
+	for i in amount:
+		var pattern = patterns.pick_random()
+		if obstacles_container.get_child_count() + pattern.size() <= max_asteroids_per_screen:		
+			var offscreen = camara_controller.get_vertical_offscreen()
+			var center_x = randf_range(200, view_port - 200)
+			for offset in pattern:
+					var obstacle = obstacles_scenes[randi_range(2, 3)].instantiate()
+					obstacles_container.add_child(obstacle)
+					var position = Vector2(
+						center_x + offset.x,
+						offscreen + offset.y
+					)
+					obstacle.initialize(
+						position
+					)
+			
 
 func _spawn_four_lvl():
 	var formation = alien_formation.pick_random()
@@ -228,8 +234,7 @@ func _spawn_scenery():
 	star.global_position = position
 
 func _dificulty_lvl_up() -> void:
-	time_between_obstacles = max(0.2,time_between_obstacles - 0.5)
-	number_of_obstacles_per_spawn += 1
+	time_between_obstacles = max(0.4,time_between_obstacles - 0.5)
 	threat_lvl = min(threat_lvl+1,5)
 	next_distance_to_level_up +=  distancesperlevel[min(threat_lvl,4)]
 
@@ -254,3 +259,63 @@ func get_next_distance_to_level_up() -> float:
 
 func get_distance_to_level_up() -> float:
 	return distancesperlevel[min(threat_lvl,4)]
+	
+	
+func _load_difficulty() -> void:
+	match Settings.difficulty:
+		Settings.Difficulty.EASY:
+			buff_spawn.wait_time = 4
+			number_of_planes_per_spawn = 1 
+			number_of_saelites_per_spawn = 1
+			max_planes_per_screen = 3
+			max_satelites_per_screen = 3
+			max_asteroids_per_screen = 5
+
+
+			distance_first_level = 150
+			distance_second_level = 150
+			distance_third_level = 100
+			distance_fourd_level = 100
+			distance_epiloge = 25
+
+		Settings.Difficulty.NORMAL:
+			buff_spawn.wait_time = 5.0
+			number_of_planes_per_spawn = 1 
+			number_of_saelites_per_spawn = 2
+			max_planes_per_screen = 4
+			max_satelites_per_screen = 5
+			max_asteroids_per_screen = 5
+
+			distance_first_level = 150
+			distance_second_level = 150
+			distance_third_level = 150
+			distance_fourd_level = 150
+			distance_epiloge = 50
+
+		Settings.Difficulty.HARD:
+			buff_spawn.wait_time = 5.0
+			number_of_planes_per_spawn = 2 
+			number_of_saelites_per_spawn = 3
+			max_planes_per_screen = 5
+			max_satelites_per_screen = 6
+			max_asteroids_per_screen = 6
+
+			distance_first_level = 100
+			distance_second_level = 150
+			distance_third_level = 200
+			distance_fourd_level = 200
+			distance_epiloge = 50
+
+		Settings.Difficulty.VERYHARD:
+			buff_spawn.wait_time = 10
+			number_of_planes_per_spawn = 2 
+			number_of_saelites_per_spawn = 4
+			max_planes_per_screen = 6
+			max_satelites_per_screen = 7
+			max_asteroids_per_screen = 8
+
+			distance_first_level = 150
+			distance_second_level = 150
+			distance_third_level = 300
+			distance_fourd_level = 300
+			distance_epiloge = 50

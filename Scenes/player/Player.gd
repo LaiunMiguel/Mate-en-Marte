@@ -2,10 +2,11 @@ extends CharacterBody2D
 class_name Player
 
 
-@onready var line_2d: Line2D = $"../Line2D"
 @onready var animated_sprite: AnimatedSprite2D = $animated_sprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var state_machine: Node = $StateMachine
+@onready var shield_sprite: Sprite2D = $Shield
+
 
 
 # State variables
@@ -48,6 +49,8 @@ var distance_traveled : float = 0;
 
 #Flags
 @export var is_invulnerable: bool = false
+@export var shield_up: bool = false
+@onready var hit_timer: Timer = $HitTimer
 
 #Particulas
 @onready var gpu_particles_2d_3: GPUParticles2D = $GPUParticles2D3
@@ -135,17 +138,24 @@ func _rotate_sprite(vector: Vector2):
 	
 func get_hit():
 	if !is_invulnerable:
-		CURRENT_LIFE -= 1
-		CURRENT_MAX_SPEED = BASE_MAX_SPEED
-		velocity = velocity.normalized() * CURRENT_MAX_SPEED
-		emit_signal("player_hit")
-		animation_player.play("hit")
-		_play_sound(AudioPreload.HIT_HURT)
-		if CURRENT_LIFE == 0:
-			emit_signal("player_lose")
+		if shield_up:
+			shield_up = false
+			shield_sprite.hide()
+			_play_sound(AudioPreload.EXPLOSION)
+		else:	
+			CURRENT_LIFE -= 1
+			CURRENT_MAX_SPEED = BASE_MAX_SPEED
+			velocity = velocity.normalized() * CURRENT_MAX_SPEED
+			emit_signal("player_hit")
+			animation_player.play("hit")
+			_play_sound(AudioPreload.HIT_HURT)
+			if CURRENT_LIFE == 0:
+				_play_sound(AudioPreload.EXPLOSION_3)
+				emit_signal("player_lose")
+		hit_timer.start()
+		is_invulnerable = true
 	
 func lose():
-	line_2d.queue_free()
 	hide()
 	process_mode = Node.PROCESS_MODE_DISABLED
 	
@@ -154,22 +164,31 @@ func lose():
 func gain_life():
 	if CURRENT_LIFE < MAX_LIFE:
 		CURRENT_LIFE += 1
-		_play_sound(AudioPreload.POWER_UP)
+		_play_sound(AudioPreload.HEAL)
 		emit_signal("player_heal")
 	
 	
 func activate_invulnerable():
 	_set_invulnerable(true)
 	invulnerable_timer.start(inv_duration)
+	_play_sound_priority(AudioPreload.MARIO_RAINBOW_STAR_POWER)
 	
 	
 func _set_invulnerable(boolean: bool):
 	animation_player.stop()
 	if (boolean):
 		animation_player.play("star")
-		_play_sound(AudioPreload.POWER_UP)
+		_play_sound(AudioPreload.STAR_POWER)
 	else:
+		AudioManager.stop_priority_music()
 		animation_player.play("default")
+	
+	
+func activateShield():
+	shield_up = true
+	shield_sprite.show()
+	_play_sound(AudioPreload.SHIELD)
+
 	
 	
 func _on_brake_button_pressed():
@@ -184,9 +203,16 @@ func play(animation : String):
 func _play_sound(sound):
 	AudioManager.play_sfx(sound)
 	
+func _play_sound_priority(sound):
+	AudioManager.play_priority_music(sound)
+	
 func _on_max_velocity_timer_timeout() -> void:
 	CURRENT_MAX_SPEED = max(BASE_MAX_SPEED , CURRENT_MAX_SPEED - 150)
 
 
 func _on_invulnerable_timer_timeout() -> void:
 	_set_invulnerable(false)
+
+
+func _on_hit_timer_timeout() -> void:
+	is_invulnerable = false

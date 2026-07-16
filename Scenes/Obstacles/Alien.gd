@@ -13,6 +13,8 @@ var projectile_velocity : float = 300
 var vertical_speed: float = 1000
 var formation_offset : Vector2
 
+var sound = []
+
 func initialize(initial_position:Vector2, player: Player, offset:Vector2):
 	global_position = initial_position
 	player_to_follow = player
@@ -20,6 +22,8 @@ func initialize(initial_position:Vector2, player: Player, offset:Vector2):
 	time_alive.start(5)
 	formation_offset = offset
 	direction = [-1,1].pick_random()
+	sound.append(AudioPreload.LASER_SHOOT1)
+	sound.append(AudioPreload.LASER_SHOOT2)
 	 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
@@ -53,6 +57,8 @@ func _on_shooting_time_timeout() -> void:
 		var projectile = projectile_scene.instantiate()
 		projectile.initialize(global_position, player_to_follow ,projectile_velocity)
 		get_parent().get_parent().add_child(projectile)
+		AudioManager.play_sfx(sound.pick_random())
+
 	
 	
 	

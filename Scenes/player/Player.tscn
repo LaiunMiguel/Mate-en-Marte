@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cunr1j1kfsw4f"]
 
 [ext_resource type="Script" uid="uid://c53pg2hblwnjg" path="res://Scenes/player/Player.gd" id="1_xhfnw"]
+[ext_resource type="Texture2D" uid="uid://cyej7afphk1nw" path="res://Assets/Imagenes/Buff/burbuja.png" id="2_1u68r"]
 [ext_resource type="Texture2D" uid="uid://cwaxyg134abw5" path="res://Assets/Imagenes/Player/nave Copy-Sheet.png" id="2_hg0hj"]
 [ext_resource type="Script" uid="uid://dbqyvxla0s5v" path="res://Scenes/player/States/State_machine.gd" id="3_kne1u"]
 [ext_resource type="Texture2D" uid="uid://iwpuyi2dmsup" path="res://Assets/Imagenes/Player/Aura.png" id="3_trp67"]
@@ -10,7 +11,9 @@
 [ext_resource type="Script" uid="uid://b3miqawxbxp3x" path="res://Scenes/player/States/LaunchState.gd" id="6_wi0c6"]
 [ext_resource type="Script" uid="uid://c26rtdlj7bld1" path="res://Scenes/player/States/CooldownState.gd" id="7_hp6x6"]
 [ext_resource type="Script" uid="uid://dottawpiyk6d6" path="res://Scenes/player/States/BrakeState.gd" id="8_pe0xw"]
-[ext_resource type="Texture2D" uid="uid://cqfjrhduyxema" path="res://Assets/Imagenes/Player/flare.png" id="10_xb7k6"]
+[ext_resource type="Texture2D" uid="uid://b61ubavailptu" path="res://Assets/Imagenes/Player/flareWhote.png" id="12_8hdke"]
+[ext_resource type="Script" uid="uid://8dompkjhw0c4" path="res://Scenes/player/particles.gd" id="13_h8poa"]
+[ext_resource type="Texture2D" uid="uid://b1r0sngwtejja" path="res://Assets/Imagenes/Player/flareCeleste.png" id="14_3tjkw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pe0xw"]
 atlas = ExtResource("2_hg0hj")
@@ -334,24 +337,24 @@ _data = {
 &"star": SubResource("Animation_trp67")
 }
 
-[sub_resource type="Gradient" id="Gradient_xb7k6"]
-colors = PackedColorArray(0.7862192, 0.7756371, 0.04224337, 1, 1, 1, 1, 0.5058824)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_v18lm"]
-gradient = SubResource("Gradient_xb7k6")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v18lm"]
 particle_flag_disable_z = true
 direction = Vector3(0, 1, 0)
 initial_velocity_max = 20.0
 gravity = Vector3(0, 98, 0)
 scale_max = 2.0
-color_ramp = SubResource("GradientTexture1D_v18lm")
 
 [node name="Player" type="CharacterBody2D" unique_id=497995314 groups=["player"]]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_xhfnw")
+
+[node name="Shield" type="Sprite2D" parent="." unique_id=1650742024]
+visible = false
+self_modulate = Color(0.5849248, 0.3503454, 0.85452455, 1)
+position = Vector2(2.7499957, 9.000002)
+scale = Vector2(1.795, 1.76)
+texture = ExtResource("2_1u68r")
 
 [node name="animated_sprite" type="AnimatedSprite2D" parent="." unique_id=1804397377]
 modulate = Color(1.2738329, 1.2738329, 1.2738329, 1)
@@ -435,25 +438,33 @@ one_shot = true
 [node name="GPUParticles2D3" type="GPUParticles2D" parent="." unique_id=138530327]
 position = Vector2(2, 27)
 amount = 20
-texture = ExtResource("10_xb7k6")
+texture = ExtResource("12_8hdke")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_v18lm")
+script = ExtResource("13_h8poa")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=508223877]
 position = Vector2(22, 27)
 amount = 20
-texture = ExtResource("10_xb7k6")
+texture = ExtResource("14_3tjkw")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_v18lm")
+script = ExtResource("13_h8poa")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1207194368]
 position = Vector2(-19, 27)
 amount = 20
-texture = ExtResource("10_xb7k6")
+texture = ExtResource("14_3tjkw")
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_v18lm")
+script = ExtResource("13_h8poa")
+
+[node name="HitTimer" type="Timer" parent="." unique_id=1045504237]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="timeout" from="StateMachine/CooldownState/MoveCooldown" to="StateMachine/CooldownState" method="_on_move_cooldown_timeout"]
 [connection signal="timeout" from="StateMachine/BrakeState/BrakeDuration" to="StateMachine/BrakeState" method="_on_brake_duration_timeout"]
 [connection signal="timeout" from="MaxVelocityTimer" to="." method="_on_max_velocity_timer_timeout"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_invulnerable_timer_timeout"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]

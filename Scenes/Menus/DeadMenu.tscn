@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cliej30jqu54q" path="res://Assets/Imagenes/UI/ui.png" id="2_y7ns2"]
 [ext_resource type="Script" uid="uid://bfll0k07cy5xa" path="res://Scenes/Menus/dead_menu.gd" id="3_150hs"]
 [ext_resource type="Theme" uid="uid://rm178ayv8b74" path="res://ButtonTheme.tres" id="3_y7ns2"]
+[ext_resource type="Script" uid="uid://c0tbk1tn6m50k" path="res://Scenes/Menus/buttonScript.gd" id="5_llu52"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_150hs"]
 font_size = 37
@@ -70,11 +71,17 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_vertical = 3
 text = "Restart"
+script = ExtResource("5_llu52")
 
 [node name="MenuButton" type="Button" parent="Main/VBoxContainer2" unique_id=1811550895]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Volver Al Menu"
+script = ExtResource("5_llu52")
 
+[connection signal="mouse_entered" from="Main/VBoxContainer2/RestartButton" to="Main/VBoxContainer2/RestartButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main/VBoxContainer2/RestartButton" to="Main/VBoxContainer2/RestartButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="Main/VBoxContainer2/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="mouse_entered" from="Main/VBoxContainer2/MenuButton" to="Main/VBoxContainer2/MenuButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Main/VBoxContainer2/MenuButton" to="Main/VBoxContainer2/MenuButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="Main/VBoxContainer2/MenuButton" to="." method="_on_menu_button_pressed"]

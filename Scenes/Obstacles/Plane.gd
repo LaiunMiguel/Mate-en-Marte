@@ -9,9 +9,9 @@ var in_screen : int = 0
 func initialize(initial_position:Vector2, speed: float):
 	global_position = initial_position
 	obstacle_speed = speed
-	if position.x < 150:
+	if position.x <= 150:
 		direction = 1
-	elif position.x > 450:
+	elif position.x >= 450:
 		direction = -1
 	else:
 		direction = [-1, 1].pick_random()
@@ -32,4 +32,8 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	in_screen = 1
+
+
+func _on_visible_on_screen_notifier_2d_2_screen_entered() -> void:
 	in_screen = 1

@@ -10,7 +10,10 @@ font_size = 21
 
 [node name="OptionMenu" type="Control" unique_id=1022705813]
 layout_mode = 3
-anchors_preset = 0
+anchor_right = 0.44300002
+anchor_bottom = 0.40300003
+offset_right = -239.22002
+offset_bottom = -386.88004
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_vfyb1")
@@ -20,7 +23,7 @@ script = ExtResource("1_c6kko")
 layout_mode = 0
 offset_top = -6.0
 offset_right = 242.0
-offset_bottom = 273.0
+offset_bottom = 407.0
 texture = ExtResource("3_520ba")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=2138092912]
@@ -30,10 +33,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -108.0
-offset_top = -92.5
-offset_right = 108.0
-offset_bottom = 117.5
+offset_left = -109.0
+offset_top = -158.5
+offset_right = 110.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 13
@@ -48,6 +51,24 @@ bus_name = "SFX"
 [node name="BusControl3" parent="TextureRect/VBoxContainer" unique_id=1765437447 instance=ExtResource("1_fpbte")]
 layout_mode = 2
 bus_name = "Music"
+
+[node name="CheckButton" type="CheckButton" parent="TextureRect/VBoxContainer" unique_id=433646053]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Linea Visual"
+
+[node name="CheckButton2" type="CheckButton" parent="TextureRect/VBoxContainer" unique_id=472028085]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+button_pressed = true
+text = "Mostrar Tutorial"
+autowrap_mode = 2
+
+[node name="CheckButton3" type="CheckButton" parent="TextureRect/VBoxContainer" unique_id=1824178769]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Turbo Arg"
+autowrap_mode = 2
 
 [node name="SaveButton" type="Button" parent="TextureRect/VBoxContainer" unique_id=1047310108]
 layout_mode = 2
@@ -65,4 +86,7 @@ label_settings = SubResource("LabelSettings_vfyb1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="toggled" from="TextureRect/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="toggled" from="TextureRect/VBoxContainer/CheckButton2" to="." method="_on_check_button_2_toggled"]
+[connection signal="toggled" from="TextureRect/VBoxContainer/CheckButton3" to="." method="_on_check_button_3_toggled"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]

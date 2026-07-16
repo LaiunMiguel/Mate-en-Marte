@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://ctk8g73nn6mrx" path="res://Scenes/Menus/menu_principal.gd" id="1_mwl8v"]
 [ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="2_2dvkh"]
 [ext_resource type="Texture2D" uid="uid://3r75anuijja4" path="res://Assets/Imagenes/ParallexBackground/Menu.png" id="3_2dvkh"]
+[ext_resource type="Script" uid="uid://c0tbk1tn6m50k" path="res://Scenes/Menus/buttonScript.gd" id="3_cs1fg"]
+[ext_resource type="PackedScene" uid="uid://8fwitx8t7kw2" path="res://Scenes/Menus/OptionMenu.tscn" id="3_yl6lt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yl6lt"]
 font_size = 88
@@ -14,7 +16,7 @@ script = ExtResource("1_mwl8v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=695213856]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=869209834]
+[node name="GameMenu" type="VBoxContainer" parent="CanvasLayer" unique_id=869209834]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -28,24 +30,63 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_2dvkh")
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1221628492]
+[node name="PlayButton" type="Button" parent="CanvasLayer/GameMenu" unique_id=1221628492]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 65
-text = "Play"
+text = "Jugar"
+script = ExtResource("3_cs1fg")
 
-[node name="OptionsButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1940481385]
+[node name="OptionsButton" type="Button" parent="CanvasLayer/GameMenu" unique_id=1940481385]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 55
-text = "Options
+text = "Opciones
 "
+script = ExtResource("3_cs1fg")
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=27114660]
+[node name="ExitButton" type="Button" parent="CanvasLayer/GameMenu" unique_id=27114660]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 65
 text = "Exit"
+script = ExtResource("3_cs1fg")
+
+[node name="DificultySelector" type="VBoxContainer" parent="CanvasLayer" unique_id=1690005214]
+visible = false
+offset_left = 83.0
+offset_top = 243.0
+offset_right = 395.0
+offset_bottom = 560.0
+theme = ExtResource("2_2dvkh")
+
+[node name="Facil" type="Button" parent="CanvasLayer/DificultySelector" unique_id=329341844]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "FACIL"
+script = ExtResource("3_cs1fg")
+
+[node name="Normal" type="Button" parent="CanvasLayer/DificultySelector" unique_id=494138516]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "NORMAL"
+script = ExtResource("3_cs1fg")
+
+[node name="Dificil" type="Button" parent="CanvasLayer/DificultySelector" unique_id=1217052394]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "DIFICIL"
+script = ExtResource("3_cs1fg")
+
+[node name="Imposible" type="Button" parent="CanvasLayer/DificultySelector" unique_id=1878090354]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 47
+text = "IMPOSIBLE"
+script = ExtResource("3_cs1fg")
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=106955240]
 offset_left = 33.0
@@ -57,10 +98,47 @@ text = "MATE EN
 MARTE"
 label_settings = SubResource("LabelSettings_yl6lt")
 
+[node name="OptionMenu" parent="CanvasLayer" unique_id=1022705813 instance=ExtResource("3_yl6lt")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -255.0
+offset_right = -153.0
+offset_bottom = -255.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+
 [node name="Menu" type="Sprite2D" parent="." unique_id=1204321216]
 position = Vector2(271.125, 478.00003)
 scale = Vector2(2, 2)
 texture = ExtResource("3_2dvkh")
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/GameMenu/PlayButton" to="CanvasLayer/GameMenu/PlayButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/GameMenu/PlayButton" to="CanvasLayer/GameMenu/PlayButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/GameMenu/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/GameMenu/OptionsButton" to="CanvasLayer/GameMenu/OptionsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/GameMenu/OptionsButton" to="CanvasLayer/GameMenu/OptionsButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/GameMenu/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/GameMenu/ExitButton" to="CanvasLayer/GameMenu/ExitButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/GameMenu/ExitButton" to="CanvasLayer/GameMenu/ExitButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/GameMenu/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/DificultySelector/Facil" to="CanvasLayer/DificultySelector/Facil" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/DificultySelector/Facil" to="CanvasLayer/DificultySelector/Facil" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/DificultySelector/Facil" to="." method="_on_facil_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/DificultySelector/Normal" to="CanvasLayer/DificultySelector/Normal" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/DificultySelector/Normal" to="CanvasLayer/DificultySelector/Normal" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/DificultySelector/Normal" to="." method="_on_normal_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/DificultySelector/Dificil" to="CanvasLayer/DificultySelector/Dificil" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/DificultySelector/Dificil" to="CanvasLayer/DificultySelector/Dificil" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/DificultySelector/Dificil" to="." method="_on_dificil_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/DificultySelector/Imposible" to="CanvasLayer/DificultySelector/Imposible" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/DificultySelector/Imposible" to="CanvasLayer/DificultySelector/Imposible" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/DificultySelector/Imposible" to="." method="_on_imposible_pressed"]
+[connection signal="save_option" from="CanvasLayer/OptionMenu" to="." method="_on_option_menu_save_option"]
+
+[editable path="CanvasLayer/OptionMenu"]

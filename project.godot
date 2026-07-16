@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://bgx0lt1fxre5f"
 
 AudioManager="*uid://c2ixjw8odoavv"
 AudioPreload="*uid://doplv0ot3k3wl"
+Settings="*uid://fqfjqih235tn"
 
 [display]
 

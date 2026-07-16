@@ -51,16 +51,20 @@ var curStrength = 0;
 @onready var victory_player: AnimatedSprite2D = $VictoryPlayer
 @onready var fade_out: ColorRect = $CanvasLayer/FadeOut
 
-
 func _ready() -> void:
+	if Settings.show_tutorial:
+		ui.hide()
+		stats.hide()
+		director.threat_lvl = -1
+	else:
+		tutorial.queue_free()
+		_on_tutorial_tutorial_finish()
+
 	fade_out.hide()
-	ui.hide()
-	stats.hide()
 	AudioManager.play_music(AudioPreload.MUSIC_TRACK_1)
 	player.CURRENT_GRAVITY = 0
 	player.global_position.x = get_viewport_rect().size.x / 2
 	director.process_mode = Node.PROCESS_MODE_DISABLED
-	director.threat_lvl = -1
 
 func _process(delta: float) -> void: 
 	

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwiynp4f55lpd" path="res://Scenes/Menus/game_main.gd" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://cunr1j1kfsw4f" path="res://Scenes/player/Player.tscn" id="2_cm0pq"]
+[ext_resource type="Script" uid="uid://c31wsrs5p40t0" path="res://Scenes/Menus/drag_line.gd" id="2_kx62r"]
 [ext_resource type="Script" uid="uid://b4dbiqhuwar75" path="res://OutOfArea.gd" id="3_03owx"]
 [ext_resource type="Script" uid="uid://b17wpt351gla5" path="res://Scripts/Spawner.gd" id="3_r0du0"]
 [ext_resource type="PackedScene" uid="uid://bsdcg57acsaef" path="res://Scenes/Obstacles/Plane.tscn" id="4_cm0pq"]
@@ -16,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://uiaahtf8j42k" path="res://Scenes/Menus/Pause_Menu.tscn" id="10_n5qs1"]
 [ext_resource type="Shader" uid="uid://bokpkow4w5nr3" path="res://Shaders/GameScene.gdshader" id="11_axnfw"]
 [ext_resource type="PackedScene" uid="uid://dmepk24ji4wgx" path="res://Scenes/StarScenary.tscn" id="12_82a24"]
+[ext_resource type="PackedScene" uid="uid://bd0g76hhfcyop" path="res://Scenes/Buff/Shield.tscn" id="12_aqce0"]
 [ext_resource type="PackedScene" uid="uid://dbg8hwo05j3c5" path="res://Scenes/Menus/TutorialScene.tscn" id="14_4aajq"]
 [ext_resource type="PackedScene" uid="uid://ckfkqngiximir" path="res://Scenes/Background.tscn" id="15_eq5i7"]
 [ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="15_q441p"]
@@ -23,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://cliej30jqu54q" path="res://Assets/Imagenes/UI/ui.png" id="17_ggpbi"]
 [ext_resource type="Texture2D" uid="uid://djeljp0o055ve" path="res://Assets/Imagenes/UI/pause.png" id="18_uumtb"]
 [ext_resource type="Texture2D" uid="uid://cwaxyg134abw5" path="res://Assets/Imagenes/Player/nave Copy-Sheet.png" id="21_4f0m1"]
+[ext_resource type="Script" uid="uid://c0tbk1tn6m50k" path="res://Scenes/Menus/buttonScript.gd" id="23_w2xge"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_trn2v"]
 b = Vector2(864, 0)
@@ -141,10 +144,6 @@ script = ExtResource("1_uu6xs")
 
 [node name="ObstaclesContainer" type="Node" parent="." unique_id=1892285031]
 
-[node name="Line2D" type="Line2D" parent="." unique_id=1583125275]
-visible = false
-points = PackedVector2Array(0, 2)
-
 [node name="Player" parent="." unique_id=1050372350 instance=ExtResource("2_cm0pq")]
 
 [node name="OutOfArea" type="Area2D" parent="." unique_id=673634652]
@@ -161,7 +160,7 @@ shape = SubResource("SegmentShape2D_trn2v")
 process_mode = 1
 script = ExtResource("3_r0du0")
 obstacles_scenes = Array[PackedScene]([ExtResource("4_cm0pq"), ExtResource("6_eq5i7"), ExtResource("6_ugqhr"), ExtResource("8_eq5i7"), ExtResource("7_xa1i3")])
-buff_list = Array[PackedScene]([ExtResource("5_lgr22"), ExtResource("7_wkp8b")])
+buff_list = Array[PackedScene]([ExtResource("5_lgr22"), ExtResource("7_wkp8b"), ExtResource("12_aqce0")])
 scenary_scenes = Array[PackedScene]([ExtResource("12_82a24")])
 
 [node name="Spawn_timer" type="Timer" parent="Director" unique_id=711883737]
@@ -183,6 +182,11 @@ unique_name_in_owner = true
 position = Vector2(304, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=266534747]
+
+[node name="DragLine" type="Line2D" parent="CanvasLayer" unique_id=1583125275]
+position = Vector2(442, 553)
+points = PackedVector2Array(0, 2)
+script = ExtResource("2_kx62r")
 
 [node name="ScreenShakeShader" type="ColorRect" parent="CanvasLayer" unique_id=1398224433]
 material = SubResource("ShaderMaterial_ugqhr")
@@ -279,6 +283,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("18_uumtb")
 stretch_mode = 0
+script = ExtResource("23_w2xge")
 metadata/_edit_use_anchors_ = true
 
 [node name="Distance" type="Sprite2D" parent="CanvasLayer/UI/Stats/Stats" unique_id=604992490]
@@ -384,6 +389,8 @@ autoplay = "default"
 [connection signal="timeout" from="Director/Spawn_timer" to="Director" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Director/BuffSpawn" to="Director" method="_on_buff_spawn_timeout"]
 [connection signal="tutorial_finish" from="CanvasLayer/UI/Tutorial" to="." method="_on_tutorial_tutorial_finish"]
+[connection signal="mouse_entered" from="CanvasLayer/UI/Stats/Stats/PausaMenu" to="CanvasLayer/UI/Stats/Stats/PausaMenu" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/UI/Stats/Stats/PausaMenu" to="CanvasLayer/UI/Stats/Stats/PausaMenu" method="_on_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/UI/Stats/Stats/PausaMenu" to="." method="_on_pausa_menu_pressed"]
 [connection signal="timeout" from="CanvasLayer/UI/Stats/Stats/Timer/TiempoTranscurrido" to="." method="_on_tiempo_transcurrido_timeout"]
 

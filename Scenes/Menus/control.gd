@@ -20,7 +20,7 @@ func _ready():
 	hold_hint()
 	set_text("Mantené presionado")
 
-func _input(event):
+func _input(_event):
 	if tutorial_step == 0 and Input.is_action_just_pressed("aim"):
 		tween_hint.kill()
 		drag_hint()
