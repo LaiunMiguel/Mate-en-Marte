@@ -10,6 +10,7 @@ const STAR_SCENARY = preload("uid://dmepk24ji4wgx")
 
 
 func _ready() -> void:
+	change_text()
 	AudioManager.play_music(AudioPreload.CREDITS)
 	_spawn_scenery()
 	win_photo.visible = true
@@ -121,3 +122,17 @@ func _spawn_scenery():
 
 		star.speed_scale = randf_range(0.5, 2.0)
 		star.play()
+
+func change_text():
+	match Settings.difficulty:
+		Settings.Difficulty.EASY:
+			player_won_label.text = "¡FELICIDADES! HAS LLEGADO A MARTE. DISFRUTÁ DE ESE MATE, TE LO MERECÉS."
+
+		Settings.Difficulty.NORMAL:
+			player_won_label.text = "¡FELICIDADES! HAS LLEGADO A MARTE. DISFRUTÁ DE ESE MATE, TE LO MERECÉS."
+
+		Settings.Difficulty.HARD:
+			player_won_label.text = "¡FELICIDADES! HAS LLEGADO A MARTE EN DIFICULTAD DIFÍCIL. ¡ESE MATE ESTÁ MÁS QUE MERECIDO!"
+
+		Settings.Difficulty.VERYHARD:
+			player_won_label.text = "¡INCREÍBLE! HAS LLEGADO A MARTE EN LA MÁXIMA DIFICULTAD. ESE MATE ES DE CAMPEÓN."

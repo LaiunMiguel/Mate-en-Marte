@@ -49,8 +49,11 @@ var distance_traveled : float = 0;
 
 #Flags
 @export var is_invulnerable: bool = false
+@export var recent_hit: bool = false
 @export var shield_up: bool = false
 @onready var hit_timer: Timer = $HitTimer
+
+
 
 #Particulas
 @onready var gpu_particles_2d_3: GPUParticles2D = $GPUParticles2D3
@@ -143,7 +146,7 @@ func _rotate_sprite(vector: Vector2):
 	rotation = direction.angle() + deg_to_rad(90)
 	
 func get_hit():
-	if !is_invulnerable:
+	if !is_invulnerable && !recent_hit:
 		if shield_up:
 			shield_up = false
 			shield_sprite.hide()
@@ -159,7 +162,7 @@ func get_hit():
 				_play_sound(AudioPreload.EXPLOSION_3)
 				emit_signal("player_lose")
 		hit_timer.start()
-		is_invulnerable = true
+		recent_hit = true
 	
 func lose():
 	hide()
@@ -234,5 +237,5 @@ func _on_invulnerable_timer_timeout() -> void:
 
 
 func _on_hit_timer_timeout() -> void:
-	is_invulnerable = false
+	recent_hit = false
 	

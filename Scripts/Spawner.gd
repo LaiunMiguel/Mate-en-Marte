@@ -312,7 +312,7 @@ func _load_difficulty() -> void:
 			number_of_saelites_per_spawn = 4
 			max_planes_per_screen = 6
 			max_satelites_per_screen = 7
-			max_asteroids_per_screen = 8
+			max_asteroids_per_screen = 7
 
 			distance_first_level = 150
 			distance_second_level = 150
