@@ -4,16 +4,28 @@
 [ext_resource type="PackedScene" uid="uid://c5ykivjiolnj6" path="res://Scenes/Menus/BusControl.tscn" id="1_fpbte"]
 [ext_resource type="Theme" uid="uid://djjgvk57twubi" path="res://FontGame.tres" id="1_vfyb1"]
 [ext_resource type="Texture2D" uid="uid://cliej30jqu54q" path="res://Assets/Imagenes/UI/ui.png" id="3_520ba"]
+[ext_resource type="Script" uid="uid://c0tbk1tn6m50k" path="res://Scenes/Menus/buttonScript.gd" id="5_xwexr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vfyb1"]
 font_size = 21
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwexr"]
+bg_color = Color(0.31801978, 0.3180198, 0.31801963, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="OptionMenu" type="Control" unique_id=1022705813]
 layout_mode = 3
-anchor_right = 0.44300002
-anchor_bottom = 0.40300003
-offset_right = -239.22002
-offset_bottom = -386.88004
+anchor_right = 0.448
+anchor_bottom = 0.407
+offset_right = -241.92001
+offset_bottom = -390.72
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_vfyb1")
@@ -22,8 +34,8 @@ script = ExtResource("1_c6kko")
 [node name="TextureRect" type="NinePatchRect" parent="." unique_id=1843121644]
 layout_mode = 0
 offset_top = -6.0
-offset_right = 242.0
-offset_bottom = 407.0
+offset_right = 463.0
+offset_bottom = 766.0
 texture = ExtResource("3_520ba")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=2138092912]
@@ -33,60 +45,68 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -109.0
-offset_top = -158.5
-offset_right = 110.0
-offset_bottom = 150.0
+offset_left = -211.5
+offset_top = -332.0
+offset_right = 210.5
+offset_bottom = 298.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 13
+
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer" unique_id=996027331]
+layout_mode = 2
+text = "SOUND OPTIONS"
+label_settings = SubResource("LabelSettings_vfyb1")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BusControl" parent="TextureRect/VBoxContainer" unique_id=755649149 instance=ExtResource("1_fpbte")]
 layout_mode = 2
 
 [node name="BusControl2" parent="TextureRect/VBoxContainer" unique_id=1007603936 instance=ExtResource("1_fpbte")]
 layout_mode = 2
+size_flags_horizontal = 1
 bus_name = "SFX"
 
 [node name="BusControl3" parent="TextureRect/VBoxContainer" unique_id=1765437447 instance=ExtResource("1_fpbte")]
 layout_mode = 2
 bus_name = "Music"
 
+[node name="Label2" type="Label" parent="TextureRect/VBoxContainer" unique_id=1548511966]
+layout_mode = 2
+text = "OTHER OPTIONS"
+label_settings = SubResource("LabelSettings_vfyb1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CheckButton" type="CheckButton" parent="TextureRect/VBoxContainer" unique_id=433646053]
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 40
 text = "Linea Visual"
 
 [node name="CheckButton2" type="CheckButton" parent="TextureRect/VBoxContainer" unique_id=472028085]
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 40
 button_pressed = true
 text = "Mostrar Tutorial"
 autowrap_mode = 2
 
 [node name="CheckButton3" type="CheckButton" parent="TextureRect/VBoxContainer" unique_id=1824178769]
 layout_mode = 2
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 40
 text = "Turbo Arg"
 autowrap_mode = 2
 
 [node name="SaveButton" type="Button" parent="TextureRect/VBoxContainer" unique_id=1047310108]
 layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_xwexr")
 text = "Save"
-
-[node name="Label" type="Label" parent="TextureRect" unique_id=996027331]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 14.0
-offset_bottom = 55.0
-grow_horizontal = 2
-text = "SOUND OPTIONS"
-label_settings = SubResource("LabelSettings_vfyb1")
-horizontal_alignment = 1
-vertical_alignment = 1
+script = ExtResource("5_xwexr")
 
 [connection signal="toggled" from="TextureRect/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="toggled" from="TextureRect/VBoxContainer/CheckButton2" to="." method="_on_check_button_2_toggled"]
 [connection signal="toggled" from="TextureRect/VBoxContainer/CheckButton3" to="." method="_on_check_button_3_toggled"]
+[connection signal="mouse_entered" from="TextureRect/VBoxContainer/SaveButton" to="TextureRect/VBoxContainer/SaveButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/VBoxContainer/SaveButton" to="TextureRect/VBoxContainer/SaveButton" method="_on_mouse_exited"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]

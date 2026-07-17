@@ -7,6 +7,7 @@ func _ready():
 	base_scale = scale
 
 func _on_mouse_entered():
+	AudioManager.play_sfx(AudioPreload.SELECT)
 	var tween = create_tween()
 	tween.tween_property(self, "scale", base_scale * 1.08, 0.15)\
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

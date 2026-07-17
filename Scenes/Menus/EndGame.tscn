@@ -159,10 +159,39 @@ horizontal_alignment = 1
 
 [node name="Credits10" type="Label" parent="CanvasLayer/Control/Credits" unique_id=1243381871]
 layout_mode = 2
-text = "https://sfxr.me/"
+text = "https://sfxr.me/
+
+Mario Bros StarPowerup - Nintendo
+
+HealSound - Undertale
+
+"
 horizontal_alignment = 1
 
-[node name="Credits11" type="Label" parent="CanvasLayer/Control/Credits" unique_id=772962864]
+[node name="Credits11" type="Label" parent="CanvasLayer/Control/Credits" unique_id=101521567]
+layout_mode = 2
+text = "Music
+"
+label_settings = SubResource("LabelSettings_in6xa")
+horizontal_alignment = 1
+
+[node name="Credits12" type="Label" parent="CanvasLayer/Control/Credits" unique_id=2016644619]
+layout_mode = 2
+text = "Menu song - Astral Float
+Kyra van Meijl
+https://kyrasvoice.itch.io/8-bit-space-music
+
+Ingame song - Orbital Coin Run
+https://suno.com/s/76nt52nxtbJAP0Dm
+
+Credits - Space Main Theme
+Kyra van Meijl
+https://kyrasvoice.itch.io/8-bit-space-music
+
+"
+horizontal_alignment = 1
+
+[node name="Credits15" type="Label" parent="CanvasLayer/Control/Credits" unique_id=772962864]
 layout_mode = 2
 text = "
 Y En especial 
@@ -171,7 +200,7 @@ Gracias a Vos!
 label_settings = SubResource("LabelSettings_almbg")
 horizontal_alignment = 1
 
-[node name="Credits12" type="Label" parent="CanvasLayer/Control/Credits" unique_id=1854527819]
+[node name="Credits16" type="Label" parent="CanvasLayer/Control/Credits" unique_id=1854527819]
 layout_mode = 2
 text = "Esperamos que hayas 
 disfrutados el juego!

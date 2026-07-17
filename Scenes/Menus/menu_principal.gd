@@ -6,7 +6,7 @@ extends Node2D
 @onready var dificulty_selector: VBoxContainer = $CanvasLayer/DificultySelector
 
 func _ready():
-	AudioManager.play_music(AudioPreload.MUSIC_TRACK_1)
+	AudioManager.play_music(AudioPreload.MUSIC_TRACK_0)
 
 	var tween = create_tween()
 	tween.set_loops()
@@ -28,7 +28,11 @@ func _on_play_button_pressed() -> void:
 
 
 func _on_exit_button_pressed() -> void:
-	get_tree().quit()
+	if OS.get_name() == "Web":
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	else:
+		get_tree().quit()
 
 
 func _on_option_menu_save_option() -> void:

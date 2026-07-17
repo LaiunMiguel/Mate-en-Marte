@@ -11,8 +11,8 @@ size = Vector2(15, 10)
 size = Vector2(16, 10.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aly8q"]
-radius = 9.0
-height = 44.0
+radius = 6.4146247
+height = 40.474777
 
 [node name="Satelite" type="Node2D" unique_id=997671834]
 rotation = 0.87266463
@@ -24,7 +24,6 @@ visible = false
 texture = ExtResource("1_fww3q")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=2122155099]
-visible = false
 texture = ExtResource("3_6yq4w")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=149674387]

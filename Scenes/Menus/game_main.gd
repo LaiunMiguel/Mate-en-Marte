@@ -47,9 +47,12 @@ var distance_to_win: float = 0
 
 var curStrength = 0;
 
+#FakePlayer
+@onready var fake_player: AnimatedSprite2D = $FakePlayer
+
 #Win Animation
-@onready var victory_player: AnimatedSprite2D = $VictoryPlayer
 @onready var fade_out: ColorRect = $CanvasLayer/FadeOut
+
 
 func _ready() -> void:
 	if Settings.show_tutorial:
@@ -67,7 +70,6 @@ func _ready() -> void:
 	director.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _process(delta: float) -> void: 
-	
 	if is_first_launch:
 		if Input.is_action_just_released("aim"):
 			player.CURRENT_GRAVITY = player.GRAVITY
@@ -114,6 +116,11 @@ func _on_button_lose_pressed() -> void:
 
 
 func _on_player_player_lose() -> void:
+	player.visible = false
+	fake_player.rotation = player.rotation
+	fake_player.global_position = player.global_position
+	fake_player.visible = true
+	fake_player.play("Explosion")
 	_end_level()
 	curStrength = dead_shake_strength
 
@@ -158,17 +165,17 @@ func _on_director_player_win() -> void:
 	camara_controller.end_chase()
 	
 	player.visible = false
-	victory_player.global_position = player.global_position
-	victory_player.visible = true
+	fake_player.global_position = player.global_position
+	fake_player.visible = true
 	
 	var tween = create_tween() 
 	tween.set_parallel(true) 
-	tween.tween_property(victory_player, "global_position:x", 270, 0.5) 
-	tween.tween_property(victory_player, "rotation_degrees", 180, 0.5) 
+	tween.tween_property(fake_player, "global_position:x", 270, 0.5) 
+	tween.tween_property(fake_player, "rotation_degrees", 180, 0.5) 
 	await tween.finished
 	tween.kill()
 	tween = create_tween() 
-	tween.tween_property(victory_player, "global_position:y", victory_player.global_position.y - 200, 1.5)
+	tween.tween_property(fake_player, "global_position:y", fake_player.global_position.y - 200, 1.5)
 	await tween.finished
 	await fade_out_animation()
 	get_tree().change_scene_to_file("res://Scenes/Menus/EndGame.tscn")

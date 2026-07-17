@@ -10,6 +10,7 @@ const STAR_SCENARY = preload("uid://dmepk24ji4wgx")
 
 
 func _ready() -> void:
+	AudioManager.play_music(AudioPreload.CREDITS)
 	_spawn_scenery()
 	win_photo.visible = true
 	player_won_label.visible = true

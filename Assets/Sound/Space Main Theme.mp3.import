@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://t74tfka4a5n8"
+path="res://.godot/imported/Space Main Theme.mp3-72069f2560011b2f3bdd5a79b6eb6916.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Space Main Theme.mp3"
+dest_files=["res://.godot/imported/Space Main Theme.mp3-72069f2560011b2f3bdd5a79b6eb6916.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

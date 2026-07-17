@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://h34ahto1kw4t"]
+
+[ext_resource type="FontFile" uid="uid://bylt0qjw1radm" path="res://Assets/Fonts/Quadrillion Sb.otf" id="1_iqeol"]
+[ext_resource type="Script" uid="uid://dxgw6naexv53i" path="res://Scripts/LabelPower.gd" id="2_qoq52"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ny85v"]
+font = ExtResource("1_iqeol")
+font_size = 30
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Label" unique_id=666036261]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Text"
+label_settings = SubResource("LabelSettings_ny85v")
+script = ExtResource("2_qoq52")

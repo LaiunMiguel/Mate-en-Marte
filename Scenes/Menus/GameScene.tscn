@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://djeljp0o055ve" path="res://Assets/Imagenes/UI/pause.png" id="18_uumtb"]
 [ext_resource type="Texture2D" uid="uid://cwaxyg134abw5" path="res://Assets/Imagenes/Player/nave Copy-Sheet.png" id="21_4f0m1"]
 [ext_resource type="Script" uid="uid://c0tbk1tn6m50k" path="res://Scenes/Menus/buttonScript.gd" id="23_w2xge"]
+[ext_resource type="Texture2D" uid="uid://tjcqkyh0ysvr" path="res://Assets/Imagenes/Player/Explosion.png" id="26_kmp8k"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_trn2v"]
 b = Vector2(864, 0)
@@ -94,6 +95,22 @@ font_size = 80
 [sub_resource type="LabelSettings" id="LabelSettings_4f0m1"]
 font_size = 90
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_37s74"]
+atlas = ExtResource("26_kmp8k")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfr7f"]
+atlas = ExtResource("26_kmp8k")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10lec"]
+atlas = ExtResource("26_kmp8k")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_baykw"]
+atlas = ExtResource("26_kmp8k")
+region = Rect2(192, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4aajq"]
 atlas = ExtResource("21_4f0m1")
 region = Rect2(0, 0, 64, 64)
@@ -116,6 +133,26 @@ region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kmp8k"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37s74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfr7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10lec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_baykw")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"Explosion",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4aajq")
@@ -203,13 +240,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -211.0
-offset_top = -237.0
-offset_right = -211.0
-offset_bottom = -237.0
+offset_left = -212.0
+offset_top = -298.0
+offset_right = -212.0
+offset_bottom = -298.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
 
 [node name="UI" type="Node" parent="CanvasLayer" unique_id=319581126]
 
@@ -374,12 +410,22 @@ director = NodePath("../Director")
 [node name="TextureRect" parent="ParallexBackground/Cielo" parent_id_path=PackedInt32Array(72708418, 1345486876) index="0" unique_id=1251872463]
 metadata/_edit_lock_ = true
 
-[node name="VictoryPlayer" type="AnimatedSprite2D" parent="." unique_id=1647425534]
+[node name="MountainMars" parent="ParallexBackground" index="4" unique_id=156643830]
+visible = true
+
+[node name="Sprite2D" parent="ParallexBackground/MountainMars" index="0" unique_id=1415146574]
+visible = false
+position = Vector2(262, 737.00006)
+
+[node name="FakePlayer" type="AnimatedSprite2D" parent="." unique_id=1647425534]
 visible = false
 position = Vector2(1, 0)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kmp8k")
+animation = &"Explosion"
 autoplay = "default"
+frame = 4
+frame_progress = 1.0
 
 [connection signal="player_heal" from="Player" to="." method="_on_player_player_heal"]
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]

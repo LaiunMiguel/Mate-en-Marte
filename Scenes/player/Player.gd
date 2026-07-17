@@ -59,6 +59,9 @@ var distance_traveled : float = 0;
 @onready var propulsion: AnimatedSprite2D = $Propulsion
 var propulsion_initial: Vector2 
 
+#Scenes
+const POWER_NAME_LABEL = preload("uid://h34ahto1kw4t")
+const  offset_label : Vector2 = Vector2(0,-150)
 
 func _ready() -> void:
 	_distancia_traveled()
@@ -102,7 +105,10 @@ func slingshot():
 	velocity = direction * speed
 	
 	_activate_thrusters(power)
-	_play_sound(AudioPreload.JUMP)
+	if power < 1:
+		_play_sound(AudioPreload.JUMP_2)
+	else:
+		_play_sound(AudioPreload.JUMP)
 	
 	
 func _activate_thrusters(power: float):
@@ -164,6 +170,10 @@ func lose():
 func gain_life():
 	if CURRENT_LIFE < MAX_LIFE:
 		CURRENT_LIFE += 1
+		var label_scene = POWER_NAME_LABEL.instantiate()
+		label_scene.power_name = "+1 VIDA"
+		label_scene.global_position = global_position + offset_label 
+		get_parent().add_child(label_scene)
 		_play_sound(AudioPreload.HEAL)
 		emit_signal("player_heal")
 	
@@ -178,6 +188,11 @@ func _set_invulnerable(boolean: bool):
 	animation_player.stop()
 	if (boolean):
 		animation_player.play("star")
+		var label_scene = POWER_NAME_LABEL.instantiate()
+		label_scene.power_name = "INVULNERABILIDAD"
+		label_scene.global_position = global_position + offset_label 
+
+		get_parent().add_child(label_scene)
 		_play_sound(AudioPreload.STAR_POWER)
 	else:
 		AudioManager.stop_priority_music()
@@ -185,6 +200,10 @@ func _set_invulnerable(boolean: bool):
 	
 	
 func activateShield():
+	var label_scene = POWER_NAME_LABEL.instantiate()
+	label_scene.power_name = "ESCUDO ACTIVO"
+	label_scene.global_position = global_position + offset_label 
+	get_parent().add_child(label_scene)
 	shield_up = true
 	shield_sprite.show()
 	_play_sound(AudioPreload.SHIELD)
@@ -216,3 +235,4 @@ func _on_invulnerable_timer_timeout() -> void:
 
 func _on_hit_timer_timeout() -> void:
 	is_invulnerable = false
+	
